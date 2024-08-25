@@ -1,0 +1,23 @@
+O Teorema de Pitágoras é um dos princípios fundamentais da geometria e foi nomeado em homenagem ao matemático grego Pitágoras, que viveu por volta do século VI a.C. 
+O teorema estabelece uma relação entre os lados de um triângulo retângulo, ou seja, um triângulo que possui um ângulo reto (90 graus).
+
+A formulação clássica do Teorema de Pitágoras é a seguinte: "Em um triângulo retângulo, o quadrado da medida da hipotenusa é igual à soma dos quadrados das medidas dos catetos."
+
+Para compreender melhor essa afirmação, vamos considerar um triângulo retângulo com lados a, b e c, onde c é a hipotenusa (o lado oposto ao ângulo reto) e a e b são os catetos (os lados que formam o ângulo reto).
+
+O Teorema de Pitágoras é expresso pela fórmula matemática:
+
+c² = a² + b²
+
+Isso significa que se conhecermos as medidas de dois lados de um triângulo retângulo, podemos calcular a medida do terceiro lado usando essa relação. 
+Ou, se conhecermos as medidas dos três lados de um triângulo, podemos verificar se ele é retângulo, verificando se a equação é satisfeita.
+
+Essa relação é amplamente utilizada na matemática e em várias áreas da ciência e engenharia, especialmente na trigonometria e na geometria. 
+Além disso, o Teorema de Pitágoras é a base para muitas aplicações práticas, como no cálculo de distâncias, resolução de problemas de navegação e construção de estruturas.
+
+A prova do Teorema de Pitágoras possui várias demonstrações, e muitas delas são elegantes e engenhosas. 
+Essas provas podem envolver conceitos geométricos, álgebra, análise ou até mesmo noções de área. 
+É um dos teoremas mais estudados e conhecidos da matemática, e sua relevância perdura até os dias atuais.
+
+Em resumo, o Teorema de Pitágoras é um princípio matemático fundamental que estabelece uma relação entre os lados de um triângulo retângulo, 
+sendo uma ferramenta poderosa para a resolução de problemas geométricos e aplicada em diversos campos da ciência e tecnologia.

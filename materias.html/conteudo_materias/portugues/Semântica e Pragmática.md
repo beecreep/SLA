@@ -1,0 +1,37 @@
+**Semântica e Pragmática: Compreendendo o Significado e o Uso da Linguagem**
+
+No estudo da linguística, duas áreas fundamentais que nos ajudam a entender como a linguagem funciona são a semântica e a pragmática. Enquanto a semântica se concentra no significado das palavras e frases em si, a pragmática vai além, analisando como esses significados são usados e interpretados no contexto da comunicação. Nesta aula, exploraremos os conceitos centrais de semântica e pragmática, suas diferenças e como elas se complementam para oferecer uma visão completa da linguagem.
+
+**1. Semântica: O Estudo do Significado**
+
+A semântica é a área da linguística que estuda o significado das palavras, frases e sentenças. Ela se preocupa com a forma como as expressões linguísticas representam a realidade e como os falantes de uma língua interpretam essas expressões.
+
+- **Significado Lexical**: Refere-se ao significado das palavras isoladamente. Por exemplo, a palavra "cachorro" refere-se a um animal doméstico, geralmente associado a certas características como lealdade e latidos. O estudo do significado lexical envolve questões como sinonímia (palavras com significados semelhantes), antonímia (palavras com significados opostos) e polissemia (uma palavra com múltiplos significados relacionados).
+
+- **Significado Sentencial**: Refere-se ao significado das frases e sentenças. A semântica composicional, por exemplo, explora como o significado das partes de uma frase (palavras e expressões) se combinam para formar o significado da frase inteira. A frase "O cachorro está latindo" tem um significado claro e específico que resulta da combinação dos significados individuais das palavras "cachorro", "estar" e "latindo".
+
+- **Ambiguidade**: É um aspecto importante da semântica. Ambiguidade ocorre quando uma palavra ou frase pode ter mais de um significado. Por exemplo, a frase "Ela viu a criança com o telescópio" pode significar que ela usou um telescópio para ver a criança ou que a criança estava segurando um telescópio.
+
+**2. Pragmática: O Estudo do Uso da Linguagem**
+
+Enquanto a semântica se concentra no significado literal, a pragmática se preocupa com o significado em contexto. A pragmática estuda como os falantes usam a linguagem em situações reais de comunicação e como o contexto influencia a interpretação do significado.
+
+- **Contexto**: O contexto é crucial para a pragmática. Ele inclui o ambiente físico, a situação social, as intenções dos falantes e o conhecimento compartilhado entre eles. Por exemplo, a frase "Pode me passar o sal?" é entendida como um pedido, não como uma pergunta literal sobre a capacidade de passar o sal.
+
+- **Atos de Fala**: Introduzidos pelo filósofo J.L. Austin e desenvolvidos por John Searle, os atos de fala são uma parte central da pragmática. Eles referem-se às ações realizadas pelos falantes ao proferir uma frase. Existem três tipos principais de atos de fala: locucionários (o ato de dizer algo), ilocucionários (a intenção por trás do que é dito, como prometer, ordenar, pedir) e perlocucionários (o efeito produzido no ouvinte).
+
+- **Implicaturas Conversacionais**: Um conceito introduzido por H.P. Grice, as implicaturas conversacionais são significados que não são explicitamente ditos, mas são inferidos pelo ouvinte com base nas normas de comunicação. Por exemplo, se alguém diz "Está frio aqui", pode estar implicando que gostaria que a janela fosse fechada, embora não tenha dito isso diretamente.
+
+- **Princípio de Cooperação e Máximas Conversacionais**: Segundo Grice, a comunicação eficaz segue o princípio de cooperação, onde os falantes geralmente tentam ser claros e informativos. Ele identificou quatro máximas que orientam as conversas: máxima da quantidade (fornecer a quantidade certa de informação), máxima da qualidade (ser verdadeiro), máxima da relevância (ser relevante) e máxima do modo (ser claro e ordenado).
+
+**3. Diferenças e Inter-relações entre Semântica e Pragmática**
+
+Embora a semântica e a pragmática tenham focos diferentes, elas estão intimamente relacionadas. A semântica fornece a base para o significado literal, enquanto a pragmática explica como esse significado pode mudar ou ser ampliado em contextos específicos.
+
+- **Semântica e Pragmática em Diálogo**: Considere a frase "Ele é um tubarão dos negócios". Semanticamente, "tubarão" refere-se a um grande peixe predador. Pragmaticamente, no contexto dos negócios, "tubarão" é interpretado metaforicamente para descrever uma pessoa agressiva e implacável nos negócios.
+
+- **Mudanças de Significado**: Palavras e frases podem adquirir novos significados ou perder significados antigos com o tempo e com o uso social, um processo estudado tanto pela semântica quanto pela pragmática.
+
+**Conclusão**
+
+Semântica e pragmática são campos complementares que, juntos, fornecem uma compreensão completa da linguagem. A semântica nos ajuda a entender o significado literal das palavras e frases, enquanto a pragmática nos mostra como esses significados são usados e interpretados no contexto da comunicação real. Estudar essas áreas é essencial para quem deseja aprofundar-se na linguística e compreender como a linguagem realmente funciona em nossas interações diárias.

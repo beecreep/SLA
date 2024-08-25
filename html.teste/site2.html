@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site B</title>
+</head>
+<body>
+    <div id="main">
+        <p>Texto estilizado no Site B</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const styleContent = localStorage.getItem('siteAStyles');
+            if (styleContent) {
+                const styleElement = document.createElement('style');
+                styleElement.innerHTML = styleContent;
+                document.head.appendChild(styleElement);
+            }
+        });
+    </script>
+</body>
+</html>
