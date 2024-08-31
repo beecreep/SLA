@@ -45,7 +45,6 @@ function handleFileUpload() {
 function enviar() {
   const now = new Date();
   const timestamp = now.toLocaleString();
-
     if (!textInput) {
         console.error("Elemento de entrada de texto não encontrado");
         return;
