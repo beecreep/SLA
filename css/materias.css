@@ -19,6 +19,7 @@
 }
 
 .conteudo-materia h1 {
+    font-size: 1.25rem;
     text-align: center;
     color: var(--text-color);
  
@@ -50,20 +51,22 @@
 #materias a {
     text-decoration: none;
 }
-@media (max-width: 768px) {
+@media (max-width: 668px) {
     #materias {
-        grid-template-columns: repeat(1, auto);
-        grid-template-rows: repeat(8, 1fr);
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(4, 1fr);
+        width: 90vw;
+        min-height: 5px;
+        margin-top: 50px;
+    }
+    .conteudo-materia{
+        width: 40vw;
+        height: 30vh;
     }
 
     #materias a {
         text-decoration: none;
     }
 
-    .conteudo-materia {
-        width: 60vw;
-        height: 40vh;
-    }
-
-}
+   }
 

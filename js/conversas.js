@@ -1,7 +1,8 @@
 const fileInput = document.getElementById('file');
 const textArea = document.getElementById('text-area');
 const textInput = document.getElementById('text');
-let nome = document.getElementById('name');
+const nome = document.getElementById('name');
+let username = ''; // Username padrão
 
 // Função para acionar o input de arquivo
 function triggerFileInput() {
@@ -17,24 +18,25 @@ function handleFileUpload() {
     Array.from(fileInput.files).forEach(file => {
       const fileReader = new FileReader();
       fileReader.onload = function (e) {
+        const content = e.target.result;
         const link = document.createElement('a');
-        link.href = e.target.result;
+        link.href = content;
         link.download = file.name;
         link.textContent = `${username} (${timestamp}): ${file.name}`;
         link.style.display = 'block';
         textArea.appendChild(link);
 
-        // Enviar link de arquivo para o servidor
-        websocket.send(JSON.stringify({
-          type: 'file',
-          username,
-          timestamp,
-          filename: file.name,
-          fileurl: e.target.result
-        }));
+        // Enviar link de arquivo para o servidor (websocket precisa ser definido)
+        // websocket.send(JSON.stringify({
+        //   type: 'file',
+        //   username,
+        //   timestamp,
+        //   filename: file.name,
+        //   fileurl: content
+        // }));
 
         // Salvar a mensagem de arquivo no localStorage
-        saveMessage({ username, timestamp, text: file.name, type: 'file', fileurl: e.target.result });
+        saveMessage({ username, timestamp, text: file.name, type: 'file', filecontent: content });
       }
       fileReader.readAsDataURL(file);
     });
@@ -46,10 +48,6 @@ function handleFileUpload() {
 function enviar() {
   const now = new Date();
   const timestamp = now.toLocaleString();
-  if (!textInput) {
-    console.error("Elemento de entrada de texto não encontrado");
-    return;
-  }
 
   if (textInput.value) {
     const message = {
@@ -62,7 +60,7 @@ function enviar() {
     addMessageToChat(message);
     saveMessage(message);
 
-    textInput.value = '';
+    textInput.value = ''; // Limpa o campo de texto após o envio
   }
 }
 
@@ -73,11 +71,17 @@ function addMessageToChat(message) {
   span.textContent = ` (${message.timestamp})`;
   span.className = 'timestamp';
 
-  // Adiciona o conteúdo da mensagem
-  p.textContent = `${message.username}: ${message.text}`;
-  p.appendChild(span);
-
-  // Alinhamento das mensagens
+  if (message.type === 'file') {
+    const link = document.createElement('a');
+    link.href = message.filecontent;
+    link.download = message.text;
+    link.textContent = `${message.username}: ${message.text}`;
+    link.style.display = 'block';
+    p.appendChild(link);
+  } else {
+    p.textContent = `${message.username}: ${message.text}`;
+    p.appendChild(span);
+  }
 
   textArea.appendChild(p);
   textArea.scrollTop = textArea.scrollHeight;
@@ -103,63 +107,13 @@ function redefinir() {
   fileInput.value = '';
   localStorage.removeItem('chatMessages');
 }
-let username = ''; // Username padrão
 
+// Código a ser executado quando a janela é carregada
 window.onload = function () {
-  // Função para enviar uma mensagem
-  function enviar() {
-    const textInput = document.getElementById('text');
-
-    if (textInput.value) {
-      const now = new Date();
-      const timestamp = now.toLocaleString();
-
-      const message = {
-        username: username, // Usa o nome definido no formulário
-        timestamp: timestamp,
-        text: textInput.value,
-      };
-
-      addMessageToChat(message);
-      saveMessage(message);
-
-      textInput.value = '';  // Limpa o campo de texto após o envio
-    }
-  }
-
-  // Função para adicionar uma mensagem ao chat
-  function addMessageToChat(message) {
-    const p = document.createElement('p');
-    const span = document.createElement('span');
-    span.textContent = ` (${message.timestamp})`;
-    span.className = 'timestamp';
-
-    p.textContent = `${message.username}: ${message.text}`;
-    p.appendChild(span);
-
-
-
-    textArea.appendChild(p);
-    textArea.scrollTop = textArea.scrollHeight;
-  }
-
-  // Função para salvar uma mensagem no localStorage
-  function saveMessage(message) {
-    const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-    messages.push(message);
-    localStorage.setItem('chatMessages', JSON.stringify(messages));
-  }
-
-  // Função para carregar mensagens do localStorage
-  function loadMessages() {
-    const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-    messages.forEach(addMessageToChat);
-  }
-
   // Evento para salvar o nome e definir como username
   document.getElementById('usernameForm').addEventListener('submit', function (event) {
     event.preventDefault(); // Evita o comportamento padrão do formulário
-    const nameInput = document.getElementById('name').value.trim();
+    const nameInput = nome.value.trim();
     if (nameInput) {
       username = nameInput; // Define o username como o valor do input
       alert(`Username alterado para: ${username}`);

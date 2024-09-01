@@ -1,8 +1,9 @@
-
-[
-    {"nome": "João Silva"},
-    {"nome": "Maria Oliveira"},
-    {"nome": "Pedro Santos"},
-    {"nome": "Ana Souza"},
-    {"nome": "abner"}
-]
+{
+    "alunos": [
+        "João Silva",
+        "Maria Oliveira",
+        "Pedro Santos",
+        "Ana Souza",
+        "abner"
+    ]
+}
