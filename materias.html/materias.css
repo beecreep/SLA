@@ -8,7 +8,7 @@
 
         body {
             width: 100vw;
-            height: 100vh;
+            min-height: 10px;
             font-family: poppins;
             padding: 10px;
 
@@ -63,27 +63,29 @@
             align-items: center;
          }
          @media (max-width: 768px){
+
             body{
                 min-height: 20vh;
                 gap: 10px;
+                width: 100vw;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
             }
            h1{
-                
                 margin: 10px;
                 width: 100%;
                 font-size: 1rem;
                 align-items: center;
                 text-align: center;
+                position: relative;
                 
                 
             }
             #conteudo-materia{
                 display: flex;
                 flex-direction: column;
-                width: 100%;
+                width: 100vw;
                 height: auto;
             }
             .conteudo{

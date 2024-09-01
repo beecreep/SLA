@@ -7,7 +7,7 @@
     <title>bem-vindo aluno</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://apis.google.com/js/api.js"></script>
-    
+    <script src="js\conversas.js"></script>
     <link rel="stylesheet" href="css\conversas.css">
     <link rel="stylesheet" href="css\materias.css">
     <link rel="stylesheet" href="css/perfil.css">
@@ -111,6 +111,7 @@
             background: #4e4d4d;
             cursor: pointer;
         }
+
 
         section {
             margin-left: 0;
@@ -326,64 +327,15 @@
             </form>
         </div>
     </section>
-    <script src="js\conversas.js"></script>
+   <script src="js\nav-aluno.js"></script>
     <script>
 
-        let atividadesbtn = document.getElementById('Atividades-btn');
-        let mainContentElements = document.getElementsByClassName('main-content');
-        let conversasbtn = document.getElementById('conversas-btn');
-        let materiasbtn = document.getElementById('materias-btn')
-        let materias = document.getElementById('materias');
-        let atividades = document.getElementById('Atividades');
-        let perfilbtn = document.getElementById('perfil-btn');
-        let perfil = document.getElementById('perfil');
+        
 
         const image = document.querySelectorAll('.imagem');
         const foto = document.getElementById('foto');
 
-        atividadesbtn.addEventListener("click", () => {
-            // Obter todos os elementos com a classe 'main-content'
-            for (let element of mainContentElements) {
-                element.style.display = 'none';
-            }
-
-            materias.style.display = 'none';
-            atividades.style.display = 'grid';
-            perfil.style.display = 'none';
-
-        });
-        perfilbtn.addEventListener("click", () => {
-            // Obter todos os elementos com a classe 'main-content'
-            for (let element of mainContentElements) {
-                element.style.display = 'none';
-            }
-
-            materias.style.display = 'none';
-            atividades.style.display = 'none';
-            perfil.style.display = 'grid';
-
-        });
-        conversasbtn.addEventListener("click", () => {
-            // Iterar sobre todos os elementos e definir display para 'none'
-            for (let element of mainContentElements) {
-                element.style.display = 'flex';
-            }
-            materias.style.display = 'none';
-            atividades.style.display = 'none';
-            perfil.style.display = 'none';
-            // Definir display para 'grid' no elemento com id 'materias'
-
-        });
-        materiasbtn.addEventListener("click", () => {
-            for (let element of mainContentElements) {
-                element.style.display = 'none';
-            }
-            materias.style.display = 'grid';
-            atividades.style.display = 'none';
-            perfil.style.display = 'none';
-
-        });
-
+    
         // Função para alterar a imagem quando o input de arquivo muda
         foto.addEventListener("change", () => {
             if (foto.files.length > 0) {
@@ -414,13 +366,7 @@
             }
         }
 
-        // Função para alternar a exibição da navbar
-        function toggleNavbar() {
-            const navbar = document.querySelector('.navbar');
-            const mainContent = document.querySelector('section');
-            navbar.classList.toggle('show');
-            mainContent.classList.toggle('shifted');
-        }   
+      
     </script>
 </body>
 

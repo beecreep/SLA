@@ -89,23 +89,7 @@ input[type="reset"]:hover {
     transform: translateY(-5px);
     transition: 0.3s ease-in-out;
 }
-.left-align {
-    align-self: flex-start;
-    text-align: left;
-    background-color: #e1ffc7;
-    padding: 10px;
-    border-radius: 8px;
-    margin: 5px 0;
-  }
-  
-  .right-align {
-    align-self: flex-end;
-    text-align: right;
-    background-color: var(--background-color);
-    padding: 10px;
-    border-radius: 8px;
-    margin: 5px 0;
-  }
+
   .timestamp {
     font-size: 0.8em;
     /* Tamanho menor */
