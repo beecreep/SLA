@@ -250,31 +250,32 @@ h1 {
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            const tabela = document.querySelector('#listaChamada tbody');
+    const tabela = document.querySelector('#listaChamada tbody');
 
-            fetch('listachamada.json')
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(aluno => {
-                        const row = document.createElement('tr');
+    fetch('listachamada.json')
+        .then(response => response.json())
+        .then(data => {
+            data.alunos.forEach(aluno => {  // Acessa a lista de alunos corretamente
+                const row = document.createElement('tr');
 
-                        const nomeCell = document.createElement('td');
-                        nomeCell.textContent = aluno.nome;
-                        nomeCell.setAttribute('data-label', 'Nome'); // Adiciona o atributo data-label
-                        row.appendChild(nomeCell);
+                const nomeCell = document.createElement('td');
+                nomeCell.textContent = aluno;  // Agora 'aluno' é uma string, não um objeto
+                nomeCell.setAttribute('data-label', 'Nome'); // Adiciona o atributo data-label
+                row.appendChild(nomeCell);
 
-                        const presencaCell = document.createElement('td');
-                        const presencaCheckbox = document.createElement('input');
-                        presencaCheckbox.type = 'checkbox';
-                        presencaCell.appendChild(presencaCheckbox);
-                        presencaCell.setAttribute('data-label', 'Presença'); // Adiciona o atributo data-label
-                        row.appendChild(presencaCell);
+                const presencaCell = document.createElement('td');
+                const presencaCheckbox = document.createElement('input');
+                presencaCheckbox.type = 'checkbox';
+                presencaCell.appendChild(presencaCheckbox);
+                presencaCell.setAttribute('data-label', 'Presença'); // Adiciona o atributo data-label
+                row.appendChild(presencaCell);
 
-                        tabela.appendChild(row);
-                    });
-                })
-                .catch(error => console.error('Erro ao buscar dados:', error));
-        });
+                tabela.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Erro ao buscar dados:', error));
+});
+
 
         document.addEventListener('DOMContentLoaded', () => {
            

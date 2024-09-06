@@ -372,6 +372,28 @@
                 alert('Todos os campos são obrigatórios');
             }
         }
+        // Função que envia a atividade e salva no localStorage
+function uploadFile() {
+    const titulo = document.querySelector('.titulo').value;
+    const descricao = document.querySelector('#descriçao-atividade').value;
+    const dueDate = document.getElementById('due-date').value;
+
+    if (titulo && descricao && dueDate) {
+        // Cria um objeto da atividade
+        const atividade = {
+            titulo: titulo,
+            descricao: descricao,
+            data: dueDate
+        };
+
+        // Salva a atividade no localStorage
+        localStorage.setItem('atividade', JSON.stringify(atividade));
+        alert('Atividade enviada com sucesso!');
+    } else {
+        alert('Preencha todos os campos.');
+    }
+}
+
     </script>
 </body>
 

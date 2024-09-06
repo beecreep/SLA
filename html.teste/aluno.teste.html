@@ -637,6 +637,27 @@ ton-theme-toggle {
             navbar.classList.toggle('show');
             mainContent.classList.toggle('shifted');
         }   
+        // Função que carrega a atividade no aluno.html
+function carregarAtividade() {
+    const atividade = JSON.parse(localStorage.getItem('atividade'));
+
+    if (atividade) {
+        // Atualiza a seção de atividades com o conteúdo
+        const atividadesSection = document.getElementById('Atividades');
+        atividadesSection.innerHTML = `
+            <h2>${atividade.titulo}</h2>
+            <p>${atividade.descricao}</p>
+            <p>Data de entrega: ${atividade.data}</p>
+        `;
+        atividadesSection.style.display = 'block';
+    } else {
+        alert('Nenhuma atividade encontrada.');
+    }
+}
+
+// Chama a função quando a página for carregada
+window.onload = carregarAtividade;
+
     </script>
 </body>
 
