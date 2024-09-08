@@ -132,3 +132,6 @@ window.onload = function () {
   loadMessages();
   document.getElementById('enviar').onclick = enviar;
 };
+// Função para obter a data e a hora atuais
+
+

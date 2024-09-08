@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bem-vindo aluno</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://apis.google.com/js/api.js"></script>
     <link rel="stylesheet" href="css\conversas.css">
     <link rel="stylesheet" href="css\materias.css">
     <link rel="stylesheet" href="css/perfil.css">
+    <link rel="stylesheet" href="css\cronogramas.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -27,7 +30,6 @@
         body,
         html {
             height: 100%;
-            
             display: flex;
             justify-content: center;
             align-items: center;
@@ -53,9 +55,6 @@
             background-color: transparent;
         }
 
-
-
-
         /* Adicionando estilos para a navbar */
         .navbar {
             width: 250px;
@@ -67,14 +66,13 @@
             padding: 20px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             z-index: 100;
-            transition: left 0.3s ;
+            transition: left 0.3s;
         }
 
         .navbar.show {
             left: 0;
             /* Mostra a navbar */
         }
-
 
         .navbar a {
             display: block;
@@ -111,7 +109,6 @@
             cursor: pointer;
         }
 
-
         section {
             margin-left: 0;
             /* Remove a margem para a navbar */
@@ -122,7 +119,6 @@
             margin-left: 270px;
             /* Adiciona espaço para a navbar quando visível */
         }
-
 
         .button-theme-toggle {
             background: none;
@@ -135,12 +131,9 @@
             right: 10px;
         }
 
-      
         #foto {
             display: none;
         }
-
-       
 
         #perfil {
             display: none;
@@ -156,6 +149,12 @@
             text-align: center;
 
         }
+
+        #atividades-img {
+            width: 90vw;
+            height: 80vh;
+        }
+
 
         @media (max-width: 768px) {
             .text-area {
@@ -175,7 +174,7 @@
                 height: 70vh;
             }
 
-            
+
         }
 
         @media (max-width: 480px) {
@@ -189,11 +188,11 @@
             #text {
                 width: 80%;
             }
+            #atividades-img {
+            width: 90vw;
+            height: 80vh;
+        }
 
-            #materias {
-                grid-template-columns: repeat(1, auto);
-                grid-template-rows: repeat(8, 1fr);
-            }
         }
     </style>
 </head>
@@ -206,24 +205,24 @@
         <h2 style="text-align: center;">Menu</h2>
         <a href="#" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
         <a href="#" id="Atividades-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
-        <a href="#" id="#">Cronogramas</a>
+        <a href="#" id="Cronogramas-btn">Cronogramas <i class="fa-solid fa-calendar-days"></i></a>
         <a href="#" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
-        <img src="img\user.png"
-            alt="clique aqui para mudar de foto" class="imagem" id="image1">
+        <img src="img\user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
         <input type="file" name="foto" id="foto">
+        <div class="info-box">
+            <p id="time-info">Carregando horário...</p>
+        </div>
     </div>
     <section>
         <main class="main-content">
             <div id="chat-form">
-                <div class="info-box">
-                    <p id="time-info">Carregando horário...</p>
-                </div>
+                
                 <div class="text-area" id="text-area"></div>
                 <div class="input-wrapper">
                     <input type="text" id="text" placeholder="Digite sua mensagem aqui">
                     <span class="icon" onclick="triggerFileInput()">&#128206;</span>
-            
+
                     <input type="file" id="file" onchange="handleFileUpload()">
                 </div>
                 <div>
@@ -233,7 +232,8 @@
             </div>
         </main>
     </section>
-    <section id="materias">
+    <section id="materias1">
+        <div id = "materias">
         <a href="materias.html\portugues.html">
             <div class="conteudo-materia">
                 <img src="img\literary.png" alt="">
@@ -242,8 +242,7 @@
         </a>
         <a href="materias.html\matematica.html">
             <div class="conteudo-materia">
-                <img src="img\calculator.png"
-                    alt="">
+                <img src="img\calculator.png" alt="">
                 <h1>Matematica</h1>
             </div>
         </a>
@@ -279,15 +278,40 @@
         </a>
         <a href="materias.html\quimica.html">
             <div class="conteudo-materia">
-                <img src="img\laboratory.png"
-                    alt="">
+                <img src="img\laboratory.png" alt="">
                 <h1>Quimica</h1>
             </div>
         </a>
-
+        <a href="materias.html\eletronica.html">
+            <div class="conteudo-materia">
+                <img src="img\resistor.png" alt="">
+                <h1>Eletronica</h1>
+            </div>
+        </a>
+        <a href="materias.html\eventos.html">
+            <div class="conteudo-materia">
+                <img src="img\red-carpet.png" alt="">
+                <h1>Eventos</h1>
+            </div>
+        </a>
+        <a href="materias.html\st.html">
+            <div class="conteudo-materia">
+                <img src="img\firefighter-helmet.png" alt="">
+                <h1>Segurança do trabalho</h1>
+            </div>
+        </a>
+        <a href="materias.html\adm.html">
+            <div class="conteudo-materia">
+                <img src="img\salary.png" alt="">
+                <h1>Administração</h1>
+            </div>
+        </a>
+    </div>
+    
     </section>
+
     <section id="Atividades">
-        <img src="img\undraw_Exams_re_4ios.png" alt="">
+        <img src="img\undraw_Exams_re_4ios.png" alt="" id="atividades-img">
         <span>sem Atividades no momento</span>
     </section>
     <section id="perfil">
@@ -326,14 +350,85 @@
             </form>
         </div>
     </section>
+    <section id="CRONOGRAMAS">
+    <section id="cronogramas">
+        <h2>Cronograma Semanal</h2>
+        
+        <div class="calendario-controle">
+            <button id="prev-week">Semana Anterior</button>
+            <span id="current-week">Semana de 04 a 10 de Setembro</span>
+            <button id="next-week">Próxima Semana</button>
+        </div>
+        
+        <div class="calendario">
+            <div class="dia">
+                <h3>Segunda-feira</h3>
+                <ul>
+                    <li>Matemática - 08:00 às 10:00</li>
+                    <li>História - 10:30 às 12:00</li>
+                </ul>
+            </div>
+            <div class="dia">
+                <h3>Terça-feira</h3>
+                <ul>
+                    <li>Geografia - 09:00 às 11:00</li>
+                    <li>Química - 11:30 às 13:00</li>
+                </ul>
+            </div>
+            <div class="dia">
+                <h3>Quarta-feira</h3>
+                <ul>
+                    <li>Física - 08:00 às 10:00</li>
+                    <li>Biologia - 10:30 às 12:00</li>
+                </ul>
+            </div>
+            <div class="dia">
+                <h3>Quinta-feira</h3>
+                <ul>
+                    <li>Português - 09:00 às 11:00</li>
+                    <li>Educação Física - 11:30 às 13:00</li>
+                </ul>
+            </div>
+            <div class="dia">
+                <h3>Sexta-feira</h3>
+                <ul>
+                    <li>Artes - 08:00 às 09:30</li>
+                    <li>Inglês - 10:00 às 11:30</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section id="calendario-mensal">
+        <h2>Calendário Mensal</h2>
+        <div class="calendar-header">
+            <button id="prev-month">&laquo; Anterior</button>
+            <span id="month-year"></span>
+            <button id="next-month">Próximo &raquo;</button>
+        </div>
+        <div id="calendar">
+            <div class="day-name">Dom</div>
+            <div class="day-name">Seg</div>
+            <div class="day-name">Ter</div>
+            <div class="day-name">Qua</div>
+            <div class="day-name">Qui</div>
+            <div class="day-name">Sex</div>
+            <div class="day-name">Sáb</div>
+            <!-- Dias do mês serão gerados dinamicamente aqui -->
+        </div>
+    </section>
+    </section>
+    <script src="js\cronogramas.js"></script>
     <script src="js\conversas.js"></script>
     <script src="js\nav-aluno.js"></script>
+    <script src="js\materias.js"></script>
+
     <script>
 
         const image = document.querySelectorAll('.imagem');
         const foto = document.getElementById('foto');
 
-    
+
         // Função para alterar a imagem quando o input de arquivo muda
         foto.addEventListener("change", () => {
             if (foto.files.length > 0) {
@@ -364,7 +459,36 @@
             }
         }
 
-      
+        
+        const keys = document.querySelectorAll('.key');
+        
+        // Adiciona o evento de clique a todos os botões
+        
+
+        function mostrarHorario() {
+  const timeInfo = document.getElementById('time-info');
+  
+  const now = new Date();
+  const horas = now.getHours().toString().padStart(2, '0');
+  const minutos = now.getMinutes().toString().padStart(2, '0');
+  const segundos = now.getSeconds().toString().padStart(2, '0');
+  
+  const dia = now.getDate().toString().padStart(2, '0');
+  const mes = (now.getMonth() + 1).toString().padStart(2, '0'); // Mês é indexado em 0
+  const ano = now.getFullYear();
+
+  // Formatar a string de data e hora
+  const dataHoraAtual = `Data: ${dia}/${mes}/${ano} - Hora: ${horas}:${minutos}:${segundos}`;
+  
+  // Atualizar o conteúdo do elemento time-info
+  timeInfo.textContent = dataHoraAtual;
+}
+
+// Função para atualizar a cada segundo
+setInterval(mostrarHorario, 1000);
+
+// Chamar a função imediatamente quando a página for carregada
+window.onload = mostrarHorario;
     </script>
 </body>
 

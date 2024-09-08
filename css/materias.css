@@ -13,6 +13,7 @@
     color: var(--text-color);
     cursor: pointer;
 }
+
 .conteudo-materia img {
     height: 80%;
     width: 80%;
@@ -22,34 +23,74 @@
     font-size: 1.25rem;
     text-align: center;
     color: var(--text-color);
- 
+
 
 }
+
 .conteudo-materia:hover {
     transition: 0.3s ease-in-out;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transform: translateY(-10px);
 
 }
-#materias {
+
+#materias1 {
     height: 90vh;
     width: 100%;
     display: none;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-gap: 20px;
-    justify-content: space-between;
-    align-items: center;
     background: var(--background-color);
     color: var(--text-color);
     padding: 10px;
     border-radius: 40px;
+    
 
 }
-
+#materias{
+    height: 90vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 20px;
+    justify-content: space-ar;
+    align-items: center;
+}
 
 #materias a {
     text-decoration: none;
+}
+
+.container {
+    width: 60vw;
+    padding: 20px;
+}
+
+.key {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 100%;
+    text-align: left;
+}
+
+.key:hover {
+    background-color: #0056b3;
+}
+
+.content {
+    display: none;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+.content p {
+    margin: 10px 0;
 }
 @media (max-width: 668px) {
     #materias {
@@ -59,7 +100,8 @@
         min-height: 5px;
         margin-top: 50px;
     }
-    .conteudo-materia{
+
+    .conteudo-materia {
         width: 40vw;
         height: 30vh;
     }
@@ -67,6 +109,8 @@
     #materias a {
         text-decoration: none;
     }
+    #materias1{
+        min-height: 10px;
+    }
 
-   }
-
+}
