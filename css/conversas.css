@@ -66,13 +66,13 @@ main input[type="file"] {
 
 #text {
     border-radius: 20px;
-    width: 50vw;
+    width: 40vw;
     z-index: 5;
 
 }
 .input-wrapper {
     position: relative;
-    width: 80vw;
+    width: 60vw;
     max-width: 400px;
 }
 
@@ -96,7 +96,17 @@ input[type="reset"]:hover {
     color: gray;
     /* Cor cinza */
 }
-
+@media  (max-width: 375px) {
+    #text {
+        border-radius: 20px;
+        width: 60vw;
+        z-index: 5;
+    
+    }
+    .text-area{
+        height: 80vh;
+    }
+}
 
 
 

@@ -18,25 +18,15 @@ function handleFileUpload() {
     Array.from(fileInput.files).forEach(file => {
       const fileReader = new FileReader();
       fileReader.onload = function (e) {
-        const content = e.target.result;
         const link = document.createElement('a');
-        link.href = content;
+        link.href = e.target.result;
         link.download = file.name;
         link.textContent = `${username} (${timestamp}): ${file.name}`;
         link.style.display = 'block';
         textArea.appendChild(link);
 
-        // Enviar link de arquivo para o servidor (websocket precisa ser definido)
-        // websocket.send(JSON.stringify({
-        //   type: 'file',
-        //   username,
-        //   timestamp,
-        //   filename: file.name,
-        //   fileurl: content
-        // }));
-
         // Salvar a mensagem de arquivo no localStorage
-        saveMessage({ username, timestamp, text: file.name, type: 'file', filecontent: content });
+        saveMessage({ username, timestamp, text: file.name, type: 'file', fileurl: e.target.result });
       }
       fileReader.readAsDataURL(file);
     });
@@ -71,17 +61,8 @@ function addMessageToChat(message) {
   span.textContent = ` (${message.timestamp})`;
   span.className = 'timestamp';
 
-  if (message.type === 'file') {
-    const link = document.createElement('a');
-    link.href = message.filecontent;
-    link.download = message.text;
-    link.textContent = `${message.username}: ${message.text}`;
-    link.style.display = 'block';
-    p.appendChild(link);
-  } else {
-    p.textContent = `${message.username}: ${message.text}`;
-    p.appendChild(span);
-  }
+  p.textContent = `${message.username}: ${message.text}`;
+  p.appendChild(span);
 
   textArea.appendChild(p);
   textArea.scrollTop = textArea.scrollHeight;
@@ -132,6 +113,3 @@ window.onload = function () {
   loadMessages();
   document.getElementById('enviar').onclick = enviar;
 };
-// Função para obter a data e a hora atuais
-
-

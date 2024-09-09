@@ -29,7 +29,7 @@
 
         body,
         html {
-            height: 100%;
+            min-height: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -44,7 +44,6 @@
         }
 
         input[type="text"],
-        input[type="password"],
         input[type="file"] {
             width: 30vw;
             padding: 10px;
@@ -155,6 +154,38 @@
             height: 80vh;
         }
 
+        #banner {
+            width: 100%;
+            height: 60px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            align-items: center;
+            display: grid;
+            margin-bottom: 10px;
+        }
+
+        #banner-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll 10s linear infinite;
+            top: 0%;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
 
         @media (max-width: 768px) {
             .text-area {
@@ -170,10 +201,9 @@
             }
 
             #atividades img {
-                width: 70vw;
+                width: 50vw;
                 height: 70vh;
             }
-
 
         }
 
@@ -188,10 +218,11 @@
             #text {
                 width: 80%;
             }
+
             #atividades-img {
-            width: 90vw;
-            height: 80vh;
-        }
+                width: 420px;
+                height: 300px;
+            }
 
         }
     </style>
@@ -217,7 +248,7 @@
     <section>
         <main class="main-content">
             <div id="chat-form">
-                
+
                 <div class="text-area" id="text-area"></div>
                 <div class="input-wrapper">
                     <input type="text" id="text" placeholder="Digite sua mensagem aqui">
@@ -233,81 +264,86 @@
         </main>
     </section>
     <section id="materias1">
-        <div id = "materias">
-        <a href="materias.html\portugues.html">
-            <div class="conteudo-materia">
-                <img src="img\literary.png" alt="">
-                <h1>Portugues</h1>
+        <section id="banner">
+            <div class="banner-content" id="banner-content">
+                <!-- As notícias ou curiosidades vão aparecer aqui -->
             </div>
-        </a>
-        <a href="materias.html\matematica.html">
-            <div class="conteudo-materia">
-                <img src="img\calculator.png" alt="">
-                <h1>Matematica</h1>
-            </div>
-        </a>
-        <a href="materias.html\historia.html">
-            <div class="conteudo-materia">
-                <img src="img\parchment.png" alt="">
-                <h1>Historia</h1>
-            </div>
-        </a>
-        <a href="materias.html\fisica.html">
-            <div class="conteudo-materia">
-                <img src="img\atom.png" alt="">
-                <h1>Fisica</h1>
-            </div>
-        </a>
-        <a href="materias.html\ingles.html">
-            <div class="conteudo-materia">
-                <img src="img\english-language.png" alt="">
-                <h1>Ingles</h1>
-            </div>
-        </a>
-        <a href="materias.html\geografia.html">
-            <div class="conteudo-materia">
-                <img src="img\history.png" alt="">
-                <h1>Geografia</h1>
-            </div>
-        </a>
-        <a href="materias.html\biologia.html">
-            <div class="conteudo-materia">
-                <img src="img\biological.png" alt="">
-                <h1>Biologia</h1>
-            </div>
-        </a>
-        <a href="materias.html\quimica.html">
-            <div class="conteudo-materia">
-                <img src="img\laboratory.png" alt="">
-                <h1>Quimica</h1>
-            </div>
-        </a>
-        <a href="materias.html\eletronica.html">
-            <div class="conteudo-materia">
-                <img src="img\resistor.png" alt="">
-                <h1>Eletronica</h1>
-            </div>
-        </a>
-        <a href="materias.html\eventos.html">
-            <div class="conteudo-materia">
-                <img src="img\red-carpet.png" alt="">
-                <h1>Eventos</h1>
-            </div>
-        </a>
-        <a href="materias.html\st.html">
-            <div class="conteudo-materia">
-                <img src="img\firefighter-helmet.png" alt="">
-                <h1>Segurança do trabalho</h1>
-            </div>
-        </a>
-        <a href="materias.html\adm.html">
-            <div class="conteudo-materia">
-                <img src="img\salary.png" alt="">
-                <h1>Administração</h1>
-            </div>
-        </a>
-    </div>
-    
+        </section>
+        <div id="materias">
+            <a href="materias.html\portugues.html">
+                <div class="conteudo-materia">
+                    <img src="img\literary.png" alt="">
+                    <h1>Portugues</h1>
+                </div>
+            </a>
+            <a href="materias.html\matematica.html">
+                <div class="conteudo-materia">
+                    <img src="img\calculator.png" alt="">
+                    <h1>Matematica</h1>
+                </div>
+            </a>
+            <a href="materias.html\historia.html">
+                <div class="conteudo-materia">
+                    <img src="img\parchment.png" alt="">
+                    <h1>Historia</h1>
+                </div>
+            </a>
+            <a href="materias.html\fisica.html">
+                <div class="conteudo-materia">
+                    <img src="img\atom.png" alt="">
+                    <h1>Fisica</h1>
+                </div>
+            </a>
+            <a href="materias.html\ingles.html">
+                <div class="conteudo-materia">
+                    <img src="img\english-language.png" alt="">
+                    <h1>Ingles</h1>
+                </div>
+            </a>
+            <a href="materias.html\geografia.html">
+                <div class="conteudo-materia">
+                    <img src="img\history.png" alt="">
+                    <h1>Geografia</h1>
+                </div>
+            </a>
+            <a href="materias.html\biologia.html">
+                <div class="conteudo-materia">
+                    <img src="img\biological.png" alt="">
+                    <h1>Biologia</h1>
+                </div>
+            </a>
+            <a href="materias.html\quimica.html">
+                <div class="conteudo-materia">
+                    <img src="img\laboratory.png" alt="">
+                    <h1>Quimica</h1>
+                </div>
+            </a>
+            <a href="materias.html\eletronica.html">
+                <div class="conteudo-materia">
+                    <img src="img\resistor.png" alt="">
+                    <h1>Eletronica</h1>
+                </div>
+            </a>
+            <a href="materias.html\eventos.html">
+                <div class="conteudo-materia">
+                    <img src="img\red-carpet.png" alt="">
+                    <h1>Eventos</h1>
+                </div>
+            </a>
+            <a href="materias.html\st.html">
+                <div class="conteudo-materia">
+                    <img src="img\firefighter-helmet.png" alt="">
+                    <h1>Segurança do trabalho</h1>
+                </div>
+            </a>
+            <a href="materias.html\adm.html">
+                <div class="conteudo-materia">
+                    <img src="img\salary.png" alt="">
+                    <h1>Administração</h1>
+                </div>
+            </a>
+        </div>
+
     </section>
 
     <section id="Atividades">
@@ -351,72 +387,72 @@
         </div>
     </section>
     <section id="CRONOGRAMAS">
-    <section id="cronogramas">
-        <h2>Cronograma Semanal</h2>
-        
-        <div class="calendario-controle">
-            <button id="prev-week">Semana Anterior</button>
-            <span id="current-week">Semana de 04 a 10 de Setembro</span>
-            <button id="next-week">Próxima Semana</button>
-        </div>
-        
-        <div class="calendario">
-            <div class="dia">
-                <h3>Segunda-feira</h3>
-                <ul>
-                    <li>Matemática - 08:00 às 10:00</li>
-                    <li>História - 10:30 às 12:00</li>
-                </ul>
+        <section id="cronogramas">
+            <h2>Cronograma Semanal</h2>
+
+            <div class="calendario-controle">
+                <button id="prev-week">Semana Anterior</button>
+                <span id="current-week">Semana de 04 a 10 de Setembro</span>
+                <button id="next-week">Próxima Semana</button>
             </div>
-            <div class="dia">
-                <h3>Terça-feira</h3>
-                <ul>
-                    <li>Geografia - 09:00 às 11:00</li>
-                    <li>Química - 11:30 às 13:00</li>
-                </ul>
+
+            <div class="calendario">
+                <div class="dia">
+                    <h3>Segunda-feira</h3>
+                    <ul>
+                        <li>Matemática - 08:00 às 10:00</li>
+                        <li>História - 10:30 às 12:00</li>
+                    </ul>
+                </div>
+                <div class="dia">
+                    <h3>Terça-feira</h3>
+                    <ul>
+                        <li>Geografia - 09:00 às 11:00</li>
+                        <li>Química - 11:30 às 13:00</li>
+                    </ul>
+                </div>
+                <div class="dia">
+                    <h3>Quarta-feira</h3>
+                    <ul>
+                        <li>Física - 08:00 às 10:00</li>
+                        <li>Biologia - 10:30 às 12:00</li>
+                    </ul>
+                </div>
+                <div class="dia">
+                    <h3>Quinta-feira</h3>
+                    <ul>
+                        <li>Português - 09:00 às 11:00</li>
+                        <li>Educação Física - 11:30 às 13:00</li>
+                    </ul>
+                </div>
+                <div class="dia">
+                    <h3>Sexta-feira</h3>
+                    <ul>
+                        <li>Artes - 08:00 às 09:30</li>
+                        <li>Inglês - 10:00 às 11:30</li>
+                    </ul>
+                </div>
             </div>
-            <div class="dia">
-                <h3>Quarta-feira</h3>
-                <ul>
-                    <li>Física - 08:00 às 10:00</li>
-                    <li>Biologia - 10:30 às 12:00</li>
-                </ul>
+        </section>
+
+        <section id="calendario-mensal">
+            <h2>Calendário Mensal</h2>
+            <div class="calendar-header">
+                <button id="prev-month">&laquo; Anterior</button>
+                <span id="month-year"></span>
+                <button id="next-month">Próximo &raquo;</button>
             </div>
-            <div class="dia">
-                <h3>Quinta-feira</h3>
-                <ul>
-                    <li>Português - 09:00 às 11:00</li>
-                    <li>Educação Física - 11:30 às 13:00</li>
-                </ul>
+            <div id="calendar">
+                <div class="day-name">Dom</div>
+                <div class="day-name">Seg</div>
+                <div class="day-name">Ter</div>
+                <div class="day-name">Qua</div>
+                <div class="day-name">Qui</div>
+                <div class="day-name">Sex</div>
+                <div class="day-name">Sáb</div>
+                <!-- Dias do mês serão gerados dinamicamente aqui -->
             </div>
-            <div class="dia">
-                <h3>Sexta-feira</h3>
-                <ul>
-                    <li>Artes - 08:00 às 09:30</li>
-                    <li>Inglês - 10:00 às 11:30</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    
-    <section id="calendario-mensal">
-        <h2>Calendário Mensal</h2>
-        <div class="calendar-header">
-            <button id="prev-month">&laquo; Anterior</button>
-            <span id="month-year"></span>
-            <button id="next-month">Próximo &raquo;</button>
-        </div>
-        <div id="calendar">
-            <div class="day-name">Dom</div>
-            <div class="day-name">Seg</div>
-            <div class="day-name">Ter</div>
-            <div class="day-name">Qua</div>
-            <div class="day-name">Qui</div>
-            <div class="day-name">Sex</div>
-            <div class="day-name">Sáb</div>
-            <!-- Dias do mês serão gerados dinamicamente aqui -->
-        </div>
-    </section>
+        </section>
     </section>
     <script src="js\cronogramas.js"></script>
     <script src="js\conversas.js"></script>
@@ -424,71 +460,33 @@
     <script src="js\materias.js"></script>
 
     <script>
-
-        const image = document.querySelectorAll('.imagem');
-        const foto = document.getElementById('foto');
-
-
         // Função para alterar a imagem quando o input de arquivo muda
-        foto.addEventListener("change", () => {
-            if (foto.files.length > 0) {
-                const newImageSrc = URL.createObjectURL(foto.files[0]);
-                image.forEach(img => {
-                    img.src = newImageSrc;
-                });
-            }
-        })
-        image.forEach(img => {
-            img.addEventListener("click", () => {
-                foto.click();
-            });
-        });
-
         let username = '';
 
-        // Função para alternar o tema (modo claro/escuro)
-        function toggleTheme() {
-            const body = document.body;
-            const button = document.querySelector('.button-theme-toggle');
-            body.classList.toggle('dark-mode');
 
-            if (body.classList.contains('dark-mode')) {
-                button.innerHTML = '&#9789;'; // Lua
+
+        // Função para atualizar a cada segundo
+        setInterval(mostrarHorario, 1000);
+
+        // Chamar a função imediatamente quando a página for carregada
+        window.onload = mostrarHorario;
+        // Função que carrega a atividade estilizada no aluno.html
+        function carregarAtividade() {
+            const atividadeHTML = localStorage.getItem('atividadeHTML');
+
+            if (atividadeHTML) {
+                // Injetar o conteúdo HTML na seção de atividades
+                const atividadesSection = document.getElementById('Atividades');
+                atividadesSection.innerHTML = atividadeHTML;
+                atividadesSection.style.display = 'block';
             } else {
-                button.innerHTML = '&#9788;'; // Sol
+                alert('Nenhuma atividade encontrada.');
             }
         }
 
-        
-        const keys = document.querySelectorAll('.key');
-        
-        // Adiciona o evento de clique a todos os botões
-        
+        // Chama a função quando a página for carregada
+        window.onload = carregarAtividade;
 
-        function mostrarHorario() {
-  const timeInfo = document.getElementById('time-info');
-  
-  const now = new Date();
-  const horas = now.getHours().toString().padStart(2, '0');
-  const minutos = now.getMinutes().toString().padStart(2, '0');
-  const segundos = now.getSeconds().toString().padStart(2, '0');
-  
-  const dia = now.getDate().toString().padStart(2, '0');
-  const mes = (now.getMonth() + 1).toString().padStart(2, '0'); // Mês é indexado em 0
-  const ano = now.getFullYear();
-
-  // Formatar a string de data e hora
-  const dataHoraAtual = `Data: ${dia}/${mes}/${ano} - Hora: ${horas}:${minutos}:${segundos}`;
-  
-  // Atualizar o conteúdo do elemento time-info
-  timeInfo.textContent = dataHoraAtual;
-}
-
-// Função para atualizar a cada segundo
-setInterval(mostrarHorario, 1000);
-
-// Chamar a função imediatamente quando a página for carregada
-window.onload = mostrarHorario;
     </script>
 </body>
 

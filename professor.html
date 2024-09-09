@@ -210,19 +210,16 @@ h1 {
     </div>
     <script src="js\diariodebordo.js"></script>
     </section>
+    <script src="js\atividade-prof.js"></script>
     <script>
 
-           const voltar = document.querySelectorAll('.voltar');
-           const atividade= document.querySelector('main');
+         
            let home =  document.getElementById('home');
-           let listacaixa =  document.getElementById('lista-caixa')
-           let chamadabtn = document.getElementById('chamada-btn')
-           const lixeira = document.getElementById('lixeira');
-           const textarea = document.querySelectorAll('.file-description');
-           const fileInput = document.getElementById('file-upload');     
-           let uploudform = document.getElementById('upload-form')      
-           const fileList = document.getElementById('file-list');
-           let atividadebtn = document.getElementById('atividade-btn')
+           let listacaixa =  document.getElementById('lista-caixa');
+           let chamadabtn = document.getElementById('chamada-btn');
+           let atividadebtn = document.getElementById('atividade-btn');
+           const atividade = document.querySelector('main');
+           const voltar = document.querySelectorAll('.voltar');
            let diariobtn = document.getElementById('diario-btn');
            let diariodebordo = document.getElementById('diario-content');
 
@@ -293,12 +290,7 @@ h1 {
             listacaixa.style.display = 'none'
         })
       
-        textarea.forEach((element) => {
-    element.addEventListener('input', function() {
-        this.style.height = 'auto'; // Redefine a altura para calcular a nova altura
-        this.style.height = this.scrollHeight + 'px'; // Define a altura com base no scrollHeight
-    });
-});
+      
         function triggerFileInput() {
             fileInput .click();
         }
@@ -314,19 +306,9 @@ h1 {
             fileList.style.display = 'grid'
             textArea.appendChild(fileList);
         });
-        function uploadFile() {         
-            const description = textarea.value;
-            const dueDate = document.getElementById('due-date').value;
+        // Função que envia a atividade e salva o conteúdo HTML estilizado no localStorage
 
-            if (fileInput.files.length > 0 && description && dueDate) {
-                const file = fileInput.files[0];
 
-                alert('Atividade enviada com sucesso!');
-            } else {
-                alert('Todos os campos são obrigatórios');
-            }
-        }
-       
     </script>
 </body>
 

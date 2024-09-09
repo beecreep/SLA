@@ -9,6 +9,8 @@ let perfilbtn = document.getElementById('perfil-btn');
 let perfil = document.getElementById('perfil');
 let cronogramasbtn = document.getElementById('Cronogramas-btn');
 let cronogramas = document.getElementById('CRONOGRAMAS');
+const image = document.querySelectorAll('.imagem');
+const foto = document.getElementById('foto');
 
 
 atividadesbtn.addEventListener("click", () => {
@@ -76,3 +78,28 @@ function toggleNavbar() {
     navbar.classList.toggle('show');
     mainContent.classList.toggle('shifted');
 }  
+
+foto.addEventListener("change", () => {
+    if (foto.files.length > 0) {
+        const newImageSrc = URL.createObjectURL(foto.files[0]);
+        image.forEach(img => {
+            img.src = newImageSrc;
+        });
+    }
+})
+image.forEach(img => {
+    img.addEventListener("click", () => {
+        foto.click();
+    });
+});
+function toggleTheme() {
+    const body = document.body;
+    const button = document.querySelector('.button-theme-toggle');
+    body.classList.toggle('dark-mode');
+
+    if (body.classList.contains('dark-mode')) {
+        button.innerHTML = '&#9789;'; // Lua
+    } else {
+        button.innerHTML = '&#9788;'; // Sol
+    }
+}
