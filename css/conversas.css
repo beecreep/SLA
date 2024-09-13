@@ -66,8 +66,9 @@ main input[type="file"] {
 
 #text {
     border-radius: 20px;
-    width: 40vw;
+    width: 100%;
     z-index: 5;
+    color: var(--text-color);
 
 }
 .input-wrapper {

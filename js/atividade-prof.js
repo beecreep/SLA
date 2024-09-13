@@ -1,11 +1,8 @@
 const lixeira = document.getElementById('lixeira');
 const textarea = document.querySelectorAll('.file-description');
-
 const fileInput = document.getElementById('file-upload');
 let uploudform = document.getElementById('upload-form')
 const fileList = document.getElementById('file-list');
-
-
 
 function uploadFile() {
     const titulo = document.querySelector('.titulo').value;
