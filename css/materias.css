@@ -37,7 +37,7 @@
 #materias1 {
     height: 100%;
     width: 100%;
-    display: none;
+    display: grid;
     background: var(--background-color);
     color: var(--text-color);
     padding: 10px;
