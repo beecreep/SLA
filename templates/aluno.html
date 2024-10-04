@@ -9,7 +9,6 @@
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://apis.google.com/js/api.js"></script>
-    <link rel="stylesheet" href="css\conversas.css">
     <link rel="stylesheet" href="css\materias.css">
     <link rel="stylesheet" href="css/perfil.css">
     <link rel="stylesheet" href="css\cronogramas.css">
@@ -240,7 +239,7 @@
         <a href="#" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
         <a href="#" id="Atividades-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
         <a href="#" id="Cronogramas-btn">Cronogramas <i class="fa-solid fa-calendar-days"></i></a>
-        <a href="#" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
+        <a href="chat.html" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
         <img src="img\user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
         <input type="file" name="foto" id="foto">
@@ -248,24 +247,7 @@
             <p id="time-info">Carregando horário...</p>
         </div>
     </div>
-    <section>
-        <main class="main-content">
-            <div id="chat-form">
-
-                <div class="text-area" id="text-area"></div>
-                <div class="input-wrapper">
-                    <input type="text" id="text" placeholder="Digite sua mensagem aqui">
-                    <span class="icon" onclick="triggerFileInput()">&#128206;</span>
-
-                    <input type="file" id="file" onchange="handleFileUpload()">
-                </div>
-                <div>
-                    <input type="submit" value="Enviar" onclick="enviar()" id="enviar">
-                    <input type="reset" value="Redefinir" onclick="redefinir()">
-                </div>
-            </div>
-        </main>
-    </section>
+    
     <section id="materias1">
         <section id="banner">
             <div class="banner-content" id="banner-content">
@@ -458,7 +440,7 @@
         </section>
     </section>
     <script src="js\cronogramas.js"></script>
-    <script src="js\conversas.js"></script>
+  
     <script src="js\nav-aluno.js"></script>
     <script src="js\materias.js"></script>
 
