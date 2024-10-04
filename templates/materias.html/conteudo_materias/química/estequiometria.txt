@@ -1,0 +1,31 @@
+A estequiometria é uma parte fundamental da química que estuda as proporções quantitativas das substâncias envolvidas em reações químicas. 
+Ela é essencial para compreender a quantidade de reagentes necessária para produzir determinados produtos, bem como para prever o rendimento das reações.
+
+A estequiometria baseia-se em equações químicas, que representam as reações químicas em termos de átomos, moléculas ou íons. 
+Vamos analisar um exemplo de reação química para entender a estequiometria:
+
+Equação química da reação:
+2H2 + O2 → 2H2O
+
+Nessa equação, temos a reação de hidrogênio (H2) com oxigênio (O2) para formar água (H2O). 
+Vamos utilizar a estequiometria para analisar as proporções envolvidas nessa reação:
+
+1. Proporção dos reagentes: A equação mostra que 2 moléculas de hidrogênio (H2) reagem com 1 molécula de oxigênio (O2) para formar 2 moléculas de água (H2O). 
+Essa proporção é importante, pois nos diz como os reagentes estão relacionados entre si e quanto de cada substância é necessário para a reação.
+
+2. Massa molar: Para realizar cálculos estequiométricos, é necessário conhecer a massa molar das substâncias envolvidas. 
+A massa molar é a massa de uma molécula ou íon em gramas e é expressa em g/mol. 
+A massa molar do hidrogênio (H2) é 2 g/mol, do oxigênio (O2) é 32 g/mol e da água (H2O) é 18 g/mol (2 x 1 g/mol de H + 16 g/mol de O).
+
+3. Cálculos estequiométricos: Com base nas proporções da equação e nas massas molares, podemos realizar diversos cálculos. 
+Por exemplo, podemos calcular a quantidade de água formada a partir de uma quantidade conhecida de hidrogênio ou oxigênio. 
+Da mesma forma, podemos determinar a quantidade de reagentes necessária para produzir uma quantidade específica de produto.
+
+4. Rendimento da reação: O rendimento de uma reação é a quantidade real de produto obtida em relação à quantidade teórica calculada pela estequiometria. 
+Vários fatores podem afetar o rendimento de uma reação, como reações secundárias e perdas durante o processo.
+
+A estequiometria é usada em diversas áreas da química, desde laboratórios de pesquisa até a indústria química. 
+Ela é essencial para planejar e controlar reações químicas, garantindo que os reagentes sejam utilizados de forma eficiente e que os produtos sejam obtidos nas quantidades desejadas.
+
+Em resumo, a estequiometria é uma ferramenta poderosa na química, permitindo calcular quantidades de reagentes e produtos em reações químicas com base nas proporções das equações químicas e nas massas molares das substâncias envolvidas. 
+Seu uso é fundamental para entender o mundo das transformações químicas e é amplamente aplicado em diversas áreas da ciência e indústria.

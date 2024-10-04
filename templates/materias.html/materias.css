@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            min-height: 10px;
+            font-family: poppins;
+            padding: 10px;
+
+        }
+        a{
+            text-decoration: none;
+        }
+
+        #conteudo-materia {
+            display: flex;
+            height: 90vh;
+            width: 100vw;
+            padding: 10px;
+            margin: 10px;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .conteudo {
+            box-shadow: 4px 4px 10px black;
+            border: 2px solid black;
+            border-radius: 8px;
+            border-bottom: solid 2px gray;
+            min-height: 10%;
+            width: 80%;
+            display: flex;
+            padding: 10px;
+            justify-content: space-between;
+        }
+
+        i {
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .icones {
+            display: flex;
+            width: 10%;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+        }
+         .divisoria{
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            height: 100%;
+            width: 50%;
+            gap: 50px;
+            justify-content: center;
+            align-items: center;
+         }
+         @media (max-width: 768px){
+
+            body{
+                min-height: 20vh;
+                gap: 10px;
+                width: 100vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+           h1{
+                margin: 10px;
+                width: 100%;
+                font-size: 1rem;
+                align-items: center;
+                text-align: center;
+                position: relative;
+                
+                
+            }
+            #conteudo-materia{
+                display: flex;
+                flex-direction: column;
+                width: 100vw;
+                height: auto;
+            }
+            .conteudo{
+                width: 90%;
+            }
+            .divisoria{
+                width: 100%;
+            }
+            .icones{
+                width: 20%;
+            }
+         }

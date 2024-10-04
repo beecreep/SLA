@@ -1,0 +1,22 @@
+As ligações químicas são os processos pelos quais os átomos se unem para formar moléculas ou compostos.
+ Essas ligações ocorrem devido à interação dos elétrons dos átomos envolvidos, buscando alcançar configurações eletrônicas mais estáveis.
+
+Existem três tipos principais de ligações químicas: ligações iônicas, ligações covalentes e ligações metálicas.
+
+1. Ligações iônicas: As ligações iônicas ocorrem entre átomos com grande diferença de eletronegatividade (capacidade de atrair elétrons). 
+Nesse tipo de ligação, um átomo doa um ou mais elétrons para outro átomo, resultando em íons carregados positiva e negativamente. 
+O átomo que perdeu elétrons torna-se um cátion (íon com carga positiva), e o átomo que ganhou elétrons torna-se um ânion (íon com carga negativa). 
+A atração eletrostática entre esses íons positivos e negativos mantêm os átomos unidos, formando um composto iônico. 
+Um exemplo clássico é o cloreto de sódio (sal de cozinha), formado pela ligação entre sódio (Na+) e cloro (Cl-).
+
+2. Ligações covalentes: As ligações covalentes ocorrem quando átomos compartilham elétrons para alcançar a estabilidade eletrônica. 
+Isso acontece geralmente entre átomos de elementos não metálicos. Nesse tipo de ligação, os átomos compartilham pares de elétrons, formando moléculas. 
+Existem ligações covalentes simples (um par de elétrons compartilhado), duplas (dois pares) e triplas (três pares). Um exemplo comum de ligação covalente é a molécula de água (H2O), formada pela ligação entre dois átomos de hidrogênio (H) e um átomo de oxigênio (O).
+
+3. Ligações metálicas: As ligações metálicas ocorrem em metais, onde os átomos têm baixa eletronegatividade e tendem a perder elétrons facilmente.
+ Nesse tipo de ligação, os átomos de metal doam seus elétrons de valência (os elétrons mais externos) para formar uma "nuvem" de elétrons móveis, que são compartilhados por todos os átomos do metal. 
+Essa nuvem de elétrons confere aos metais suas características especiais, como condutividade elétrica e térmica, maleabilidade e brilho.
+
+As ligações químicas são essenciais para a formação de todas as substâncias ao nosso redor. 
+Elas determinam as propriedades físicas e químicas dos materiais e são a base para a compreensão das reações químicas e da formação de compostos complexos. 
+O conhecimento sobre ligações químicas é fundamental para entender a natureza da matéria e a ciência que governa o mundo que nos rodeia.

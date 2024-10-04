@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página do Professor</title>
+    <link rel="stylesheet" href="css\professor-css\atividade.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css\professor-css\diariodebordo.css">
+    <link rel="stylesheet" href="css\professor-css\listachamada.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            font-family: poppins;
+        }
+        section{
+            padding: 10px;
+        }
+
+        main {
+            width: 50vw;
+            min-height: 50vh;
+            box-shadow: 10px 10px 20px black;
+            display: none;
+            padding: 10px;
+            align-items: center;
+            gap: 20px;
+        }
+
+       
+        .content {
+            height: 280px;
+            width: 200px;
+            border-radius: 10px;
+            border: 2px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            cursor: pointer;
+
+        }
+
+        .content:hover {
+            transform: scale(1.05);
+            transition: 0.5s;
+            margin: 8px;
+            transform: translateY(-10px);
+
+        }
+
+        .content img {
+            height: 60%;
+            width: 70%;
+        }
+
+        #home {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            width: 100vw;
+            height: 100vh;
+
+
+        }
+
+        
+h1 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+
+
+        #lista-caixa {
+            display: none;
+        }
+
+        .voltar {
+            color: gray;
+            cursor: pointer;
+            top: 0px;
+            left: 0px;
+
+        }
+
+        .voltar:hover {
+            transition: 0.3s;
+            color: blue;
+
+
+        }
+        
+
+        @media (max-width: 768px) {
+            body {
+                min-height: 20%;
+            }
+
+
+        
+
+            #upload-form {
+                width: 90%;
+                height: 90%;
+            }
+
+            main {
+                width: 90%;
+                min-height: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="home">
+        <div class="content" id="diario-btn">
+            <img src="img\diary.png" alt="">
+            <h1>diario de bordo</h1>
+        </div>
+        <div class="content" id="atividade-btn">
+            <img src="img\score.png" alt="">
+            <h1>enviar atividade </h1>
+
+        </div>
+        <div class="content" id="chamada-btn">
+            <img src="img\to-do-list.png"
+                alt="">
+            <h1> lista de chamada</h1>
+        </div>
+        <div class="content" >
+            <img src="img\chat.png" alt="">
+            <h1>chat</h1>
+        </div>
+    </section>
+    <section id="lista-caixa">
+        <span class="voltar">voltar</span>
+        <h1>Lista de Chamada</h1>
+        <table id="listaChamada">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Presença</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os dados dos alunos serão inseridos aqui -->
+            </tbody>
+        </table>
+    </section>
+    <main id="atividade">
+        <span class="voltar">voltar</span>
+
+        <div id="upload-form">
+            <div style="display: flex;
+            justify-content: space-between;">
+                <h3>Enviar Atividade</h3>
+                <i class="fas fa-trash-alt" id="lixeira" style="cursor: pointer;"></i>
+            </div>
+            <hr>
+            <input type="text" placeholder="titulo" class="titulo">
+            <div style="display: flex; justify-content: space-between;">
+                <textarea class="file-description" placeholder="Descrição " id="descriçao-atividade"></textarea> <input type="file"
+                    id="file-upload">
+                <div id="file-list"></div>
+                <span class="icon" onclick="triggerFileInput()">&#128206;</span>
+
+            </div>
+            <div style="display: flex;justify-content: space-between;">
+                <div>
+                    <p>prazo para entrega</p>
+                    <input type="date" id="due-date">
+
+                </div>
+                <input type="submit" value="Enviar" onclick="uploadFile()" id="enviar">
+            </div>
+        </div>
+    </main>
+    <section id="diario-content">
+        <span class="voltar">voltar</span>
+       
+        <div class="diary-header">
+            <input type="text" placeholder="titulo" class="titulo" id="titulo-diario">
+        </div>
+    
+        <div class="new-entry">
+            <textarea id="diary-entry" rows="5" placeholder="Escreva sua nova entrada aqui..." class="file-description"></textarea>
+            <button onclick="addEntry()">Adicionar Entrada</button>
+        </div>
+    
+        <ul class="entry-list" id="entry-list">
+            <!-- Entradas serão adicionadas aqui -->
+        </ul>
+    </div>
+    <script src="js\diariodebordo.js"></script>
+    </section>
+    <script src="js\atividade-prof.js"></script>
+    <script>
+
+           let home =  document.getElementById('home');
+           let listacaixa =  document.getElementById('lista-caixa');
+           let chamadabtn = document.getElementById('chamada-btn');
+           let atividadebtn = document.getElementById('atividade-btn');
+           const atividade = document.querySelector('main');
+           const voltar = document.querySelectorAll('.voltar');
+           let diariobtn = document.getElementById('diario-btn');
+           let diariodebordo = document.getElementById('diario-content');
+
+         document.addEventListener('DOMContentLoaded', () => {
+           
+            voltar.forEach((element) => {
+                element.addEventListener('click', () => {
+            uploudform.style.display = 'none';
+            atividade.style.display = 'none';
+            home.style.display = 'none';
+            listacaixa.style.display = 'none'
+            home.style.display = 'flex';
+            diariodebordo.style.display = 'none'
+            });
+        });
+    });
+               diariobtn.addEventListener('click', () => {
+                diariodebordo.style.display =' grid'
+                home.style.display = 'none';
+               })
+        chamadabtn.addEventListener('click', () => {
+            home.style.display = 'none';
+           listacaixa.style.display = 'grid';
+
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const tabela = document.querySelector('#listaChamada tbody');
+
+    fetch('listachamada.json')
+        .then(response => response.json())
+        .then(data => {
+            data.alunos.forEach(aluno => {  // Acessa a lista de alunos corretamente
+                const row = document.createElement('tr');
+
+                const nomeCell = document.createElement('td');
+                nomeCell.textContent = aluno;  // Agora 'aluno' é uma string, não um objeto
+                nomeCell.setAttribute('data-label', 'Nome'); // Adiciona o atributo data-label
+                row.appendChild(nomeCell);
+
+                const presencaCell = document.createElement('td');
+                const presencaCheckbox = document.createElement('input');
+                presencaCheckbox.type = 'checkbox';
+                presencaCell.appendChild(presencaCheckbox);
+                presencaCell.setAttribute('data-label', 'Presença'); // Adiciona o atributo data-label
+                row.appendChild(presencaCell);
+
+                tabela.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Erro ao buscar dados:', error));
+});
+
+        document.addEventListener('DOMContentLoaded', () => {
+           
+            lixeira.addEventListener('click', () => {
+                atividade.style.display = 'none'
+                alert('atividade apagado');
+                document.querySelector('section').style.display = 'flex'
+            });
+        });
+
+       atividadebtn.addEventListener('click', () => {
+          uploudform.style.display = 'flex';
+            atividade.style.display = 'grid';
+            home.style.display = 'none';
+            listacaixa.style.display = 'none'
+        })
+      
+        function triggerFileInput() {
+            fileInput .click();
+        }
+        fileInput.addEventListener('change', function () {
+           
+            fileList.innerHTML = '';
+
+            for (let i = 0; i < this.files.length; i++) {
+                const li = document.createElement('li');
+                li.textContent = this.files[i].name;
+                fileList.appendChild(li);
+            }
+            fileList.style.display = 'grid'
+            textArea.appendChild(fileList);
+        });
+        // Função que envia a atividade e salva o conteúdo HTML estilizado no localStorage
+
+    </script>
+</body>
+
+</html>

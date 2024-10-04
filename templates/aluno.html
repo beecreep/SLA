@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bem-vindo aluno</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://apis.google.com/js/api.js"></script>
+    <link rel="stylesheet" href="css\conversas.css">
+    <link rel="stylesheet" href="css\materias.css">
+    <link rel="stylesheet" href="css/perfil.css">
+    <link rel="stylesheet" href="css\cronogramas.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
+            --background-color-clarinho: #efefefdc ;
+
+        }
+
+        body,
+        html {
+            min-height: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background-color);
+            font-family: poppins;
+        }
+
+        body.dark-mode section {
+            --background-color: #4e4d4d;
+            --text-color: #f1e9e9;
+            --background-color-clarinho: #efefef52;
+            transition: 0.3s;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 30vw;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            outline: none;
+            border-bottom: solid black 3px;
+            background-color: transparent;
+        }
+
+        /* Adicionando estilos para a navbar */
+        .navbar {
+            width: 250px;
+            background-color: var(--background-color);
+            position: fixed;
+            top: 0;
+            left: -300px;
+            height: 100%;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            transition: left 0.3s;
+        }
+
+        .navbar.show {
+            left: 0;
+            /* Mostra a navbar */
+        }
+
+        .navbar a {
+            display: block;
+            color: var(--text-color);
+            padding: 10px 0;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: var(--text-color);
+            color: var(--background-color);
+            padding-left: 10px;
+            transition: 0.3s;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            top: 10px;
+            left: 2%;
+            z-index: 1000;
+        }
+
+        #image1 {
+            height: 45px;
+            width: 45px;
+            position: absolute;
+            top: 10px;
+            left: 76%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #4e4d4d;
+            cursor: pointer;
+        }
+
+        section {
+            margin-left: 0;
+            /* Remove a margem para a navbar */
+            transition: margin-left 0.3s;
+        }
+
+        section.shifted {
+            margin-left: 270px;
+            /* Adiciona espaço para a navbar quando visível */
+        }
+
+        .button-theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            position: fixed;
+            top: 10px;
+            color: var(--text-color);
+            right: 10px;
+        }
+
+        #foto {
+            display: none;
+        }
+
+        #perfil {
+            display: none;
+        }
+
+        #Atividades {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+
+        }
+
+        #atividades-img {
+            width: 90vw;
+            height: 80vh;
+        }
+
+        #banner {
+            width: 100%;
+            height: 60px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            align-items: center;
+            display: grid;
+            margin-bottom: 10px;
+        }
+
+        #banner-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll 10s linear infinite;
+            top: 0%;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .text-area {
+                width: 90vw;
+                height: 40vh;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            #text {
+                width: 80%;
+
+            }
+
+            #atividades img {
+                width: 50vw;
+                height: 70vh;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .text-area {
+                width: 80vw;
+                height: 35vh;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            #text {
+                width: 80%;
+            }
+
+            #atividades-img {
+                width: 420px;
+                height: 300px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <button class="button-theme-toggle" onclick="toggleTheme()">&#9788;</button> <!-- Sol -->
+
+    <div class="menu-icon" onclick="toggleNavbar()">&#9776;</div> <!-- Ícone de menu -->
+    <div class="navbar">
+        <h2 style="text-align: center;">Menu</h2>
+        <a href="#" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
+        <a href="#" id="Atividades-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
+        <a href="#" id="Cronogramas-btn">Cronogramas <i class="fa-solid fa-calendar-days"></i></a>
+        <a href="#" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
+        <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
+        <img src="img\user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
+        <input type="file" name="foto" id="foto">
+        <div class="info-box">
+            <p id="time-info">Carregando horário...</p>
+        </div>
+    </div>
+    <section>
+        <main class="main-content">
+            <div id="chat-form">
+
+                <div class="text-area" id="text-area"></div>
+                <div class="input-wrapper">
+                    <input type="text" id="text" placeholder="Digite sua mensagem aqui">
+                    <span class="icon" onclick="triggerFileInput()">&#128206;</span>
+
+                    <input type="file" id="file" onchange="handleFileUpload()">
+                </div>
+                <div>
+                    <input type="submit" value="Enviar" onclick="enviar()" id="enviar">
+                    <input type="reset" value="Redefinir" onclick="redefinir()">
+                </div>
+            </div>
+        </main>
+    </section>
+    <section id="materias1">
+        <section id="banner">
+            <div class="banner-content" id="banner-content">
+                <!-- As notícias ou curiosidades vão aparecer aqui -->
+            </div>
+        </section>
+        <div id="materias">
+            <a href="materias.html\portugues.html">
+                <div class="conteudo-materia">
+                    <img src="img\literary.png" alt="">
+                    <h1>Portugues</h1>
+                </div>
+            </a>
+            <a href="materias.html\matematica.html">
+                <div class="conteudo-materia">
+                    <img src="img\calculator.png" alt="">
+                    <h1>Matematica</h1>
+                </div>
+            </a>
+            <a href="materias.html\historia.html">
+                <div class="conteudo-materia">
+                    <img src="img\parchment.png" alt="">
+                    <h1>Historia</h1>
+                </div>
+            </a>
+            <a href="materias.html\fisica.html">
+                <div class="conteudo-materia">
+                    <img src="img\atom.png" alt="">
+                    <h1>Fisica</h1>
+                </div>
+            </a>
+            <a href="materias.html\ingles.html">
+                <div class="conteudo-materia">
+                    <img src="img\english-language.png" alt="">
+                    <h1>Ingles</h1>
+                </div>
+            </a>
+            <a href="materias.html\geografia.html">
+                <div class="conteudo-materia">
+                    <img src="img\history.png" alt="">
+                    <h1>Geografia</h1>
+                </div>
+            </a>
+            <a href="materias.html\biologia.html">
+                <div class="conteudo-materia">
+                    <img src="img\biological.png" alt="">
+                    <h1>Biologia</h1>
+                </div>
+            </a>
+            <a href="materias.html\quimica.html">
+                <div class="conteudo-materia">
+                    <img src="img\laboratory.png" alt="">
+                    <h1>Quimica</h1>
+                </div>
+            </a>
+            <a href="materias.html\eletronica.html">
+                <div class="conteudo-materia">
+                    <img src="img\resistor.png" alt="">
+                    <h1>Eletronica</h1>
+                </div>
+            </a>
+            <a href="materias.html\eventos.html">
+                <div class="conteudo-materia">
+                    <img src="img\red-carpet.png" alt="">
+                    <h1>Eventos</h1>
+                </div>
+            </a>
+            <a href="materias.html\st.html">
+                <div class="conteudo-materia">
+                    <img src="img\firefighter-helmet.png" alt="">
+                    <h1>Segurança do trabalho</h1>
+                </div>
+            </a>
+            <a href="materias.html\adm.html">
+                <div class="conteudo-materia">
+                    <img src="img\salary.png" alt="">
+                    <h1>Administração</h1>
+                </div>
+            </a>
+        </div>
+
+    </section>
+
+    <section id="Atividades">
+        <img src="img\undraw_Exams_re_4ios.png" alt="" id="atividades-img">
+        <span>sem Atividades no momento</span>
+    </section>
+    <section id="perfil">
+        <div class="settings-container">
+            <h2>seu perfil</h2>
+
+            <div class="profile-picture">
+                <img src="img\user.png" alt="Profile Picture" class="imagem" id="image2">
+            </div>
+
+            <form id="usernameForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Turma</label>
+                    <input type="text" id="location" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="*********">
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" value="Save Changes">
+                    <input type="button" value="Cancel">
+                </div>
+            </form>
+        </div>
+    </section>
+    <section id="CRONOGRAMAS">
+        <section id="cronogramas">
+            <h2>Cronograma Semanal</h2>
+
+            <div class="calendario-controle">
+                <button id="prev-week">Semana Anterior</button>
+                <span id="current-week">Semana de 04 a 10 de Setembro</span>
+                <button id="next-week">Próxima Semana</button>
+            </div>
+
+            <div class="calendario">
+                <div class="dia">
+                    <h3>Segunda-feira</h3>
+                    <ul>
+                        <li>Matemática - 08:00 às 10:00</li>
+                        <li>História - 10:30 às 12:00</li>
+                    </ul>
+                </div>
+                <div class="dia">
+                    <h3>Terça-feira</h3>
+                    <ul>
+                        <li>Geografia - 09:00 às 11:00</li>
+                        <li>Química - 11:30 às 13:00</li>
+                    </ul>
+                </div>
+                <div class="dia">
+                    <h3>Quarta-feira</h3>
+                    <ul>
+                        <li>Física - 08:00 às 10:00</li>
+                        <li>Biologia - 10:30 às 12:00</li>
+                    </ul>
+                </div>
+                <div class="dia">
+                    <h3>Quinta-feira</h3>
+                    <ul>
+                        <li>Português - 09:00 às 11:00</li>
+                        <li>Educação Física - 11:30 às 13:00</li>
+                    </ul>
+                </div>
+                <div class="dia">
+                    <h3>Sexta-feira</h3>
+                    <ul>
+                        <li>Artes - 08:00 às 09:30</li>
+                        <li>Inglês - 10:00 às 11:30</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="calendario-mensal">
+            <h2>Calendário Mensal</h2>
+            <div class="calendar-header">
+                <button id="prev-month">&laquo; Anterior</button>
+                <span id="month-year"></span>
+                <button id="next-month">Próximo &raquo;</button>
+            </div>
+            <div id="calendar">
+                <div class="day-name">Dom</div>
+                <div class="day-name">Seg</div>
+                <div class="day-name">Ter</div>
+                <div class="day-name">Qua</div>
+                <div class="day-name">Qui</div>
+                <div class="day-name">Sex</div>
+                <div class="day-name">Sáb</div>
+                <!-- Dias do mês serão gerados dinamicamente aqui -->
+            </div>
+        </section>
+    </section>
+    <script src="js\cronogramas.js"></script>
+    <script src="js\conversas.js"></script>
+    <script src="js\nav-aluno.js"></script>
+    <script src="js\materias.js"></script>
+
+    <script>
+        // Função para alterar a imagem quando o input de arquivo muda
+        let username = '';
+
+
+
+        // Função para atualizar a cada segundo
+        setInterval(mostrarHorario, 1000);
+
+        // Chamar a função imediatamente quando a página for carregada
+        window.onload = mostrarHorario;
+        // Função que carrega a atividade estilizada no aluno.html
+        function carregarAtividade() {
+            const atividadeHTML = localStorage.getItem('atividadeHTML');
+
+            if (atividadeHTML) {
+                // Injetar o conteúdo HTML na seção de atividades
+                const atividadesSection = document.getElementById('Atividades');
+                atividadesSection.innerHTML = atividadeHTML;
+                atividadesSection.style.display = 'block';
+            } else {
+                alert('Nenhuma atividade encontrada.');
+            }
+        }
+
+        // Chama a função quando a página for carregada
+        window.onload = carregarAtividade;
+
+    </script>
+</body>
+
+</html>

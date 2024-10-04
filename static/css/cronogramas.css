@@ -1,0 +1,222 @@
+
+
+  #CRONOGRAMAS{
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+    
+  }
+#cronogramas {
+margin: 20px;
+padding: 20px;
+background-color: var(--background-color);
+border-radius: 8px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+color: var( --text-color);
+}
+
+#cronogramas h2, #calendario-mensal h2 {
+text-align: center;
+margin-bottom: 20px;
+}
+
+.calendario-controle {
+text-align: center;
+margin-bottom: 20px;
+}
+
+.calendario-controle button {
+padding: 10px;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+.calendario-controle button:hover {
+background-color: #0056b3;
+}
+
+.calendario {
+display: flex;
+justify-content: space-between;
+}
+
+.dia {
+flex: 1;
+margin: 0 10px;
+background-color: var(--background-color-clarinho);
+padding: 15px;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dia h3 {
+text-align: center;
+margin-bottom: 10px;
+font-size: 18px;
+}
+
+.dia ul {
+list-style: none;
+padding: 0;
+}
+
+.dia ul li {
+padding: 8px;
+margin-bottom: 6px;
+background-color: #f1f1f1;
+border-radius: 4px;
+}
+
+/* Calendário mensal */
+/* styles.css */
+
+/* ... estilos anteriores ... */
+
+/* Calendário mensal */
+#calendario-mensal {
+margin: 20px;
+padding: 20px;
+background-color: var(--background-color);
+border-radius: 8px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#calendario-mensal h2 {
+text-align: center;
+margin-bottom: 20px;
+}
+
+.calendar-header {
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: 10px;
+}
+
+.calendar-header button {
+padding: 8px 12px;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+margin: 0 10px;
+}
+
+.calendar-header button:hover {
+background-color: #0056b3;
+}
+
+#month-year {
+font-size: 1.2em;
+font-weight: bold;
+}
+
+#calendar {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+gap: 5px;
+}
+
+.day-name, .day {
+text-align: center;
+padding: 10px 0;
+border: 1px solid #ddd;
+border-radius: 4px;
+}
+
+.day-name {
+background-color: #007bff;
+color: white;
+font-weight: bold;
+}
+
+.day {
+background-color: #fff;
+cursor: pointer;
+position: relative;
+}
+
+.day:hover {
+background-color: #e6f7ff;
+}
+
+.day.today {
+border: 2px solid #28a745;
+}
+
+.day.holiday {
+background-color: #ffebee;
+border: 2px solid #f44336;
+}
+
+.day .holiday-marker {
+position: absolute;
+top: 5px;
+right: 5px;
+width: 8px;
+height: 8px;
+background-color: #f44336;
+border-radius: 50%;
+}
+
+#calendar div.sublinhado {
+    border-bottom: 3px solid red;
+    font-weight: bold;
+    color: red;
+}
+
+#calendar div.sublinhado[style*="color: blue"] {
+    border-bottom: 3px solid blue;
+    color: blue;
+    font-weight: bold;
+}
+@media (max-width: 768px) {
+    .calendario {
+        display: block;
+    }
+
+    .dia {
+        margin: 10px 0;
+        min-width: 100%;
+    }
+
+    #calendar {
+        grid-template-columns: repeat(7, 1fr); /* Mantém os dias da semana lado a lado, mas reduz o tamanho */
+        gap: 5px;
+    }
+
+}
+
+@media (max-width: 370px) {
+    #calendar {
+        grid-template-columns: repeat(2, 1fr); /* Exibir 2 colunas no calendário em telas muito pequenas, como smartphones */
+    }
+    #calendar div {
+        padding: 5px; /* Reduz o espaçamento em telas menores */
+        font-size: 12px;
+    }
+
+    .calendario-controle button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    #cronogramas h2 {
+        font-size: 20px;
+    }
+
+    .dia h3 {
+        font-size: 16px;
+    }
+
+    .dia ul li {
+        padding: 6px;
+        font-size: 14px;
+    }
+}
+
+
