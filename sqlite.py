@@ -15,13 +15,7 @@ def init_db():
                         role TEXT NOT NULL)''')
     
     # Tabela de arquivos (opcional, se houver necessidade de armazenar arquivos)
-    cursor.execute('''CREATE TABLE IF NOT EXISTS files (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        user_id INTEGER NOT NULL,
-                        filename TEXT NOT NULL,
-                        filedata BLOB NOT NULL,
-                        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-                        FOREIGN KEY(user_id) REFERENCES users(id))''')
+  
 
     conn.commit()
     conn.close()

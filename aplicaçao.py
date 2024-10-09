@@ -2,10 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 import sqlite3
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
-import json
+
 
 app = Flask(__name__)
-app.secret_key = 'sua_chave_secreta_aqui'
+app.secret_key = 'seupai123@sherekbr12'
 
 # Função para conectar ao banco de dados
 def get_db_connection():
@@ -13,35 +13,20 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-# Função para adicionar aluno ao arquivo JSON de lista de chamada
-def adicionar_a_lista_chamada(nome):
-    lista_chamada_path = 'listachamada.json'
-    
-    # Verifica se o arquivo existe, caso contrário, cria um novo
-    if not os.path.exists(lista_chamada_path):
-        with open(lista_chamada_path, 'w') as f:
-            json.dump({"alunos": []}, f)
-    
-    # Lê o conteúdo atual da lista
-    with open(lista_chamada_path, 'r') as f:
-        lista_chamada = json.load(f)
-    
-    # Adiciona o novo aluno à lista
-    lista_chamada['alunos'].append(nome)
-    
-    # Salva a lista atualizada
-    with open(lista_chamada_path, 'w') as f:
-        json.dump(lista_chamada, f, indent=4)
+# Rota para carregar a página de cadastro
+@app.route('/cadastro')
+def cadastro():
+    return render_template('home_page.html')  # Renderiza o arquivo cadastro.html
 
 # Rota para registro
 @app.route('/cadastrar', methods=['POST'])
 def cadastrar():
-    nome = request.json.get('nome')
-    email = request.json.get('email')
-    senha = request.json.get('senha')
-    turma = request.json.get('turma')
-    numero = request.json.get('numero')
-    role = request.json.get('role')
+    nome =request.form.get('nome')
+    email =request.form.get('email')
+    senha =request.form.get('senha')
+    turma =request.form.get('turma')
+    numero =request.form.get('numero')
+    role =request.form.get('role')
     
     # Verificação de senha
     hashed_password = generate_password_hash(senha)
