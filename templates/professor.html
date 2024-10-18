@@ -30,7 +30,10 @@
         section{
             padding: 10px;
         }
-
+     a{
+        text-decoration: none;
+        color: none;
+     }
         main {
             width: 50vw;
             min-height: 50vh;
@@ -148,10 +151,12 @@ h1 {
                 alt="">
             <h1> lista de chamada</h1>
         </div>
+        <a href="/chat">
         <div class="content" >
             <img src="static\img\chat.png" alt="">
             <h1>chat</h1>
         </div>
+    </a>
     </section>
     <section id="lista-caixa">
         <span class="voltar">voltar</span>
@@ -171,30 +176,19 @@ h1 {
     <main id="atividade">
         <span class="voltar">voltar</span>
 
-        <div id="upload-form">
-            <div style="display: flex;
-            justify-content: space-between;">
-                <h3>Enviar Atividade</h3>
-                <i class="fas fa-trash-alt" id="lixeira" style="cursor: pointer;"></i>
-            </div>
-            <hr>
-            <input type="text" placeholder="titulo" class="titulo">
-            <div style="display: flex; justify-content: space-between;">
-                <textarea class="file-description" placeholder="Descrição " id="descriçao-atividade"></textarea> <input type="file"
-                    id="file-upload">
-                <div id="file-list"></div>
-                <span class="icon" onclick="triggerFileInput()">&#128206;</span>
-
-            </div>
-            <div style="display: flex;justify-content: space-between;">
-                <div>
-                    <p>prazo para entrega</p>
-                    <input type="date" id="due-date">
-
-                </div>
-                <input type="submit" value="Enviar" onclick="uploadFile()" id="enviar">
-            </div>
-        </div>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="titulo">Título:</label>
+            <input type="text" name="titulo" required><br>
+        
+            <label for="descricao">Descrição:</label>
+            <textarea name="descricao" required></textarea><br>
+        
+            <label for="arquivo">Enviar arquivo (opcional):</label>
+            <input type="file" name="arquivo"><br>
+        
+            <button type="submit">Enviar Atividade</button>
+        </form>
+        
     </main>
     <section id="diario-content">
         <span class="voltar">voltar</span>

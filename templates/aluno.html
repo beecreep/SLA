@@ -239,9 +239,9 @@
         <a href="#" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
         <a href="#" id="Atividades-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
         <a href="#" id="Cronogramas-btn">Cronogramas <i class="fa-solid fa-calendar-days"></i></a>
-        <a href="chat.html" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
+        <a href="{{ url_for('chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
-        <img src="img\user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
+        <img src="static\img\user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
         <input type="file" name="foto" id="foto">
         <div class="info-box">
             <p id="time-info">Carregando horário...</p>

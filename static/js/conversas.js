@@ -41,14 +41,29 @@ function enviar() {
 
   if (textInput.value) {
     const message = {
-      username: username,
-      timestamp: timestamp,
-      text: textInput.value,
-      type: 'message'
+      usuario_id: 123, // Substitua pelo ID do usuário logado
+      mensagem: textInput.value
     };
 
-    addMessageToChat(message);
-    saveMessage(message);
+    // Enviar mensagem para o backend via POST
+    fetch('/enviar_mensagem', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(message)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.status); // Exibe a resposta no console
+      // Adicionar a mensagem no chat
+      addMessageToChat({
+        username: username,
+        timestamp: timestamp,
+        text: message.mensagem
+      });
+    })
+    .catch(error => console.error('Erro ao enviar mensagem:', error));
 
     textInput.value = ''; // Limpa o campo de texto após o envio
   }
@@ -77,8 +92,19 @@ function saveMessage(message) {
 
 // Função para carregar mensagens do localStorage
 function loadMessages() {
-  const messages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-  messages.forEach(addMessageToChat);
+  fetch('/carregar_mensagens')
+    .then(response => response.json())
+    .then(mensagens => {
+      mensagens.forEach(msg => {
+        const message = {
+          username: msg[0], // Nome do usuário
+          text: msg[1],     // Texto da mensagem
+          timestamp: msg[2] // Timestamp
+        };
+        addMessageToChat(message); // Adiciona a mensagem ao chat
+      });
+    })
+    .catch(error => console.error('Erro ao carregar mensagens:', error));
 }
 
 // Função para redefinir o chat

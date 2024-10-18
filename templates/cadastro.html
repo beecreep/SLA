@@ -42,11 +42,11 @@
             <div class="caixa">
                 <div class="lt">
                     <span>nome</span>
-                    <input type="text" name="nome" placeholder="Nome">
+                    <input type="text" name="nome" placeholder="Nome" required>
                     <span>email</span>
-                    <input type="email" name="email" placeholder="email">
+                    <input type="email" name="email" id="email" placeholder="email" required>
                     <span>senha</span>
-                    <input type="password" name="senha" placeholder="senha" id="senha">
+                    <input type="password" name="senha" placeholder="senha" id="senha" required>
                 </div>
                 <div class="lt">
                     <span>turma</span>
@@ -60,7 +60,7 @@
                     <span> numero</span>
                     <input type="text" name="numero" placeholder="(xx)xxxxx-xxxx" max="11">
                     <span>confirme sua senha</span>
-                    <input type="password" placeholder="confirme sua senha " id="confirmasenha">
+                    <input type="password" placeholder="confirme sua senha " id="confirmasenha" required>
                 </div>
             </div>
             <p>Voce é</p>
@@ -142,6 +142,19 @@
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('login-form').style.display = 'flex';
         });
+
+        function validateForm() {
+        const email = document.getElementById('email').value;
+
+        // Verifica se o email contém pelo menos uma parte antes e depois do '@'
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex para validação de email
+
+        if (!emailPattern.test(email)) {
+            alert("Por favor, insira um email válido.");
+            return false; // Impede o envio do formulário
+        }
+        return true; // Permite o envio do formulário
+    }
         // Função para cadastrar novo usuário
 
     </script>
