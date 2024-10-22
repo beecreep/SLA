@@ -5,25 +5,9 @@ app = Flask(__name__)
 
 # Função para conectar ao banco de dados
 def get_db_connection():
-    conn = sqlite3.connect('mensagens.db')
+    conn = sqlite3.connect('messages.db')
     conn.row_factory = sqlite3.Row
     return conn
-
-# Função para criar a tabela de mensagens
-def create_table():
-    conn = get_db_connection()
-    conn.execute('''
-        CREATE TABLE IF NOT EXISTS mensagens (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT NOT NULL,
-            role TEXT NOT NULL,
-            mensagem TEXT NOT NULL
-        )
-    ''')
-    conn.commit()
-    conn.close()
-
-    create_table()
 
 # Rota para a página inicial com o formulário de login
 @app.route('/', methods=['GET', 'POST'])

@@ -243,85 +243,85 @@
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
         <img src="static\img\user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
         <input type="file" name="foto" id="foto">
-        <div class="info-box">
+        <!--<div class="info-box">
             <p id="time-info">Carregando horário...</p>
-        </div>
+        </div>-->
     </div>
     
     <section id="materias1">
-        <section id="banner">
+        <div id="banner">
             <div class="banner-content" id="banner-content">
                 <!-- As notícias ou curiosidades vão aparecer aqui -->
             </div>
-        </section>
+        </div>
         <div id="materias">
-            <a href="materias.html\portugues.html">
+            <a href="{{ url_for('portugues') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\literary.png" alt="">
                     <h1>Portugues</h1>
                 </div>
             </a>
-            <a href="materias.html\matematica.html">
+            <a href="{{ url_for('matematica') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\calculator.png" alt="">
                     <h1>Matematica</h1>
                 </div>
             </a>
-            <a href="materias.html\historia.html">
+            <a href="{{ url_for('historia') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\parchment.png" alt="">
                     <h1>Historia</h1>
                 </div>
             </a>
-            <a href="materias.html\fisica.html">
+            <a href="{{ url_for('fisica') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\atom.png" alt="">
                     <h1>Fisica</h1>
                 </div>
             </a>
-            <a href="materias.html\ingles.html">
+            <a href="{{ url_for('ingles') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\english-language.png" alt="">
                     <h1>Ingles</h1>
                 </div>
             </a>
-            <a href="materias.html\geografia.html">
+            <a href="{{ url_for('geografia') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\history.png" alt="">
                     <h1>Geografia</h1>
                 </div>
             </a>
-            <a href="materias.html\biologia.html">
+            <a href="{{ url_for('biologia') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\biological.png" alt="">
                     <h1>Biologia</h1>
                 </div>
             </a>
-            <a href="materias.html\quimica.html">
+            <a href="{{ url_for('quimica') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\laboratory.png" alt="">
                     <h1>Quimica</h1>
                 </div>
             </a>
-            <a href="materias.html\eletronica.html">
+            <a href="{{ url_for('eletronica') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\resistor.png" alt="">
                     <h1>Eletronica</h1>
                 </div>
             </a>
-            <a href="materias.html\eventos.html">
+            <a href="{{ url_for('eventos') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\red-carpet.png" alt="">
                     <h1>Eventos</h1>
                 </div>
             </a>
-            <a href="materias.html\st.html">
+            <a href="{{ url_for('st') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\firefighter-helmet.png" alt="">
                     <h1>Segurança do trabalho</h1>
                 </div>
             </a>
-            <a href="materias.html\adm.html">
+            <a href="{{ url_for('adm') }}">
                 <div class="conteudo-materia">
                     <img src="static\img\icon-materias.png\salary.png" alt="">
                     <h1>Administração</h1>
@@ -332,8 +332,9 @@
     </section>
 
     <section id="Atividades">
-        <img src="static\img\undraw_Exams_re_4ios.png" alt="" id="atividades-img">
-        <span>sem Atividades no momento</span>
+        <img src="static/img/undraw/undraw_Exams_re_4ios.png" alt="" id="atividades-img">
+        <span id="sem-atividades">Sem Atividades no momento</span>
+        <ul id="lista-atividades"></ul> <!-- Lista que será preenchida -->
     </section>
     <section id="perfil">
         <div class="settings-container">
@@ -346,7 +347,7 @@
             <form id="usernameForm">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" value="">
+                    <input type="text" id="name" name="name" value="{{ nome }}">
                 </div>
 
                 <div class="form-group">
@@ -448,29 +449,70 @@
         // Função para alterar a imagem quando o input de arquivo muda
         let username = '';
 
-
-
         // Função para atualizar a cada segundo
         setInterval(mostrarHorario, 1000);
 
         // Chamar a função imediatamente quando a página for carregada
         window.onload = mostrarHorario;
         // Função que carrega a atividade estilizada no aluno.html
-        function carregarAtividade() {
-            const atividadeHTML = localStorage.getItem('atividadeHTML');
+        function carregarAtividades() {
+    fetch('/atividades')
+        .then(response => response.json())
+        .then(data => {
+            const listaAtividades = document.getElementById('lista-atividades');
+            const img = document.getElementById('atividades-img');
+            const span = document.getElementById('sem-atividades');
 
-            if (atividadeHTML) {
-                // Injetar o conteúdo HTML na seção de atividades
-                const atividadesSection = document.getElementById('Atividades');
-                atividadesSection.innerHTML = atividadeHTML;
-                atividadesSection.style.display = 'block';
+            // Limpa a lista antes de adicionar novos itens
+            listaAtividades.innerHTML = '';
+
+            if (data.length > 0) {
+                // Esconde a imagem e a mensagem
+                img.style.display = 'none';
+                span.style.display = 'none';
+
+                // Adiciona cada atividade à lista
+                data.forEach(atividade => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<h3>${atividade[0]}</h3><p>${atividade[1]}</p>`;
+                    listaAtividades.appendChild(li);
+                });
             } else {
-                alert('Nenhuma atividade encontrada.');
+                // Mostra a imagem e a mensagem caso não tenha atividades
+                img.style.display = 'block';
+                span.style.display = 'block';
             }
-        }
+        })
+        .catch(error => console.error('Erro ao carregar atividades:', error));
+}
 
-        // Chama a função quando a página for carregada
-        window.onload = carregarAtividade;
+// Chama a função para carregar atividades quando a página for carregada
+window.onload = carregarAtividades;
+
+fetch('/login', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        email: email,
+        senha: senha
+    })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.status === 'success') {
+        if (data.nome) {
+            // Exibe o nome do aluno no campo de input, se houver
+            document.getElementById('name').value = data.nome;
+        }
+        // Redireciona para a URL apropriada
+        window.location.href = data.redirect_url;
+    } else {
+        alert('Falha no login. Verifique suas credenciais.');
+    }
+})
+.catch(error => console.error('Erro:', error));
 
     </script>
 </body>

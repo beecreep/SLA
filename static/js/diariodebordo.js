@@ -45,3 +45,14 @@ function deleteEntry(button) {
     const entry = button.closest('.entry');
     entry.remove();
 }
+
+voltar.forEach((element) => {
+    element.addEventListener('click', () => {
+uploudform.style.display = 'none';
+atividade.style.display = 'none';
+home.style.display = 'none';
+listacaixa.style.display = 'none'
+home.style.display = 'flex';
+diariodebordo.style.display = 'none'
+});
+});

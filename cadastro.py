@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, jsonify, url_for
+from flask import Flask, redirect, render_template, request, jsonify, url_for, send_from_directory
 import sqlite3
 
 app = Flask(__name__)
@@ -56,7 +56,7 @@ create_table()
 def index():
     return render_template('cadastro.html')
 
-# Rota para cadastrar um novo usuário
+# Rota para ca dastrar um novo usuário
 @app.route('/cadastrar', methods=['POST'])
 def cadastrar_usuario():
     data = request.get_json()
@@ -67,9 +67,6 @@ def cadastrar_usuario():
     turma = data.get('turma', '')
     numero = data.get('numero', '')
     role = data['role']
-
-    if '@' not in email or '.' not in email.split('@')[-1]:
-            return "Email inválido!", 400  # Retorna um erro se o email for inválido
 
     conn = connect_db()
     cursor = conn.cursor()
@@ -96,74 +93,108 @@ def login_usuario():
 
     if user:
         # Verifica o papel do usuário (Aluno ou Professor)
+      
         role = user[6]  # A posição do 'role' na tabela, provavelmente a 6ª coluna
         if role == 'Aluno':
-            return jsonify({'status': 'success', 'redirect_url': '/aluno'})
+             return jsonify({'status': 'success', 'redirect_url': '/aluno' })
         elif role == 'Professor':
             return jsonify({'status': 'success', 'redirect_url': '/professor'})
     else:
         return jsonify({'status': 'Falha no login. Verifique suas credenciais.'})
     
 #rotas para rederizar os sites
+@app.route('/aluno')
+def aluno():
+    return render_template('aluno.html')
+
+@app.route('/professor')
+def professor():
+    return render_template('professor.html')
+
+@app.route('/historia')
+def historia():
+    return render_template('materias.html/historia.html')
+
+@app.route('/portugues')
+def portugues():
+    return render_template('materias.html/portugues.html')
+
+@app.route('/geografia')
+def geografia():
+    return render_template('materias.html/geografia.html')
+
+@app.route('/matematica')
+def matematica():
+    return render_template('materias.html/matematica.html')
+
+@app.route('/fisica')
+def fisica():
+    return render_template('materias.html/fisica.html')
+
+@app.route('/quimica')
+def quimica():
+    return render_template('materias.html/quimica.html')
 
 @app.route('/chat')
 def chat():
     return render_template('chat.html')
 
-#parte para implementar o chat
-@app.route('/enviar_mensagem', methods=['POST'])
-def enviar_mensagem():
-    data = request.get_json()
-    usuario_id = data['usuario_id']
-    mensagem = data['mensagem']
+@app.route('/biologia')
+def biologia():
+    return render_template('materias.html/biologia.html')
 
-    # Recupera o nome do usuário com base no ID
-    conn = connect_db()
-    cursor = conn.cursor()
-    cursor.execute('SELECT nome FROM usuarios WHERE id=?', (usuario_id,))
-    nome_usuario = cursor.fetchone()[0]
-    conn.close()
+@app.route('/ingles')
+def ingles():
+    return render_template('materias.html/ingles.html')
 
-    # Cria a mensagem com o nome do usuário e a mensagem
-    mensagem_formatada = {
-        'usuario': nome_usuario,
-        'mensagem': mensagem
-    }
+@app.route('/st')
+def st():
+    return render_template('materias.html/curso-sites/st.html')
 
-    # Adiciona à lista de mensagens
-    mensagens.append(mensagem_formatada)
+@app.route('/adm')
+def adm():
+    return render_template('materias.html/curso-sites/adm.html')
 
-    return jsonify({'status': 'Mensagem enviada com sucesso!'})
+@app.route('/eventos')
+def eventos():
+    return render_template('materias.html/curso-sites/eventos.html')
+
+@app.route('/eletronica')
+def eletronica():
+    return render_template('materias.html/curso-sites/eletronica.html')
+
+@app.route('/pdf/view/<path:subpath>/<filename>')
+def view_pdf(subpath, filename):
+    # 'subpath' permite acessar subpastas
+    return send_from_directory(f'pdfs/{subpath}', filename)
+
+@app.route('/pdf/download/<path:subpath>/<filename>')
+def download_pdf(subpath, filename):
+    # 'subpath' permite acessar subpastas
+    return send_from_directory(f'pdfs/{subpath}', filename, as_attachment=True)
 
   #rota para professor enviar uma atividade
-@app.route('/professor', methods=['GET', 'POST'])
-def professor():
-    if request.method == 'POST':
+@app.route('/prof-atv', methods=['POST'])
+def professor_atv():
+    # Verifica se o referer é a página 'professor.html'
+    referer = request.headers.get("Referer")
+    if referer and '/professor' in referer:
         titulo = request.form['titulo']
         descricao = request.form['descricao']
         arquivo = request.files['arquivo'].read() if 'arquivo' in request.files else None
-        
-        conn = get_db_connection()
+
+        conn = connect_db()
         conn.execute('INSERT INTO atividades (titulo, descricao, arquivo) VALUES (?, ?, ?)',
                      (titulo, descricao, arquivo))
         conn.commit()
         conn.close()
 
-    atividades = conn.execute('SELECT * FROM atividades').fetchall()
-        
-    respostas = conn.execute('''
-        SELECT r.id, u.nome AS aluno_nome, a.titulo AS atividade_titulo, r.resposta, r.data_resposta
-        FROM respostas r
-        JOIN usuarios u ON r.aluno_id = u.id
-        JOIN atividades a ON r.atividade_id = a.id
-    ''').fetchall()
+        return redirect(url_for('professor'))  # Redireciona de volta para professor.html
+    else:
+        return "Ação não permitida", 403  # Código de status HTTP 403 para acesso proibido
 
-    conn.close()
-
-    return render_template('professor.html', atividades=atividades, respostas=respostas)
-
-@app.route('/aluno', methods=['GET', 'POST'])
-def aluno():
+@app.route('/aluno-resposta', methods=['GET', 'POST'])
+def alunoresposta():
     conn = get_db_connection()
     atividades = conn.execute('SELECT * FROM atividades').fetchall()
     conn.close()
@@ -183,6 +214,40 @@ def aluno():
         return redirect(url_for('aluno'))
 
     return render_template('aluno.html', atividades=atividades)
+
+@app.route('/enviar_mensagem', methods=['POST'])
+def enviar_mensagem():
+    conn = connect_db()
+    cursor = conn.cursor()
+    
+    usuario_id = request.form['usuario_id']  # ID do usuário que está enviando a mensagem
+    mensagem = request.form['mensagem']  # Mensagem enviada pelo usuário
+
+    # Inserir a mensagem no banco de dados
+    cursor.execute('INSERT INTO mensagens (usuario_id, mensagem) VALUES (?, ?)', (usuario_id, mensagem))
+    conn.commit()
+
+    # Pegar todas as mensagens para retornar ao frontend
+    cursor.execute('SELECT usuarios.nome, mensagens.mensagem FROM mensagens JOIN usuarios ON mensagens.usuario_id = usuarios.id ORDER BY mensagens.data_hora ASC')
+    todas_mensagens = cursor.fetchall()
+    
+    conn.close()
+
+    # Retornar as mensagens como JSON para serem exibidas no chat
+    return jsonify(todas_mensagens)
+
+@app.route('/atividades', methods=['GET'])
+def get_atividades():
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    # Seleciona todas as atividades
+    cursor.execute('SELECT titulo, descricao FROM atividades')
+    atividades = cursor.fetchall()
+    conn.close()
+
+    # Retorna as atividades como JSON
+    return jsonify(atividades)
 
 
 if __name__ == '__main__':

@@ -176,7 +176,7 @@ h1 {
     <main id="atividade">
         <span class="voltar">voltar</span>
 
-        <form method="POST" enctype="multipart/form-data">
+        <form action="{{ url_for('professor_atv') }}" method="POST" enctype="multipart/form-data">
             <label for="titulo">Título:</label>
             <input type="text" name="titulo" required><br>
         
@@ -224,9 +224,7 @@ h1 {
            
             voltar.forEach((element) => {
                 element.addEventListener('click', () => {
-            uploudform.style.display = 'none';
             atividade.style.display = 'none';
-            home.style.display = 'none';
             listacaixa.style.display = 'none'
             home.style.display = 'flex';
             diariodebordo.style.display = 'none'
@@ -280,7 +278,6 @@ h1 {
         });
 
        atividadebtn.addEventListener('click', () => {
-          uploudform.style.display = 'flex';
             atividade.style.display = 'grid';
             home.style.display = 'none';
             listacaixa.style.display = 'none'

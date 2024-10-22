@@ -87,11 +87,10 @@ foto.addEventListener("change", () => {
         });
     }
 })
-image.forEach(img => {
-    img.addEventListener("click", () => {
+document.getElementById('image2').addEventListener("click", () => {
         foto.click();
     });
-});
+
 function toggleTheme() {
     const body = document.body;
     const button = document.querySelector('.button-theme-toggle');
