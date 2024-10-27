@@ -9,9 +9,9 @@
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://apis.google.com/js/api.js"></script>
-    <link rel="stylesheet" href="static\css\materias.css">
-    <link rel="stylesheet" href="static\css/perfil.css">
-    <link rel="stylesheet" href="static\css\cronogramas.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/materias.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cronogramas.css') }}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -89,6 +89,19 @@
             transition: 0.3s;
         }
 
+        .logout-button {
+    background-color: #f44336; /* Vermelho */
+    color: white; /* Texto branco */
+    border: none; /* Sem borda */
+    padding: 10px 20px; /* Espaçamento */
+    text-align: center; /* Centraliza o texto */
+    text-decoration: none; /* Sem sublinhado */
+    display: inline-block; /* Exibe como bloco inline */
+    font-size: 16px; /* Tamanho da fonte */
+    margin: 4px 2px; /* Margem */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    border-radius: 5px; /* Bordas arredondadas */
+}
         .menu-icon {
             font-size: 30px;
             cursor: pointer;
@@ -237,15 +250,17 @@
     <div class="navbar">
         <h2 style="text-align: center;">Menu</h2>
         <a href="#" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
-        <a href="#" id="Atividades-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
+        <a href="{{ url_for('atividade', nome=nome) }}" id="Atividades-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
         <a href="#" id="Cronogramas-btn">Cronogramas <i class="fa-solid fa-calendar-days"></i></a>
         <a href="{{ url_for('chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
         <img src="static\img\user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
         <input type="file" name="foto" id="foto">
-        <!--<div class="info-box">
-            <p id="time-info">Carregando horário...</p>
-        </div>-->
+        <form action="/logout" method="get">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+        
+
     </div>
     
     <section id="materias1">
@@ -255,75 +270,75 @@
             </div>
         </div>
         <div id="materias">
-            <a href="{{ url_for('portugues') }}">
+            <a href="{{ url_for('materias.portugues') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\literary.png" alt="">
+                    <img src="{{ url_for('static', filename='img\js.png') }}" alt="">
                     <h1>Portugues</h1>
                 </div>
             </a>
-            <a href="{{ url_for('matematica') }}">
+            <a href="{{ url_for('materias.matematica') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\calculator.png" alt="">
+                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
                     <h1>Matematica</h1>
                 </div>
             </a>
-            <a href="{{ url_for('historia') }}">
+            <a href="{{ url_for('materias.historia') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\parchment.png" alt="">
+                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
                     <h1>Historia</h1>
                 </div>
             </a>
-            <a href="{{ url_for('fisica') }}">
+            <a href="{{ url_for('materias.fisica') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\atom.png" alt="">
+                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
                     <h1>Fisica</h1>
                 </div>
             </a>
-            <a href="{{ url_for('ingles') }}">
+            <a href="{{ url_for('materias.ingles') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\english-language.png" alt="">
+                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
                     <h1>Ingles</h1>
                 </div>
             </a>
-            <a href="{{ url_for('geografia') }}">
+            <a href="{{ url_for('materias.geografia') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\history.png" alt="">
+                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}g" alt="">
                     <h1>Geografia</h1>
                 </div>
             </a>
-            <a href="{{ url_for('biologia') }}">
+            <a href="{{ url_for('materias.biologia') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\biological.png" alt="">
+                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
                     <h1>Biologia</h1>
                 </div>
             </a>
-            <a href="{{ url_for('quimica') }}">
+            <a href="{{ url_for('materias.quimica') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\laboratory.png" alt="">
+                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
                     <h1>Quimica</h1>
                 </div>
             </a>
-            <a href="{{ url_for('eletronica') }}">
+            <a href="{{ url_for('materias.eletronica') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\resistor.png" alt="">
+                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
                     <h1>Eletronica</h1>
                 </div>
             </a>
-            <a href="{{ url_for('eventos') }}">
+            <a href="{{ url_for('materias.eventos') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\red-carpet.png" alt="">
+                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
                     <h1>Eventos</h1>
                 </div>
             </a>
-            <a href="{{ url_for('st') }}">
+            <a href="{{ url_for('materias.st') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\firefighter-helmet.png" alt="">
+                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
                     <h1>Segurança do trabalho</h1>
                 </div>
             </a>
-            <a href="{{ url_for('adm') }}">
+            <a href="{{ url_for('materias.adm') }}">
                 <div class="conteudo-materia">
-                    <img src="static\img\icon-materias.png\salary.png" alt="">
+                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
                     <h1>Administração</h1>
                 </div>
             </a>
@@ -334,7 +349,12 @@
     <section id="Atividades">
         <img src="static/img/undraw/undraw_Exams_re_4ios.png" alt="" id="atividades-img">
         <span id="sem-atividades">Sem Atividades no momento</span>
-        <ul id="lista-atividades"></ul> <!-- Lista que será preenchida -->
+        <ul id="lista-atividades">
+                {% for atividade in atividades %}
+                    <li>{{ atividades.titulo }} - {{ atividades.descricao }}</li>
+                {% endfor %}
+            
+        </ul> <!-- Lista que será preenchida -->
     </section>
     <section id="perfil">
         <div class="settings-container">
@@ -347,22 +367,22 @@
             <form id="usernameForm">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" value="{{ nome }}">
+                    <input type="text" id="name" name="name" value="{{ nome }} " readonly>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" value="">
+                    <input type="email" id="email" value="{{email}}" readonly>
                 </div>
 
                 <div class="form-group">
                     <label for="location">Turma</label>
-                    <input type="text" id="location" value="">
+                    <input type="text" id="location" value="{{turma}}" readonly>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Senha</label>
-                    <input type="password" id="password" placeholder="*********">
+                    <input type="password" id="password" placeholder="" value="{{senha}}" readonly>
                 </div>
 
                 <div class="form-actions">
@@ -440,10 +460,10 @@
             </div>
         </section>
     </section>
-    <script src="static\js\cronogramas.js"></script>
+    <script src="{{ url_for('static', filename='js/materias.js') }}"></script>
   
-    <script src="static\js\nav-aluno.js"></script>
-    <script src="static\js\materias.js"></script>
+    <script src="{{ url_for('static', filename='js/nav-aluno.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cronogramas.js') }}"></script>
 
     <script>
         // Função para alterar a imagem quando o input de arquivo muda
@@ -455,36 +475,29 @@
         // Chamar a função imediatamente quando a página for carregada
         window.onload = mostrarHorario;
         // Função que carrega a atividade estilizada no aluno.html
-        function carregarAtividades() {
-    fetch('/atividades')
-        .then(response => response.json())
+     // Função para carregar as atividades
+function carregarAtividades() {
+    // Faz uma requisição para a rota Flask que retorna as atividades
+    fetch(`/atividades/{{ nome }}`)
+        .then(response => response.json())  // Converte a resposta em JSON
         .then(data => {
             const listaAtividades = document.getElementById('lista-atividades');
-            const img = document.getElementById('atividades-img');
-            const span = document.getElementById('sem-atividades');
-
-            // Limpa a lista antes de adicionar novos itens
+            
+            // Limpa qualquer atividade já listada
             listaAtividades.innerHTML = '';
 
-            if (data.length > 0) {
-                // Esconde a imagem e a mensagem
-                img.style.display = 'none';
-                span.style.display = 'none';
-
-                // Adiciona cada atividade à lista
-                data.forEach(atividade => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<h3>${atividade[0]}</h3><p>${atividade[1]}</p>`;
-                    listaAtividades.appendChild(li);
-                });
-            } else {
-                // Mostra a imagem e a mensagem caso não tenha atividades
-                img.style.display = 'block';
-                span.style.display = 'block';
-            }
+            // Adiciona cada atividade ao HTML
+            data.forEach(atividade => {
+                const li = document.createElement('li');
+                li.textContent = `${atividade.titulo}: ${atividade.descricao}`;
+                listaAtividades.appendChild(li);
+            });
         })
-        .catch(error => console.error('Erro ao carregar atividades:', error));
+        .catch(error => console.error('Erro ao carregar as atividades:', error));
 }
+
+// Chama a função quando a página é carregada
+window.onload = carregarAtividades;
 
 // Chama a função para carregar atividades quando a página for carregada
 window.onload = carregarAtividades;

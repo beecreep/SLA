@@ -1,7 +1,14 @@
-from flask import Flask, redirect, render_template, request, jsonify, url_for, send_from_directory
+from flask import Flask, redirect, render_template, request, jsonify, url_for, send_from_directory,  send_file, session
 import sqlite3
+import io
+import mimetypes
+from materias import materias_bp
+
 
 app = Flask(__name__)
+app.secret_key = '12345678910'
+
+app.register_blueprint(materias_bp)
 
 # Função para conectar ao banco de dados
 def connect_db():
@@ -93,75 +100,70 @@ def login_usuario():
 
     if user:
         # Verifica o papel do usuário (Aluno ou Professor)
-      
-        role = user[6]  # A posição do 'role' na tabela, provavelmente a 6ª coluna
-        if role == 'Aluno':
-             return jsonify({'status': 'success', 'redirect_url': '/aluno' })
-        elif role == 'Professor':
-            return jsonify({'status': 'success', 'redirect_url': '/professor'})
+       nome = user[1]  # Pega o nome do usuário (segunda coluna)
+       role = user[6]  # Pega o role (Aluno ou Professor)
+        
+    if role == 'Aluno':
+            # Redireciona para aluno.html com o nome do usuário na URL
+            return jsonify({
+                'status': 'success',
+                'redirect_url': f'/aluno/{nome}'
+            })
+    elif role == 'Professor':
+            return jsonify({
+                'status': 'success',
+                'redirect_url': f'/professor/{nome}'
+            })
     else:
         return jsonify({'status': 'Falha no login. Verifique suas credenciais.'})
     
 #rotas para rederizar os sites
-@app.route('/aluno')
-def aluno():
-    return render_template('aluno.html')
+@app.route('/aluno/<nome>')
+def aluno(nome):
+    return render_template('aluno.html', nome=nome,)
 
-@app.route('/professor')
-def professor():
-    return render_template('professor.html')
+@app.route('/professor/<nome>')
+def professor(nome): 
+      # Redireciona se não estiver autenticado como professor
 
-@app.route('/historia')
-def historia():
-    return render_template('materias.html/historia.html')
+    if request.method == 'POST':
+        titulo = request.form['titulo']
+        descricao = request.form['descricao']
+        arquivo = request.files['arquivo'].read() if 'arquivo' in request.files else None
 
-@app.route('/portugues')
-def portugues():
-    return render_template('materias.html/portugues.html')
+        conn = connect_db()
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO atividades (titulo, descricao, arquivo) VALUES (?, ?, ?)',
+                       (titulo, descricao, arquivo))
+        conn.commit()
+        conn.close()
 
-@app.route('/geografia')
-def geografia():
-    return render_template('materias.html/geografia.html')
+        return "Atividade enviada com sucesso!"
+    return render_template('professor.html', nome=nome )
 
-@app.route('/matematica')
-def matematica():
-    return render_template('materias.html/matematica.html')
-
-@app.route('/fisica')
-def fisica():
-    return render_template('materias.html/fisica.html')
-
-@app.route('/quimica')
-def quimica():
-    return render_template('materias.html/quimica.html')
+@app.route('/logout')
+def logout():
+    session.clear()  # Limpa a sessão
+    return redirect('/')  # Redireciona para a página inicial
 
 @app.route('/chat')
 def chat():
-    return render_template('chat.html')
+    conn = connect_db()
+    cursor = conn.cursor()
 
-@app.route('/biologia')
-def biologia():
-    return render_template('materias.html/biologia.html')
+    # Pegar todas as mensagens, juntamente com o nome do usuário
+    cursor.execute('''
+        SELECT usuarios.nome, mensagens.mensagem 
+        FROM mensagens 
+        JOIN usuarios ON mensagens.usuario_id = usuarios.id 
+        ORDER BY mensagens.timestamp ASC
+    ''')
+    mensagens = cursor.fetchall()
 
-@app.route('/ingles')
-def ingles():
-    return render_template('materias.html/ingles.html')
+    conn.close()
 
-@app.route('/st')
-def st():
-    return render_template('materias.html/curso-sites/st.html')
-
-@app.route('/adm')
-def adm():
-    return render_template('materias.html/curso-sites/adm.html')
-
-@app.route('/eventos')
-def eventos():
-    return render_template('materias.html/curso-sites/eventos.html')
-
-@app.route('/eletronica')
-def eletronica():
-    return render_template('materias.html/curso-sites/eletronica.html')
+    # Renderizar o template do chat com as mensagens enviadas
+    return render_template('chat.html', mensagens=mensagens)
 
 @app.route('/pdf/view/<path:subpath>/<filename>')
 def view_pdf(subpath, filename):
@@ -172,6 +174,24 @@ def view_pdf(subpath, filename):
 def download_pdf(subpath, filename):
     # 'subpath' permite acessar subpastas
     return send_from_directory(f'pdfs/{subpath}', filename, as_attachment=True)
+
+@app.route('/download/<int:atividade_id>')
+def download(atividade_id):
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('SELECT arquivo, extensao FROM atividades WHERE id=?', (atividade_id,))
+    result = cursor.fetchone()
+    conn.close()
+    
+    if result:
+        arquivo, extensao = result
+        mime_type, _ = mimetypes.guess_type(f"arquivo.{extensao}")
+        
+        return send_file(io.BytesIO(arquivo), as_attachment=True, 
+                         download_name=f"arquivo_{atividade_id}.{extensao}", 
+                         mimetype=mime_type)
+    else:
+        return "Arquivo não encontrado.", 404
 
   #rota para professor enviar uma atividade
 @app.route('/prof-atv', methods=['POST'])
@@ -193,27 +213,26 @@ def professor_atv():
     else:
         return "Ação não permitida", 403  # Código de status HTTP 403 para acesso proibido
 
-@app.route('/aluno-resposta', methods=['GET', 'POST'])
-def alunoresposta():
-    conn = get_db_connection()
-    atividades = conn.execute('SELECT * FROM atividades').fetchall()
+@app.route('/enviar_resposta', methods=['POST'])
+def enviar_resposta():
+    aluno_id = request.form['aluno_id']
+    atividade_id = request.form['atividade_id']
+    resposta = request.form['resposta']
+    arquivo_resposta = request.files['arquivo_resposta'].read() if 'arquivo_resposta' in request.files else None
+
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    # Insere a resposta do aluno no banco de dados
+    cursor.execute('''
+        INSERT INTO respostas (aluno_id, atividade_id, resposta, arquivo_resposta) 
+        VALUES (?, ?, ?, ?)
+    ''', (aluno_id, atividade_id, resposta, arquivo_resposta))
+    
+    conn.commit()
     conn.close()
 
-    if request.method == 'POST':
-        aluno_id = request.form['aluno_id']  # Supondo que o ID do aluno seja passado de alguma forma
-        atividade_id = request.form['atividade_id']
-        resposta = request.form['resposta']
-        arquivo_resposta = request.files['arquivo_resposta'].read() if 'arquivo_resposta' in request.files else None
-        
-        conn = get_db_connection()
-        conn.execute('INSERT INTO respostas (aluno_id, atividade_id, resposta, arquivo_resposta) VALUES (?, ?, ?, ?)',
-                     (aluno_id, atividade_id, resposta, arquivo_resposta))
-        conn.commit()
-        conn.close()
-        
-        return redirect(url_for('aluno'))
-
-    return render_template('aluno.html', atividades=atividades)
+    return redirect(f'/atividade/{aluno_id}')
 
 @app.route('/enviar_mensagem', methods=['POST'])
 def enviar_mensagem():
@@ -236,18 +255,45 @@ def enviar_mensagem():
     # Retornar as mensagens como JSON para serem exibidas no chat
     return jsonify(todas_mensagens)
 
-@app.route('/atividades', methods=['GET'])
-def get_atividades():
+@app.route('/api/alunos', methods=['GET'])
+def get_alunos():
     conn = connect_db()
     cursor = conn.cursor()
-
-    # Seleciona todas as atividades
-    cursor.execute('SELECT titulo, descricao FROM atividades')
-    atividades = cursor.fetchall()
+    cursor.execute("SELECT nome, turma FROM usuarios WHERE role = 'Aluno'")
+    alunos = [{'nome': row[0], 'turma': row[1]} for row in cursor.fetchall()]
     conn.close()
 
-    # Retorna as atividades como JSON
-    return jsonify(atividades)
+    return jsonify(alunos=alunos)
+
+# Rota para a página de atividades
+# Função para buscar as atividades do banco de dados
+def obter_atividades():
+    conn = connect_db()
+    cursor = conn.cursor()
+    
+    # Seleciona a coluna 'extensao' para saber o tipo do arquivo
+    cursor.execute('SELECT id, titulo, descricao, data_envio, arquivo, extensao FROM atividades')
+    atividades = cursor.fetchall()
+
+    lista_atividades = []
+    for atividade in atividades:
+        lista_atividades.append({
+            'id': atividade[0],
+            'titulo': atividade[1],
+            'descricao': atividade[2],
+            'data_envio': atividade[3],
+            'arquivo': atividade[4],
+            'extensao': atividade[5]  # Adiciona a extensão do arquivo ao dicionário
+        })
+
+    conn.close()
+    return lista_atividades
+
+# Rota para exibir as atividades
+@app.route('/atividade')
+def atividade():
+    atividades = obter_atividades()  # Obtém as atividades
+    return render_template('atividade.html', atividades=atividades)
 
 
 if __name__ == '__main__':

@@ -120,7 +120,7 @@ input[type="submit"]:hover {
     margin: 10px;
 }
 
-input {
+input, select {
     border-radius: 30px;
     padding: 4px;
     margin-bottom: 20px;

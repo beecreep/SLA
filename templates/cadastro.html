@@ -49,16 +49,17 @@
                     <input type="password" name="senha" placeholder="senha" id="senha" required>
                 </div>
                 <div class="lt">
-                    <span>turma</span>
-                    <input list="turmas" name="turma" id="turma" name="turma">
-                    <datalist id="turmas">
-                        <option value="eletro">
-                        <option value="segurança do trabalho">
-                        <option value="eventos">
-                        <option value="administração"></option>
-                    </datalist>
-                    <span> numero</span>
-                    <input type="text" name="numero" placeholder="(xx)xxxxx-xxxx" max="11">
+                    <span>Turma</span>
+                    <select name="turma" id="turma">
+                        <option value="eletro">Eletro</option>
+                        <option value="segurança do trabalho">Segurança do Trabalho</option>
+                        <option value="eventos">Eventos</option>
+                        <option value="administração">Administração</option>
+                    </select>
+
+                    <span>Número</span>
+                    <input type="tel" name="numero" id="numero" placeholder="(xx)xxxxx-xxxx" pattern="^\(\d{2}\)\d{5}-\d{4}$" maxlength="14">
+                    
                     <span>confirme sua senha</span>
                     <input type="password" placeholder="confirme sua senha " id="confirmasenha" required>
                 </div>
@@ -75,31 +76,31 @@
     <script>
         // Função para realizar o login
         function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-    fetch('/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: username, senha: password })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            // Redireciona para a URL correta com base na resposta
-            console.log('Redirecionando para: ', data.redirect_url);
-            window.location.href = data.redirect_url;  // Aqui ocorre o redirecionamento
-        } else {
-            // Mostra o erro no login
-            alert(data.status);
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: username, senha: password })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Redireciona para a URL correta com base na resposta
+                        console.log('Redirecionando para: ', data.redirect_url);
+                        window.location.href = data.redirect_url;  // Aqui ocorre o redirecionamento
+                    } else {
+                        // Mostra o erro no login
+                        alert(data.status);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                });
         }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-    });
-}
 
 
         // Função para cadastrar novo usuário
@@ -108,7 +109,7 @@
             const email = document.querySelector('input[placeholder="email"]').value;
             const senha = document.querySelector('input[placeholder="senha"]').value;
             const confirmasenha = document.querySelector('input[placeholder="confirme sua senha "]').value;
-            const turma = document.querySelector('input[list="turmas"]').value;
+            const turma = document.querySelector('select[name="turma"]').value;
             const numero = document.querySelector('input[placeholder="(xx)xxxxx-xxxx"]').value;
             const role = document.querySelector('input[name="role"]:checked').value;
 
@@ -144,17 +145,57 @@
         });
 
         function validateForm() {
-        const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value;
 
-        // Verifica se o email contém pelo menos uma parte antes e depois do '@'
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex para validação de email
+            // Verifica se o email contém pelo menos uma parte antes e depois do '@'
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex para validação de email
 
-        if (!emailPattern.test(email)) {
-            alert("Por favor, insira um email válido.");
-            return false; // Impede o envio do formulário
+            if (!emailPattern.test(email)) {
+                alert("Por favor, insira um email válido.");
+                return false; // Impede o envio do formulário
+            }
+            return true; // Permite o envio do formulário
         }
-        return true; // Permite o envio do formulário
-    }
+        // Supondo que você já tenha a função de login configurada com fetch
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault();  // Evita o comportamento padrão do formulário
+
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    senha: senha
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        if (data.nome) {
+                            // Exibe o nome do aluno no campo de input, se houver
+                            document.getElementById('name').value = data.nome;
+                        }
+                        // Redireciona para a URL apropriada
+                        window.location.href = data.redirect_url;
+                    } else {
+                        alert('Falha no login. Verifique suas credenciais.');
+                    }
+                })
+                .catch(error => console.error('Erro:', error));
+        });
+
+        document.getElementById('numero').addEventListener('input', function (e) {
+        let input = e.target.value.replace(/\D/g, '');  // Remove caracteres não numéricos
+        if (input.length > 0) input = `(${input.slice(0, 2)})${input.slice(2)}`;
+        if (input.length > 9) input = `${input.slice(0, 9)}-${input.slice(9, 13)}`;
+        e.target.value = input;
+    });
+
         // Função para cadastrar novo usuário
 
     </script>

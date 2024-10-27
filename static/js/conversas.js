@@ -53,6 +53,9 @@ function enviar() {
       data.forEach(item => {
           textArea.innerHTML += `<p><strong>${item[0]}:</strong> ${item[1]}</p>`;
       });
+      if(textinput == ""){
+        alert('preencha o campo')
+      }
   });
 
   // Limpar o campo de texto

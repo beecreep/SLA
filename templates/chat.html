@@ -73,7 +73,13 @@
         <main class="main-content">
             <div id="chat-form">
 
-                <div class="text-area" id="text-area"></div>
+                <div class="text-area" id="text-area">
+                    <ul>
+                        {% for mensagem in mensagens %}
+                            <li><strong>{{ mensagem[0] }}</strong> : {{ mensagem[1] }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 <div class="input-wrapper">
                     <input type="text" id="text" name="mensagem" placeholder="Digite sua mensagem aqui">
                     <span class="icon" onclick="triggerFileInput()">&#128206;</span>

@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página do Professor</title>
-    <link rel="stylesheet" href="static\css\professor-css\atividade.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Professor-css/atividade.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="static\css\professor-css\diariodebordo.css">
-    <link rel="stylesheet" href="static\css\professor-css\listachamada.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Professor-css/diariodebordo.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Professor-css/listachamada.css') }}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -138,11 +138,11 @@ h1 {
 <body>
     <section id="home">
         <div class="content" id="diario-btn">
-            <img src="static\img\diary.png" alt="">
+            <img src="{{ url_for('static', filename='img\diary.png') }}" alt="">
             <h1>diario de bordo</h1>
         </div>
         <div class="content" id="atividade-btn">
-            <img src="static\img\score.png" alt="">
+            <img src="{{ url_for('static', filename='img\score.png') }}" alt="">
             <h1>enviar atividade </h1>
 
         </div>
@@ -153,7 +153,7 @@ h1 {
         </div>
         <a href="/chat">
         <div class="content" >
-            <img src="static\img\chat.png" alt="">
+            <img src="{{ url_for('static', filename='img\chat.png') }}" alt="">
             <h1>chat</h1>
         </div>
     </a>
@@ -165,6 +165,7 @@ h1 {
             <thead>
                 <tr>
                     <th>Nome</th>
+                    <th>Turma</th>
                     <th>Presença</th>
                 </tr>
             </thead>
@@ -206,9 +207,9 @@ h1 {
             <!-- Entradas serão adicionadas aqui -->
         </ul>
     </div>
-    <script src="static\js\diariodebordo.js"></script>
+    <script src="{{ url_for('static', filename='js/diariodebordo.js') }}"></script>
     </section>
-    <script src="static\js\atividade-prof.js"></script>
+    <script src="s{{ url_for('static', filename='js/atividade-prof.js') }}"></script>
     <script>
 
            let home =  document.getElementById('home');
@@ -244,29 +245,34 @@ h1 {
         document.addEventListener('DOMContentLoaded', () => {
     const tabela = document.querySelector('#listaChamada tbody');
 
-    fetch('listachamada.json')
-        .then(response => response.json())
-        .then(data => {
-            data.alunos.forEach(aluno => {  // Acessa a lista de alunos corretamente
-                const row = document.createElement('tr');
+    fetch('/api/alunos')  // Faz a requisição para a rota Flask
+    .then(response => response.json())
+    .then(data => {
+        data.alunos.forEach(aluno => {  // Acessa a lista de alunos do JSON
+            const row = document.createElement('tr');
 
-                const nomeCell = document.createElement('td');
-                nomeCell.textContent = aluno;  // Agora 'aluno' é uma string, não um objeto
-                nomeCell.setAttribute('data-label', 'Nome'); // Adiciona o atributo data-label
-                row.appendChild(nomeCell);
+            const nomeCell = document.createElement('td');
+            nomeCell.textContent = aluno.nome;  // 'aluno' é uma string retornada do banco
+            nomeCell.setAttribute('data-label', 'Nome'); // Adiciona o atributo data-label
+            row.appendChild(nomeCell);
 
-                const presencaCell = document.createElement('td');
-                const presencaCheckbox = document.createElement('input');
-                presencaCheckbox.type = 'checkbox';
-                presencaCell.appendChild(presencaCheckbox);
-                presencaCell.setAttribute('data-label', 'Presença'); // Adiciona o atributo data-label
-                row.appendChild(presencaCell);
+            const turmaCell = document.createElement('td');
+            turmaCell.textContent = aluno.turma || 'Sem turma';  // Exibe a turma ou 'Sem turma' se for nulo
+            turmaCell.setAttribute('data-label', 'Turma');
+            row.appendChild(turmaCell);
 
-                tabela.appendChild(row);
-            });
-        })
-        .catch(error => console.error('Erro ao buscar dados:', error));
-});
+            const presencaCell = document.createElement('td');
+            const presencaCheckbox = document.createElement('input');
+            presencaCheckbox.type = 'checkbox';
+            presencaCell.appendChild(presencaCheckbox);
+            presencaCell.setAttribute('data-label', 'Presença'); // Adiciona o atributo data-label
+            row.appendChild(presencaCell);
+
+            tabela.appendChild(row);
+        });
+    })
+    .catch(error => console.error('Erro ao buscar dados:', error));
+})
 
         document.addEventListener('DOMContentLoaded', () => {
            
