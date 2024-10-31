@@ -250,11 +250,11 @@
     <div class="navbar">
         <h2 style="text-align: center;">Menu</h2>
         <a href="#" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
-        <a href="{{ url_for('atividade', nome=nome) }}" id="Atividades-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
+        <a href="{{ url_for('atividade.atividade', nome=nome) }}" id="Atividades-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
         <a href="#" id="Cronogramas-btn">Cronogramas <i class="fa-solid fa-calendar-days"></i></a>
-        <a href="{{ url_for('chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
+        <a href="{{ url_for('chat.chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
-        <img src="static\img\user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
+        <img src="static/img/user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
         <input type="file" name="foto" id="foto">
         <form action="/logout" method="get">
             <button type="submit" class="logout-button">Logout</button>
@@ -272,73 +272,73 @@
         <div id="materias">
             <a href="{{ url_for('materias.portugues') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\js.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/literary.png') }}" alt="">
                     <h1>Portugues</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.matematica') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/calculator.png') }}" alt="">
                     <h1>Matematica</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.historia') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/parchment.png') }}" alt="">
                     <h1>Historia</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.fisica') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/atom.png') }}" alt="">
                     <h1>Fisica</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.ingles') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/english-language.png') }}" alt="">
                     <h1>Ingles</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.geografia') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}g" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/history.png') }}" alt="">
                     <h1>Geografia</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.biologia') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/calculator.png') }}" alt="">
                     <h1>Biologia</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.quimica') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/laboratory.png') }}" alt="">
                     <h1>Quimica</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.eletronica') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/resistor.png') }}" alt="">
                     <h1>Eletronica</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.eventos') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/red-carpet.png') }}" alt="">
                     <h1>Eventos</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.st') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/firefighter-helmet.png') }}" alt="">
                     <h1>Segurança do trabalho</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.adm') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img\icon-materias.png\calculator.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/salary.png') }}" alt="">
                     <h1>Administração</h1>
                 </div>
             </a>
@@ -361,7 +361,7 @@
             <h2>seu perfil</h2>
 
             <div class="profile-picture">
-                <img src="static\img\user.png" alt="Profile Picture" class="imagem" id="image2">
+                <img src="static/img/user.png" alt="Profile Picture" class="imagem" id="image2">
             </div>
 
             <form id="usernameForm">

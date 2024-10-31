@@ -1,4 +1,33 @@
 import sqlite3
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
+class User(UserMixin, db.Model):
+    __tablename__ = 'usuarios'
+
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    senha = db.Column(db.String(150), nullable=False)
+    turma = db.Column(db.String(50))
+    numero = db.Column(db.String(50))
+    role = db.Column(db.String(50))
+
+    def __repr__(self):
+        return f'<User {self.nome}>'
+
+
+Base = declarative_base()
+engine = create_engine('sqlite:///usuarios.db')
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+def init_db():
+    Base.metadata.create_all(bind=engine)
 
 def connect_db():
     conn = sqlite3.connect('usuarios.db')

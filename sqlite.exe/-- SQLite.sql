@@ -1,2 +1,2 @@
 -- SQLite
-ALTER TABLE users ADD COLUMN role TEXT;
+ALTER TABLE atividades ADD COLUMN extensao TEXT;

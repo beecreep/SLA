@@ -1,45 +1,37 @@
-from flask import Blueprint, request, jsonify, render_template
+
 from db import connect_db
+from flask import Blueprint, request, jsonify, session, render_template
+from models import User, Mensagem
+from db import db
+
+chat_bp = Blueprint('chat', __name__)
+
+@chat_bp.route('/chat')
+def chat():
+    mensagens = db.session.query(User.username, Mensagem.mensagem).join(Mensagem.user).order_by(Mensagem.timestamp.asc()).all()
+    return render_template('chat.html', mensagens=mensagens)
+
+@chat_bp.route('/enviar_mensagem', methods=['POST'])
+def enviar_mensagem():
+    if 'usuario_id' not in session:
+        return jsonify({'status': 'Erro', 'message': 'Usuário não autenticado.'}), 401
+    
+    usuario_id = session['usuario_id']
+    mensagem_texto = request.form['mensagem']
+
+    nova_mensagem = Mensagem(usuario_id=usuario_id, mensagem=mensagem_texto)
+    db.session.add(nova_mensagem)
+    db.session.commit()
+
+    return jsonify({'status': 'Mensagem enviada com sucesso!'})
+
+@chat_bp.route('/carregar_mensagens', methods=['GET'])
+def carregar_mensagens():
+    mensagens = db.session.query(User.username, Mensagem.mensagem).join(Mensagem.user).order_by(Mensagem.timestamp.asc()).all()
+    return jsonify(mensagens)
+
 
 chat_bp = Blueprint('chat', __name__)
 
 # Lista temporária de mensagens (idealmente, use um banco de dados)
 mensagens = []
-
-# Rota para exibir a página do chat
-@chat_bp.route('/chat')
-def chat():
-    return render_template('chat.html')
-
-# Rota para enviar uma mensagem no chat
-@chat_bp.route('/enviar_mensagem', methods=['POST'])
-def enviar_mensagem():
-    data = request.get_json()
-    usuario_id = data['usuario_id']
-    mensagem = data['mensagem']
-
-    # Conecte-se ao banco de dados para recuperar o nome do usuário
-    conn = connect_db()
-    cursor = conn.cursor()
-    
-    # Buscando o nome do usuário
-    cursor.execute('SELECT nome FROM usuarios WHERE id=?', (usuario_id,))
-    result = cursor.fetchone()
-    
-    # Verifica se o usuário foi encontrado
-    if result is None:
-        return jsonify({'status': 'Erro', 'message': 'Usuário não encontrado.'}), 404
-
-    nome_usuario = result[0]  # Nome do usuário encontrado
-    conn.close()
-
-    # Formata a mensagem com o nome do usuário
-    mensagem_formatada = {'usuario': nome_usuario, 'mensagem': mensagem}
-    mensagens.append(mensagem_formatada)
-
-    return jsonify({'status': 'Mensagem enviada com sucesso!'})
-
-# Rota para carregar as mensagens existentes (para exibir no chat)
-@chat_bp.route('/carregar_mensagens', methods=['GET'])
-def carregar_mensagens():
-    return jsonify(mensagens)

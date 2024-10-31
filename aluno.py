@@ -1,10 +1,15 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from db import connect_db
+from flask_login import current_user
 
 aluno_bp = Blueprint('aluno', __name__)
 
 @aluno_bp.route('/aluno', methods=['GET', 'POST'])
 def aluno():
+    
+    if current_user.role != 'Aluno':
+        return redirect(url_for('/'))
+
     try:
         conn = connect_db()
         atividades = conn.execute('SELECT * FROM atividades').fetchall()
@@ -35,4 +40,4 @@ def aluno():
 
         return redirect(url_for('aluno.aluno'))
 
-    return render_template('aluno.html', atividades=atividades)
+    return render_template('aluno.html', atividades=atividades, nome=current_user.nome,)

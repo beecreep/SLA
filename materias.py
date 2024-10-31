@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, send_from_directory
 
 materias_bp = Blueprint('materias', __name__)
 
@@ -49,3 +49,14 @@ def eventos():
 @materias_bp.route('/eletronica')
 def eletronica():
     return render_template('materias.html/curso-sites/eletronica.html')
+
+@materias_bp.route('/pdf/view/<path:subpath>/<filename>')
+def view_pdf(subpath, filename):
+    # 'subpath' permite acessar subpastas
+    return send_from_directory(f'pdfs/{subpath}', filename)
+
+@materias_bp.route('/pdf/download/<path:subpath>/<filename>')
+def download_pdf(subpath, filename):
+    # 'subpath' permite acessar subpastas
+    return send_from_directory(f'pdfs/{subpath}', filename, as_attachment=True)
+    

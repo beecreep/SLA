@@ -38,8 +38,12 @@ function enviar() {
   const mensagem = textInput.value;
   const usuario_id = 1;  // Exemplo de ID de usuário, isso deve ser dinâmico
 
+  if (mensagem === "") {
+    alert("Por favor, preencha o campo.");
+    return; // Interrompe a execução da função se o campo estiver vazio
+}
   // Enviar a mensagem para o servidor via POST
-  fetch('/enviar_mensagem', {
+  fetch('chat.enviar_mensagem', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -53,9 +57,7 @@ function enviar() {
       data.forEach(item => {
           textArea.innerHTML += `<p><strong>${item[0]}:</strong> ${item[1]}</p>`;
       });
-      if(textinput == ""){
-        alert('preencha o campo')
-      }
+      
   });
 
   // Limpar o campo de texto

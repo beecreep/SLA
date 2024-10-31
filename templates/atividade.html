@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,162 +8,170 @@
     <link rel="stylesheet" href="style.css"> <!-- Link para o CSS -->
     <style>
         /* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* Corpo da página */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    padding: 20px;
-}
+        /* Corpo da página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 20px;
+        }
 
-/* Estilo do cabeçalho */
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
+        /* Estilo do cabeçalho */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-h1 {
-    color: #4CAF50;
-    font-size: 2em;
-}
+        h1 {
+            color: #4CAF50;
+            font-size: 2em;
+        }
 
-/* Container principal */
-.container {
-    min-width: 1000px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    border-radius: 8px;
-}
+        /* Container principal */
+        .container {
+            min-width: 1000px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+        }
 
-/* Tabela de atividades */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
+        /* Tabela de atividades */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
 
-th {
-    background-color: #4CAF50;
-    color: white;
-}
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
 
-td {
-    word-wrap: break-word;
-}
+        td {
+            word-wrap: break-word;
+        }
 
-/* Botão */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        /* Botão */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-button:hover {
-    background-color: #45a049;
-}
+        button:hover {
+            background-color: #45a049;
+        }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.8em;
-    }
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
 
-    table, th, td {
-        font-size: 0.9em;
-    }
-}
+            table,
+            th,
+            td {
+                font-size: 0.9em;
+            }
+        }
 
-@media (max-width: 576px) {
-    .container {
-        padding: 15px;
-    }
+        @media (max-width: 576px) {
+            .container {
+                padding: 15px;
+            }
 
-    table, th, td {
-        font-size: 0.8em;
-    }
+            table,
+            th,
+            td {
+                font-size: 0.8em;
+            }
 
-    button {
-        width: 100%;
-        padding: 12px;
-    }
-}
+            button {
+                width: 100%;
+                padding: 12px;
+            }
+        }
 
         /* Estilo do formulário de resposta */
-.resposta {
-    margin-top: 30px;
-}
+        .resposta {
+            margin-top: 30px;
+        }
 
-.resposta h2 {
-    font-size: 1.5em;
-    color: #4CAF50;
-    margin-bottom: 10px;
-}
+        .resposta h2 {
+            font-size: 1.5em;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
 
-form label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-}
+        form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
 
-form textarea,
-form select,
-form input[type="file"] {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-}
+        form textarea,
+        form select,
+        form input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
 
-form button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-}
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
 
-form button:hover {
-    background-color: #45a049;
-}
+        form button:hover {
+            background-color: #45a049;
+        }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.8em;
-    }
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
 
-    table, th, td, .resposta h2 {
-        font-size: 0.9em;
-    }
+            table,
+            th,
+            td,
+            .resposta h2 {
+                font-size: 0.9em;
+            }
 
-    form button {
-        padding: 12px;
-    }
-}
-
+            form button {
+                padding: 12px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Lista de Atividades</h1>
@@ -187,13 +196,13 @@ form button:hover {
                     <td>{{ atividade.data_envio }}</td>
                     <td>
                         {% if atividade.arquivo %}
-                        <a href="{{ url_for('download', atividade_id=atividade.id) }}" 
-                           title="Baixar {{ atividade.extensao|upper }}">
-                           Baixar Arquivo ({{ atividade.extensao|upper }})
+                        <a href="{{ url_for('download', atividade_id=atividade.id) }}"
+                            title="Baixar {{ atividade.extensao|upper }}">
+                            Baixar Arquivo ({{ atividade.extensao|upper }})
                         </a>
-                    {% else %}
+                        {% else %}
                         Nenhum arquivo
-                    {% endif %}
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -210,6 +219,8 @@ form button:hover {
                     <option value="{{ atividade.id }}">{{ atividade.titulo }}</option>
                     {% endfor %}
                 </select>
+                <input type="hidden" name="aluno_id" value="{{ aluno_id }}">
+                <input type="hidden" name="atividade_id" value="{{ atividade_id }}">
 
                 <label for="resposta">Sua Resposta:</label>
                 <textarea id="resposta" name="resposta" required></textarea>
@@ -222,4 +233,5 @@ form button:hover {
         </section>
     </div>
 </body>
+
 </html>

@@ -138,22 +138,22 @@ h1 {
 <body>
     <section id="home">
         <div class="content" id="diario-btn">
-            <img src="{{ url_for('static', filename='img\diary.png') }}" alt="">
+            <img src="{{ url_for('static', filename='img/diary.png') }}" alt="">
             <h1>diario de bordo</h1>
         </div>
         <div class="content" id="atividade-btn">
-            <img src="{{ url_for('static', filename='img\score.png') }}" alt="">
+            <img src="{{ url_for('static', filename='img/score.png') }}" alt="">
             <h1>enviar atividade </h1>
 
         </div>
         <div class="content" id="chamada-btn">
-            <img src="static\img\to-do-list.png"
+            <img src="{{ url_for('static', filename='img/to-do-list.png') }}"
                 alt="">
             <h1> lista de chamada</h1>
         </div>
         <a href="/chat">
         <div class="content" >
-            <img src="{{ url_for('static', filename='img\chat.png') }}" alt="">
+            <img src="{{ url_for('static', filename='img/chat.png') }}" alt="">
             <h1>chat</h1>
         </div>
     </a>
@@ -179,15 +179,15 @@ h1 {
 
         <form action="{{ url_for('professor_atv') }}" method="POST" enctype="multipart/form-data">
             <label for="titulo">Título:</label>
-            <input type="text" name="titulo" required><br>
+            <input type="text" class="titulo" required><br>
         
             <label for="descricao">Descrição:</label>
-            <textarea name="descricao" required></textarea><br>
+            <textarea name="descricao"  id="descriçao-atividade"></textarea><br>
         
             <label for="arquivo">Enviar arquivo (opcional):</label>
             <input type="file" name="arquivo"><br>
         
-            <button type="submit">Enviar Atividade</button>
+            <button type="submit" id="enviar">Enviar Atividade</button>
         </form>
         
     </main>
@@ -207,6 +207,9 @@ h1 {
             <!-- Entradas serão adicionadas aqui -->
         </ul>
     </div>
+    <section>
+        
+    </section>
     <script src="{{ url_for('static', filename='js/diariodebordo.js') }}"></script>
     </section>
     <script src="s{{ url_for('static', filename='js/atividade-prof.js') }}"></script>
