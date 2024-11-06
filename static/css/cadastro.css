@@ -85,7 +85,7 @@ input[type="submit"]:hover {
 
 }
 
-#login-form {
+#login{
     width: 40vw;
     min-height: 40vh;
     display: flex;
@@ -99,9 +99,14 @@ input[type="submit"]:hover {
     font-family:poppins;
 
 }
+#login-Form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-#login-form input[type="text"],
-#login-form input[type="password"] {
+#login-Form input[type="text"],
+#login-Form input[type="password"] {
     width: 30vw;
     padding: 10px;
     margin-bottom: 10px;
@@ -112,7 +117,7 @@ input[type="submit"]:hover {
     background-color: transparent;
 }
 
-#login-form input[type="submit"] {
+#login-Form input[type="submit"] {
     width: 30vw;
     background-color: blue;
     color: aliceblue;

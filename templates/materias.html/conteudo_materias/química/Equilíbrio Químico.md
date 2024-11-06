@@ -10,8 +10,9 @@ O equilíbrio químico é um conceito fundamental na química que descreve o est
 
    As reações químicas podem ser reversíveis, o que significa que os reagentes podem se converter em produtos e, simultaneamente, os produtos podem se reverter em reagentes. Um exemplo clássico é a reação de formação do amoníaco:
 
-   \[ N_2(g) + 3H_2(g) \rightleftharpoons 2NH_3(g) \]
-
+   $$
+   N_2(g) + 3H_2(g) \rightleftharpoons 2NH_3(g) \
+   $$
    Nesta reação, o nitrogênio e o hidrogênio se combinam para formar amoníaco, e o amoníaco pode se decompor de volta em nitrogênio e hidrogênio.
 
 2. **Estado de Equilíbrio**
@@ -22,12 +23,14 @@ O equilíbrio químico é um conceito fundamental na química que descreve o est
 
    A constante de equilíbrio (K) é uma medida da posição do equilíbrio para uma reação química. Ela é expressa em termos das concentrações dos produtos e reagentes no equilíbrio. Para a reação geral:
 
-   \[ aA + bB \rightleftharpoons cC + dD \]
-
+   $$
+   \ aA + bB \rightleftharpoons cC + dD \
+   $$
    A constante de equilíbrio é dada por:
-
-   \[ K = \frac{[C]^c[D]^d}{[A]^a[B]^b} \]
-
+   
+   $$
+   \ K = \frac{[C]^c[D]^d}{[A]^a[B]^b} \
+   $$
    Onde [A], [B], [C] e [D] são as concentrações dos reagentes e produtos no equilíbrio, e a, b, c, e d são os coeficientes estequiométricos da reação.
 
 #### Princípios de Le Chatelier

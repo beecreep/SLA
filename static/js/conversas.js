@@ -43,21 +43,27 @@ function enviar() {
     return; // Interrompe a execução da função se o campo estiver vazio
 }
   // Enviar a mensagem para o servidor via POST
-  fetch('chat.enviar_mensagem', {
+  fetch('/chat/enviar_mensagem', {
       method: 'POST',
       headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
       },
-      body: `usuario_id=${usuario_id}&mensagem=${mensagem}`
+      body: JSON.stringify({ usuario_id: usuario_id, mensagem: mensagem })
   })
   .then(response => response.json())
-  .then(data => {
-      // Atualizar a text-area com as mensagens recebidas
-      textArea.innerHTML = '';  // Limpar a área de texto
-      data.forEach(item => {
-          textArea.innerHTML += `<p><strong>${item[0]}:</strong> ${item[1]}</p>`;
-      });
-      
+    .then(data => {
+        if (Array.isArray(data)) {
+            textArea.innerHTML = '';  // Limpa a área de texto
+            data.forEach(item => {
+                textArea.innerHTML += `<p><strong>${item.usuario}:</strong> ${item.mensagem}</p>`;
+            });
+        } else {
+            console.error("Formato inesperado na resposta:", data);
+        }
+    })
+    .catch(error => {
+      console.error("Erro ao enviar mensagem:", error);
+      alert("Ocorreu um erro ao enviar a mensagem. Tente novamente.");
   });
 
   // Limpar o campo de texto
@@ -85,7 +91,7 @@ function enviarArquivo(username, timestamp, fileName, fileData) {
 
 // Função para carregar mensagens do servidor
 function loadMessages() {
-  fetch('/carregar_mensagens')
+  fetch('/chat/carregar_mensagens')
     .then(response => response.json())
     .then(mensagens => {
       mensagens.forEach(msg => {

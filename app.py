@@ -1,22 +1,28 @@
 
-from db import create_tables
 from db import db  # Importa a instância de db do db.py
-from cadastrar import cadastro_bp
+from cadastrar import cadastro_bp, cadastrar_usuario
 from professor import professor_bp
 from aluno import aluno_bp
-from models import User  # Importe o modelo
+from models import Mensagem, User, Atividade, Resposta 
 from materias import materias_bp
 from chat import chat_bp
 from atividade import atividade_bp
-from cadastro import cadastrar_usuario
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 from flask import Flask, redirect, render_template, request, jsonify, url_for, session
+from flask_login import LoginManager
 
 app = Flask(__name__)
 app.secret_key = '12345678910'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuarios.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'cadastrar.login_usuario'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 db.init_app(app)
 
@@ -42,13 +48,12 @@ def index():
     return render_template('cadastro.html')
 
 # Registra os blueprints
-app.register_blueprint(cadastro_bp, url_prefix='/cadastro')
-app.register_blueprint(professor_bp)
-app.register_blueprint(aluno_bp)
-app.register_blueprint(chat_bp)
+app.register_blueprint(cadastro_bp,  url_prefix='/cadastrar')
+app.register_blueprint(professor_bp,  url_prefix='/professor')
+app.register_blueprint(aluno_bp,  url_prefix='/aluno')
+app.register_blueprint(chat_bp,  url_prefix='/chat')
 app.register_blueprint(materias_bp)
-app.register_blueprint(atividade_bp)
-
+app.register_blueprint(atividade_bp,  url_prefix='/atividade')
 
 if __name__ == '__main__':
     with app.app_context():

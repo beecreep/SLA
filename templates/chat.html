@@ -66,7 +66,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="static\css\conversas.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/conversas.css') }}">
 </head>
 <body>
     <section>
@@ -87,12 +87,12 @@
                     <input type="file" id="file" onchange="handleFileUpload()">
                 </div>
                 <div>
-                    <input type="submit" value="Enviar" onclick="enviar()" id="enviar">
-                    <input type="reset" value="Redefinir" onclick="redefinir()">
+                    <input type="submit" value="Enviar" name="enviar" onclick="enviar()" id="enviar">
+                    <input type="reset" value="Redefinir" name="redefinir" onclick="redefinir()">
                 </div>
             </div>
         </main>
     </section>
-    <script src="static\js\conversas.js"></script>
+    <script src="{{ url_for('static', filename='js/conversas.js') }}"></script>
 </body>
 </html>

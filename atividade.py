@@ -1,76 +1,53 @@
-from flask import  request, redirect, url_for, render_template, Blueprint,  send_file
+from flask import  request, redirect, url_for, render_template, Blueprint,  send_file, session, jsonify
+from flask_login import current_user, login_required
+from db import db
+from models import Atividade, Resposta
 import mimetypes
 import io
-import sqlite3
 
 atividade_bp = Blueprint('atividade', __name__)
-
-def connect_db():
-    conn = sqlite3.connect('usuarios.db')
-    print("Conexão com banco de dados estabelecida")
-    return conn
 
 @atividade_bp.route('/prof-atv', methods=['POST'])
 def professor_atv():
     # Verifica se o referer é a página 'professor.html'
     referer = request.headers.get("Referer")
-    if referer and '/professor' in referer:
-        titulo = request.form['titulo']
-        descricao = request.form['descricao']
+    if current_user.role == 'professor' and referer and '/professor' in referer:
+        titulo = request.form.get('titulo')
+        descricao = request.form.get('descricao')
         arquivo = request.files['arquivo'].read() if 'arquivo' in request.files else None
+        extensao = request.files['arquivo'].filename.split('.')[-1] if 'arquivo' in request.files else None
 
-        conn = connect_db()
-        conn.execute('INSERT INTO atividades (titulo, descricao, arquivo) VALUES (?, ?, ?)',
-                     (titulo, descricao, arquivo))
-        conn.commit()
-        conn.close()
+        nova_atividade = Atividade(titulo=titulo, descricao=descricao, arquivo=arquivo, extensao=extensao)
+        db.session.add(nova_atividade)
+        db.session.commit()
 
-        return redirect(url_for('professor'))  # Redireciona de volta para professor.html
+        return redirect(url_for('profwssor.professor'))  # Redireciona de volta para professor.html
     else:
         return "Ação não permitida", 403  # Código de status HTTP 403 para acesso proibido
 
 @atividade_bp.route('/enviar_resposta', methods=['POST'])
 def enviar_resposta():
-    aluno_id = request.form['aluno_id']
-    atividade_id = request.form['atividade_id']
-    resposta = request.form['resposta']
+    aluno_id = current_user.id
+    atividade_id = request.form.get('atividade_id')
+    resposta = request.form.get('resposta')
     arquivo_resposta = request.files['arquivo_resposta'].read() if 'arquivo_resposta' in request.files else None
 
-    conn = connect_db()
-    cursor = conn.cursor()
-
-    # Insere a resposta do aluno no banco de dados
-    cursor.execute('''
-        INSERT INTO respostas (aluno_id, atividade_id, resposta, arquivo_resposta) 
-        VALUES (?, ?, ?, ?)
-    ''', (aluno_id, atividade_id, resposta, arquivo_resposta))
-    
-    conn.commit()
-    conn.close()
+    nova_resposta = Resposta(aluno_id=aluno_id, atividade_id=atividade_id, resposta=resposta, arquivo_resposta=arquivo_resposta)
+    db.session.add(nova_resposta)
+    db.session.commit()
 
     return redirect(f'/atividade/{aluno_id}')
 
 # Função para buscar as atividades do banco de dados
 def obter_atividades():
-    conn = connect_db()
-    cursor = conn.cursor()
-    
-    # Seleciona a coluna 'extensao' para saber o tipo do arquivo
-    cursor.execute('SELECT id, titulo, descricao, data_envio, arquivo, extensao FROM atividades')
-    atividades = cursor.fetchall()
-
-    lista_atividades = []
-    for atividade in atividades:
-        lista_atividades.append({
-            'id': atividade[0],
-            'titulo': atividade[1],
-            'descricao': atividade[2],
-            'data_envio': atividade[3],
-            'arquivo': atividade[4],
-            'extensao': atividade[5]  # Adiciona a extensão do arquivo ao dicionário
-        })
-
-    conn.close()
+    atividades = Atividade.query.all()
+    lista_atividades = [{
+        'id': atividade.id,
+        'titulo': atividade.titulo,
+        'descricao': atividade.descricao,
+        'data_envio': atividade.data_envio,
+        'extensao': atividade.extensao
+    } for atividade in atividades]
     return lista_atividades
 
 # Rota para exibir as atividades
@@ -81,18 +58,10 @@ def atividade():
 
 @atividade_bp.route('/download/<int:atividade_id>')
 def download(atividade_id):
-    conn = connect_db()
-    cursor = conn.cursor()
-    cursor.execute('SELECT arquivo, extensao FROM atividades WHERE id=?', (atividade_id,))
-    result = cursor.fetchone()
-    conn.close()
-    
-    if result:
-        arquivo, extensao = result
-        mime_type, _ = mimetypes.guess_type(f"arquivo.{extensao}")
-        
-        return send_file(io.BytesIO(arquivo), as_attachment=True, 
-                         download_name=f"arquivo_{atividade_id}.{extensao}", 
-                         mimetype=mime_type)
+    atividade = Atividade.query.get(atividade_id)
+    if atividade and atividade.arquivo:
+        mime_type, _ = mimetypes.guess_type(f"arquivo.{atividade.extensao}")
+        return send_file(io.BytesIO(atividade.arquivo), as_attachment=True,
+                         download_name=f"arquivo_{atividade_id}.{atividade.extensao}", mimetype=mime_type)
     else:
         return "Arquivo não encontrado.", 404

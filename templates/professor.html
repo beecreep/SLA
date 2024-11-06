@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Professor-css/diariodebordo.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Professor-css/listachamada.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -27,13 +28,16 @@
             align-items: center;
             font-family: poppins;
         }
-        section{
+
+        section {
             padding: 10px;
         }
-     a{
-        text-decoration: none;
-        color: none;
-     }
+
+        a {
+            text-decoration: none;
+            color: none;
+        }
+
         main {
             width: 50vw;
             min-height: 50vh;
@@ -44,7 +48,7 @@
             gap: 20px;
         }
 
-       
+
         .content {
             height: 280px;
             width: 200px;
@@ -67,6 +71,9 @@
             transform: translateY(-10px);
 
         }
+        #perfil{
+            display: none;
+        }
 
         .content img {
             height: 60%;
@@ -85,14 +92,11 @@
 
         }
 
-        
-h1 {
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
 
         #lista-caixa {
             display: none;
@@ -109,18 +113,12 @@ h1 {
         .voltar:hover {
             transition: 0.3s;
             color: blue;
-
-
         }
-        
 
         @media (max-width: 768px) {
             body {
                 min-height: 20%;
             }
-
-
-        
 
             #upload-form {
                 width: 90%;
@@ -147,17 +145,21 @@ h1 {
 
         </div>
         <div class="content" id="chamada-btn">
-            <img src="{{ url_for('static', filename='img/to-do-list.png') }}"
-                alt="">
+            <img src="{{ url_for('static', filename='img/to-do-list.png') }}" alt="">
             <h1> lista de chamada</h1>
         </div>
         <a href="/chat">
-        <div class="content" >
-            <img src="{{ url_for('static', filename='img/chat.png') }}" alt="">
-            <h1>chat</h1>
+            <div class="content">
+                <img src="{{ url_for('static', filename='img/chat.png') }}" alt="">
+                <h1>chat</h1>
+            </div>
+        </a>
+        <div class="content" id="perfil-btn">
+            <img src="{{ url_for('static', filename='img/user.png') }}" alt="">
+            <h1>perfil</h1>
         </div>
-    </a>
     </section>
+
     <section id="lista-caixa">
         <span class="voltar">voltar</span>
         <h1>Lista de Chamada</h1>
@@ -174,111 +176,158 @@ h1 {
             </tbody>
         </table>
     </section>
+
     <main id="atividade">
         <span class="voltar">voltar</span>
 
-        <form action="{{ url_for('professor_atv') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url_for('atividade.professor_atv') }}" method="POST" enctype="multipart/form-data">
             <label for="titulo">Título:</label>
             <input type="text" class="titulo" required><br>
-        
+
             <label for="descricao">Descrição:</label>
-            <textarea name="descricao"  id="descriçao-atividade"></textarea><br>
-        
+            <textarea name="descricao" id="descriçao-atividade"></textarea><br>
+
             <label for="arquivo">Enviar arquivo (opcional):</label>
             <input type="file" name="arquivo"><br>
-        
+
             <button type="submit" id="enviar">Enviar Atividade</button>
         </form>
-        
     </main>
+
+    <section id="perfil">
+        <span class="voltar">voltar</span>
+        <div class="settings-container">
+            <h2>bem-vindo {{nome}}</h2>
+
+            <div class="profile-picture">
+                <img src="static/img/user.png" alt="Profile Picture" class="imagem" id="image2">
+            </div>
+
+            <form id="usernameForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" value="{{ nome }} " readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="{{email}}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Turma</label>
+                    <input type="text" id="location" value="{{turma}}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="" value="{{senha}}" readonly>
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" value="Save Changes">
+                    <input type="button" value="Cancel">
+                </div>
+            </form>
+        </div>
+    </section>
+
     <section id="diario-content">
         <span class="voltar">voltar</span>
-       
+
         <div class="diary-header">
             <input type="text" placeholder="titulo" class="titulo" id="titulo-diario">
         </div>
-    
+
         <div class="new-entry">
-            <textarea id="diary-entry" rows="5" placeholder="Escreva sua nova entrada aqui..." class="file-description"></textarea>
+            <textarea id="diary-entry" rows="5" placeholder="Escreva sua nova entrada aqui..."
+                class="file-description"></textarea>
             <button onclick="addEntry()">Adicionar Entrada</button>
         </div>
-    
+
         <ul class="entry-list" id="entry-list">
             <!-- Entradas serão adicionadas aqui -->
         </ul>
-    </div>
-    <section>
+        </div>
         
+        <script src="{{ url_for('static', filename='js/diariodebordo.js') }}"></script>
     </section>
-    <script src="{{ url_for('static', filename='js/diariodebordo.js') }}"></script>
-    </section>
-    <script src="s{{ url_for('static', filename='js/atividade-prof.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/atividade-prof.js') }}"></script>
     <script>
 
-           let home =  document.getElementById('home');
-           let listacaixa =  document.getElementById('lista-caixa');
-           let chamadabtn = document.getElementById('chamada-btn');
-           let atividadebtn = document.getElementById('atividade-btn');
-           const atividade = document.querySelector('main');
-           const voltar = document.querySelectorAll('.voltar');
-           let diariobtn = document.getElementById('diario-btn');
-           let diariodebordo = document.getElementById('diario-content');
+        let home = document.getElementById('home');
+        let listacaixa = document.getElementById('lista-caixa');
+        let chamadabtn = document.getElementById('chamada-btn');
+        let atividadebtn = document.getElementById('atividade-btn');
+        const atividade = document.querySelector('main');
+        const voltar = document.querySelectorAll('.voltar');
+        let diariobtn = document.getElementById('diario-btn');
+        let diariodebordo = document.getElementById('diario-content');
+        let perfilbtn = document.getElementById('perfil-btn');
+        let perfil = document.querySelector('#perfil');
 
-         document.addEventListener('DOMContentLoaded', () => {
-           
+        document.addEventListener('DOMContentLoaded', () => {
+
             voltar.forEach((element) => {
                 element.addEventListener('click', () => {
-            atividade.style.display = 'none';
-            listacaixa.style.display = 'none'
-            home.style.display = 'flex';
-            diariodebordo.style.display = 'none'
+                    atividade.style.display = 'none';
+                    listacaixa.style.display = 'none'
+                    home.style.display = 'flex';
+                    diariodebordo.style.display = 'none'
+                    perfil.style.display = 'none'
+                });
             });
         });
-    });
-               diariobtn.addEventListener('click', () => {
-                diariodebordo.style.display =' grid'
-                home.style.display = 'none';
-               })
+        diariobtn.addEventListener('click', () => {
+            diariodebordo.style.display = ' grid'
+            home.style.display = 'none';
+        })
+
         chamadabtn.addEventListener('click', () => {
             home.style.display = 'none';
-           listacaixa.style.display = 'grid';
+            listacaixa.style.display = 'grid';
 
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-    const tabela = document.querySelector('#listaChamada tbody');
-
-    fetch('/api/alunos')  // Faz a requisição para a rota Flask
-    .then(response => response.json())
-    .then(data => {
-        data.alunos.forEach(aluno => {  // Acessa a lista de alunos do JSON
-            const row = document.createElement('tr');
-
-            const nomeCell = document.createElement('td');
-            nomeCell.textContent = aluno.nome;  // 'aluno' é uma string retornada do banco
-            nomeCell.setAttribute('data-label', 'Nome'); // Adiciona o atributo data-label
-            row.appendChild(nomeCell);
-
-            const turmaCell = document.createElement('td');
-            turmaCell.textContent = aluno.turma || 'Sem turma';  // Exibe a turma ou 'Sem turma' se for nulo
-            turmaCell.setAttribute('data-label', 'Turma');
-            row.appendChild(turmaCell);
-
-            const presencaCell = document.createElement('td');
-            const presencaCheckbox = document.createElement('input');
-            presencaCheckbox.type = 'checkbox';
-            presencaCell.appendChild(presencaCheckbox);
-            presencaCell.setAttribute('data-label', 'Presença'); // Adiciona o atributo data-label
-            row.appendChild(presencaCell);
-
-            tabela.appendChild(row);
+        perfilbtn.addEventListener('click', () => {
+            home.style.display = 'none';
+            perfil.style.display = 'flex';
         });
-    })
-    .catch(error => console.error('Erro ao buscar dados:', error));
-})
 
         document.addEventListener('DOMContentLoaded', () => {
-           
+            const tabela = document.querySelector('#listaChamada tbody');
+
+            fetch('/api/alunos')  // Faz a requisição para a rota Flask
+                .then(response => response.json())
+                .then(data => {
+                    data.alunos.forEach(aluno => {  // Acessa a lista de alunos do JSON
+                        const row = document.createElement('tr');
+
+                        const nomeCell = document.createElement('td');
+                        nomeCell.textContent = aluno.nome;  // 'aluno' é uma string retornada do banco
+                        nomeCell.setAttribute('data-label', 'Nome'); // Adiciona o atributo data-label
+                        row.appendChild(nomeCell);
+
+                        const turmaCell = document.createElement('td');
+                        turmaCell.textContent = aluno.turma || 'Sem turma';  // Exibe a turma ou 'Sem turma' se for nulo
+                        turmaCell.setAttribute('data-label', 'Turma');
+                        row.appendChild(turmaCell);
+
+                        const presencaCell = document.createElement('td');
+                        const presencaCheckbox = document.createElement('input');
+                        presencaCheckbox.type = 'checkbox';
+                        presencaCell.appendChild(presencaCheckbox);
+                        presencaCell.setAttribute('data-label', 'Presença'); // Adiciona o atributo data-label
+                        row.appendChild(presencaCell);
+
+                        tabela.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        })
+
+        document.addEventListener('DOMContentLoaded', () => {
+
             lixeira.addEventListener('click', () => {
                 atividade.style.display = 'none'
                 alert('atividade apagado');
@@ -286,17 +335,17 @@ h1 {
             });
         });
 
-       atividadebtn.addEventListener('click', () => {
+        atividadebtn.addEventListener('click', () => {
             atividade.style.display = 'grid';
             home.style.display = 'none';
             listacaixa.style.display = 'none'
         })
-      
+
         function triggerFileInput() {
-            fileInput .click();
+            fileInput.click();
         }
         fileInput.addEventListener('change', function () {
-           
+
             fileList.innerHTML = '';
 
             for (let i = 0; i < this.files.length; i++) {

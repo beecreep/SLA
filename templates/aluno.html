@@ -249,11 +249,11 @@
     <div class="menu-icon" onclick="toggleNavbar()">&#9776;</div> <!-- Ícone de menu -->
     <div class="navbar">
         <h2 style="text-align: center;">Menu</h2>
-        <a href="#" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
+        <a href="" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
         <a href="{{ url_for('atividade.atividade', nome=nome) }}" id="Atividades-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
         <a href="#" id="Cronogramas-btn">Cronogramas <i class="fa-solid fa-calendar-days"></i></a>
         <a href="{{ url_for('chat.chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
-        <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
+        <a href="" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
         <img src="static/img/user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
         <input type="file" name="foto" id="foto">
         <form action="/logout" method="get">
@@ -308,7 +308,7 @@
             </a>
             <a href="{{ url_for('materias.biologia') }}">
                 <div class="conteudo-materia">
-                    <img src="{{ url_for('static', filename='img/icon-materias.png/calculator.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/biological.png') }}" alt="">
                     <h1>Biologia</h1>
                 </div>
             </a>
