@@ -35,8 +35,7 @@ function handleFileUpload() {
 
 // Função para enviar uma mensagem
 function enviar() {
-  const mensagem = textInput.value;
-  const usuario_id = 1;  // Exemplo de ID de usuário, isso deve ser dinâmico
+  const mensagem = document.getElementById('text').value;
 
   if (mensagem === "") {
     alert("Por favor, preencha o campo.");
@@ -44,22 +43,19 @@ function enviar() {
 }
   // Enviar a mensagem para o servidor via POST
   fetch('/chat/enviar_mensagem', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ usuario_id: usuario_id, mensagem: mensagem })
-  })
-  .then(response => response.json())
-    .then(data => {
-        if (Array.isArray(data)) {
-            textArea.innerHTML = '';  // Limpa a área de texto
-            data.forEach(item => {
-                textArea.innerHTML += `<p><strong>${item.usuario}:</strong> ${item.mensagem}</p>`;
-            });
-        } else {
-            console.error("Formato inesperado na resposta:", data);
-        }
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ mensagem: mensagem })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.status === 'Mensagem enviada com sucesso!') {
+        carregarMensagens();  // Atualiza as mensagens no chat
+    } else {
+        alert(data.message || 'Erro ao enviar a mensagem.');
+    }
     })
     .catch(error => {
       console.error("Erro ao enviar mensagem:", error);
@@ -90,21 +86,24 @@ function enviarArquivo(username, timestamp, fileName, fileData) {
 }
 
 // Função para carregar mensagens do servidor
-function loadMessages() {
+function carregarMensagens() {
   fetch('/chat/carregar_mensagens')
-    .then(response => response.json())
-    .then(mensagens => {
-      mensagens.forEach(msg => {
-        const message = {
-          username: msg[0], // Nome do usuário
-          text: msg[1],     // Texto da mensagem
-          timestamp: msg[2] // Timestamp
-        };
-        addMessageToChat(message); // Adiciona a mensagem ao chat
-      });
-    })
-    .catch(error => console.error('Erro ao carregar mensagens:', error));
+      .then(response => response.json())
+      .then(data => {
+          const chatContainer = document.getElementById('text-area');
+          chatContainer.innerHTML = '';  // Limpa o conteúdo
+
+          // Exibe cada mensagem com o timestamp
+          data.forEach(item => {
+              const messageElement = document.createElement('p');
+              messageElement.innerHTML = `<strong>${item.nome}:</strong> ${item.texto} <span>(${item.timestamp})</span>`;
+              chatContainer.appendChild(messageElement);
+          });
+      })
+      .catch(error => console.error('Erro ao carregar as mensagens:', error));
 }
+
+document.addEventListener('DOMContentLoaded', carregarMensagens);
 
 // Função para adicionar uma mensagem ao chat
 function addMessageToChat(message) {

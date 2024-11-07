@@ -10,7 +10,7 @@ aluno_bp = Blueprint('aluno', __name__)
 def aluno():
     
     if current_user.role != 'Aluno':
-        return redirect(url_for('/'))
+        return redirect(url_for('index'))
 
     try:
         atividades = Atividade.query.all()

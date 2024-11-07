@@ -1,7 +1,7 @@
 from flask import  request, redirect, url_for, render_template, Blueprint,  send_file, session, jsonify
 from flask_login import current_user, login_required
 from db import db
-from models import Atividade, Resposta
+from models import Atividade, Resposta, User
 import mimetypes
 import io
 
@@ -11,7 +11,7 @@ atividade_bp = Blueprint('atividade', __name__)
 def professor_atv():
     # Verifica se o referer é a página 'professor.html'
     referer = request.headers.get("Referer")
-    if current_user.role == 'professor' and referer and '/professor' in referer:
+    if current_user.role == 'Professor' and referer and '/professor' in referer:
         titulo = request.form.get('titulo')
         descricao = request.form.get('descricao')
         arquivo = request.files['arquivo'].read() if 'arquivo' in request.files else None
@@ -21,7 +21,7 @@ def professor_atv():
         db.session.add(nova_atividade)
         db.session.commit()
 
-        return redirect(url_for('profwssor.professor'))  # Redireciona de volta para professor.html
+        return redirect(url_for('professor.professor'))  # Redireciona de volta para professor.html
     else:
         return "Ação não permitida", 403  # Código de status HTTP 403 para acesso proibido
 
@@ -50,11 +50,36 @@ def obter_atividades():
     } for atividade in atividades]
     return lista_atividades
 
+@atividade_bp.route('/respostas', methods=['GET'])
+@login_required
+def obter_respostas():
+    # Consulta para obter respostas com detalhes do aluno e da atividade
+    respostas = db.session.query(
+        User.nome.label("aluno"),
+        Resposta.atividade_id,
+        Resposta.resposta,
+        Resposta.data_resposta
+    ).join(User, User.id == Resposta.aluno_id).all()
+
+    # Converte as respostas para um formato JSON
+    respostas_data = [
+        {
+            "aluno": resposta.aluno,
+            "atividade_id": resposta.atividade_id,
+            "resposta": resposta.resposta,
+            "data_resposta": resposta.data_resposta.strftime("%d/%m/%Y") if resposta.data_resposta else "N/A"
+        }
+        for resposta in respostas
+    ]
+    return jsonify(respostas_data)
+
+
 # Rota para exibir as atividades
 @atividade_bp.route('/atividade')
 def atividade():
     atividades = obter_atividades()  # Obtém as atividades
     return render_template('atividade.html', atividades=atividades)
+
 
 @atividade_bp.route('/download/<int:atividade_id>')
 def download(atividade_id):

@@ -193,10 +193,10 @@
                 <tr>
                     <td>{{ atividade.titulo }}</td>
                     <td>{{ atividade.descricao }}</td>
-                    <td>{{ atividade.data_envio }}</td>
+                    <td>{{ atividade.data_envio.strftime('%d/%m/%Y') }}</td>
                     <td>
-                        {% if atividade.arquivo %}
-                        <a href="{{ url_for('download', atividade_id=atividade.id) }}"
+                        {% if atividade.extensao %}
+                        <a href="{{ url_for('atividade.download', atividade_id=atividade.id) }}"
                             title="Baixar {{ atividade.extensao|upper }}">
                             Baixar Arquivo ({{ atividade.extensao|upper }})
                         </a>
@@ -212,7 +212,7 @@
         <!-- Formulário para envio da resposta -->
         <section class="resposta">
             <h2>Enviar Resposta</h2>
-            <form action="/enviar_resposta" method="POST" enctype="multipart/form-data">
+            <form action="{{ url_for('atividade.enviar_resposta') }}" method="POST" enctype="multipart/form-data">
                 <label for="atividade_id">Atividade:</label>
                 <select name="atividade_id" id="atividade_id">
                     {% for atividade in atividades %}

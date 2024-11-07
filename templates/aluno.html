@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/materias.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cronogramas.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav-bar.css') }}">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -57,60 +59,7 @@
         }
 
         /* Adicionando estilos para a navbar */
-        .navbar {
-            width: 250px;
-            background-color: var(--background-color);
-            position: fixed;
-            top: 0;
-            left: -300px;
-            height: 100%;
-            padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            transition: left 0.3s;
-        }
-
-        .navbar.show {
-            left: 0;
-            /* Mostra a navbar */
-        }
-
-        .navbar a {
-            display: block;
-            color: var(--text-color);
-            padding: 10px 0;
-            text-decoration: none;
-        }
-
-        .navbar a:hover {
-            background-color: var(--text-color);
-            color: var(--background-color);
-            padding-left: 10px;
-            transition: 0.3s;
-        }
-
-        .logout-button {
-    background-color: #f44336; /* Vermelho */
-    color: white; /* Texto branco */
-    border: none; /* Sem borda */
-    padding: 10px 20px; /* Espaçamento */
-    text-align: center; /* Centraliza o texto */
-    text-decoration: none; /* Sem sublinhado */
-    display: inline-block; /* Exibe como bloco inline */
-    font-size: 16px; /* Tamanho da fonte */
-    margin: 4px 2px; /* Margem */
-    cursor: pointer; /* Muda o cursor ao passar o mouse */
-    border-radius: 5px; /* Bordas arredondadas */
-}
-        .menu-icon {
-            font-size: 30px;
-            cursor: pointer;
-            position: fixed;
-            top: 10px;
-            left: 2%;
-            z-index: 1000;
-        }
-
+       
         #image1 {
             height: 45px;
             width: 45px;
@@ -253,7 +202,7 @@
         <a href="{{ url_for('atividade.atividade', nome=nome) }}" id="Atividades-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
         <a href="#" id="Cronogramas-btn">Cronogramas <i class="fa-solid fa-calendar-days"></i></a>
         <a href="{{ url_for('chat.chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
-        <a href="" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
+        <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
         <img src="static/img/user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
         <input type="file" name="foto" id="foto">
         <form action="/logout" method="get">
@@ -367,28 +316,24 @@
             <form id="usernameForm">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" value="{{ nome }} " readonly>
+                    <input type="text" id="name" name="name" value=" {{ current_user.nome }} " readonly>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" value="{{email}}" readonly>
+                    <input type="email" id="email" name="email" value=" {{current_user.email}} " readonly>
                 </div>
 
                 <div class="form-group">
-                    <label for="location">Turma</label>
-                    <input type="text" id="location" value="{{turma}}" readonly>
+                    <label for="turma">Turma</label>
+                    <input type="text" id="turma" name="turma" value=" {{current_user.turma}} " readonly>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" placeholder="" value="{{senha}}" readonly>
+                    <label for="numero">numero</label>
+                    <input type="text" id="password" name="numero" placeholder="" value=" {{current_user.numero}} " readonly>
                 </div>
 
-                <div class="form-actions">
-                    <input type="submit" value="Save Changes">
-                    <input type="button" value="Cancel">
-                </div>
             </form>
         </div>
     </section>
@@ -518,6 +463,8 @@ fetch('/login', {
         if (data.nome) {
             // Exibe o nome do aluno no campo de input, se houver
             document.getElementById('name').value = data.nome;
+            document.getElementById('email').value = data.email;
+            document.getElementById('turma').value = data.turma;
         }
         // Redireciona para a URL apropriada
         window.location.href = data.redirect_url;

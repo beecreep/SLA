@@ -1,0 +1,75 @@
+section {
+    margin-left: 0;
+    /* Remove a margem para a navbar */
+    transition: margin-left 0.3s;
+}
+
+section.shifted {
+    margin-left: 270px;
+    /* Adiciona espaço para a navbar quando visível */
+}
+
+.button-theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    position: fixed;
+    top: 10px;
+    color: var(--text-color);
+    right: 10px;
+}
+ /* Adicionando estilos para a navbar */
+ .navbar {
+    width: 250px;
+    background-color: var(--background-color);
+    position: fixed;
+    top: 0;
+    left: -300px;
+    height: 100%;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transition: left 0.3s;
+}
+
+.navbar.show {
+    left: 0;
+    /* Mostra a navbar */
+}
+
+.navbar a {
+    display: block;
+    color: var(--text-color);
+    padding: 10px 0;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: var(--text-color);
+    color: var(--background-color);
+    padding-left: 10px;
+    transition: 0.3s;
+}
+
+.logout-button {
+background-color: #f44336; /* Vermelho */
+color: white; /* Texto branco */
+border: none; /* Sem borda */
+padding: 10px 20px; /* Espaçamento */
+text-align: center; /* Centraliza o texto */
+text-decoration: none; /* Sem sublinhado */
+display: inline-block; /* Exibe como bloco inline */
+font-size: 16px; /* Tamanho da fonte */
+margin: 4px 2px; /* Margem */
+cursor: pointer; /* Muda o cursor ao passar o mouse */
+border-radius: 5px; /* Bordas arredondadas */
+}
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    position: fixed;
+    top: 10px;
+    left: 2%;
+    z-index: 1000;
+}

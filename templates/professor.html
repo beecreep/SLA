@@ -5,11 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página do Professor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Professor-css/atividade.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Professor-css/diariodebordo.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Professor-css/listachamada.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav-bar.css') }}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -48,7 +52,6 @@
             gap: 20px;
         }
 
-
         .content {
             height: 280px;
             width: 200px;
@@ -71,7 +74,8 @@
             transform: translateY(-10px);
 
         }
-        #perfil{
+
+        #perfil {
             display: none;
         }
 
@@ -88,8 +92,15 @@
             gap: 15px;
             width: 100vw;
             height: 100vh;
+        }
 
-
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            top: 10px;
+            left: 2%;
+            z-index: 1000;
         }
 
         h1 {
@@ -134,7 +145,25 @@
 </head>
 
 <body>
+    <div class="menu-icon" onclick="toggleNavbar()">&#9776;</div> <!-- Ícone de menu -->
+
+    <div class="navbar">
+        <h2 style="text-align: center;">Menu</h2>
+        <a href="" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
+        <a href="#" id="Atividades-btn">Atividades <i
+                class="fa-solid fa-clipboard-list"></i></a>
+        <a href="#" id="chamada-btn">chamada <i class="fa-solid fa-calendar-days"></i></a>
+        <a href="{{ url_for('chat.chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
+        <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
+
+        <form action="/logout" method="get">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+
+
+    </div>
     <section id="home">
+        
         <div class="content" id="diario-btn">
             <img src="{{ url_for('static', filename='img/diary.png') }}" alt="">
             <h1>diario de bordo</h1>
@@ -144,20 +173,8 @@
             <h1>enviar atividade </h1>
 
         </div>
-        <div class="content" id="chamada-btn">
-            <img src="{{ url_for('static', filename='img/to-do-list.png') }}" alt="">
-            <h1> lista de chamada</h1>
-        </div>
-        <a href="/chat">
-            <div class="content">
-                <img src="{{ url_for('static', filename='img/chat.png') }}" alt="">
-                <h1>chat</h1>
-            </div>
-        </a>
-        <div class="content" id="perfil-btn">
-            <img src="{{ url_for('static', filename='img/user.png') }}" alt="">
-            <h1>perfil</h1>
-        </div>
+        
+       
     </section>
 
     <section id="lista-caixa">
@@ -182,7 +199,7 @@
 
         <form action="{{ url_for('atividade.professor_atv') }}" method="POST" enctype="multipart/form-data">
             <label for="titulo">Título:</label>
-            <input type="text" class="titulo" required><br>
+            <input type="text" class="titulo" name="titulo" required><br>
 
             <label for="descricao">Descrição:</label>
             <textarea name="descricao" id="descriçao-atividade"></textarea><br>
@@ -195,33 +212,32 @@
     </main>
 
     <section id="perfil">
-        <span class="voltar">voltar</span>
         <div class="settings-container">
-            <h2>bem-vindo {{nome}}</h2>
-
+           
             <div class="profile-picture">
-                <img src="static/img/user.png" alt="Profile Picture" class="imagem" id="image2">
+                <img src="{{ url_for('static', filename='img/user.png') }}" alt="Profile Picture" class="imagem"
+                    id="image2">
             </div>
 
             <form id="usernameForm">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" value="{{ nome }} " readonly>
+                    <input type="text" id="name" name="name" value="{{ current_user.nome }} " readonly>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" value="{{email}}" readonly>
+                    <input type="email" id="email" name="email" value="{{ current_user.email }}" readonly>
                 </div>
 
                 <div class="form-group">
-                    <label for="location">Turma</label>
-                    <input type="text" id="location" value="{{turma}}" readonly>
+                    <label for="turma">Turma</label>
+                    <input type="text" id="turma" name="turma" value="{{current_user.turma}}" readonly>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" placeholder="" value="{{senha}}" readonly>
+                    <label for="password">numero</label>
+                    <input type="password" id="password" placeholder="" value="{{current_user.numero}}" readonly>
                 </div>
 
                 <div class="form-actions">
@@ -231,6 +247,24 @@
             </form>
         </div>
     </section>
+
+    <section id="respostas-alunos">
+        <h2>Respostas dos Alunos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Aluno</th>
+                    <th>ID da Atividade</th>
+                    <th>Resposta</th>
+                    <th>Data de Resposta</th>
+                </tr>
+            </thead>
+            <tbody id="respostas-tabela">
+                <!-- As respostas dos alunos serão inseridas aqui dinamicamente -->
+            </tbody>
+        </table>
+    </section>
+
 
     <section id="diario-content">
         <span class="voltar">voltar</span>
@@ -249,10 +283,9 @@
             <!-- Entradas serão adicionadas aqui -->
         </ul>
         </div>
-        
+
         <script src="{{ url_for('static', filename='js/diariodebordo.js') }}"></script>
     </section>
-    <script src="{{ url_for('static', filename='js/atividade-prof.js') }}"></script>
     <script>
 
         let home = document.getElementById('home');
@@ -297,7 +330,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const tabela = document.querySelector('#listaChamada tbody');
 
-            fetch('/api/alunos')  // Faz a requisição para a rota Flask
+            fetch('/professor/api/alunos')  // Faz a requisição para a rota Flask
                 .then(response => response.json())
                 .then(data => {
                     data.alunos.forEach(aluno => {  // Acessa a lista de alunos do JSON
@@ -356,7 +389,52 @@
             fileList.style.display = 'grid'
             textArea.appendChild(fileList);
         });
-        // Função que envia a atividade e salva o conteúdo HTML estilizado no localStorage
+
+        async function carregarRespostas() {
+            try {
+                const response = await fetch('/atividade/respostas');
+                const data = await response.json();
+
+                const tabela = document.getElementById('respostas-tabela');
+                tabela.innerHTML = ''; // Limpa a tabela antes de preencher
+
+                data.forEach(resposta => {
+                    const row = document.createElement('tr');
+
+                    const alunoCell = document.createElement('td');
+                    alunoCell.textContent = resposta.aluno;
+                    row.appendChild(alunoCell);
+
+                    const atividadeCell = document.createElement('td');
+                    atividadeCell.textContent = resposta.atividade_id;
+                    row.appendChild(atividadeCell);
+
+                    const respostaCell = document.createElement('td');
+                    respostaCell.textContent = resposta.resposta;
+                    row.appendChild(respostaCell);
+
+                    const dataCell = document.createElement('td');
+                    dataCell.textContent = resposta.data_resposta;
+                    row.appendChild(dataCell);
+
+                    tabela.appendChild(row);
+                });
+            } catch (error) {
+                console.error("Erro ao carregar as respostas dos alunos:", error);
+            }
+        }
+
+        // Carrega as respostas dos alunos ao carregar a página
+        document.addEventListener('DOMContentLoaded', carregarRespostas);
+
+        function toggleNavbar() {
+            const navbar = document.querySelector('.navbar');
+            const mainContent = document.querySelectorAll('section');
+            navbar.classList.toggle('show');
+            mainContent.classList.toggle('shifted');
+        }
+
+
 
     </script>
 </body>

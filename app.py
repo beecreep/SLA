@@ -10,6 +10,7 @@ from atividade import atividade_bp
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, redirect, render_template, request, jsonify, url_for, session
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.secret_key = '12345678910'
@@ -19,6 +20,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'cadastrar.login_usuario'
+
+migrate = Migrate(app, db)
 
 @login_manager.user_loader
 def load_user(user_id):

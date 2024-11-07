@@ -33,6 +33,7 @@ class Atividade(db.Model):
     titulo = db.Column(db.String, nullable=False)
     descricao = db.Column(db.String, nullable=False)
     arquivo = db.Column(db.LargeBinary)  # Store files as binary
+    extensao = db.Column(db.String(10)) 
     data_envio = db.Column(db.DateTime, default=db.func.current_timestamp())
 
 class Resposta(db.Model):

@@ -31,7 +31,7 @@ alert('Erro ao fazer login');
 // Função para cadastrar novo usuário
 async function cadastrar() {
     const nome = document.querySelector('input[placeholder="Nome"]').value;
-    const email = document.querySelector('input[placeholder="Email"]').value;
+    const email = document.querySelector('input[placeholder="email"]').value;
     const senha = document.querySelector('input[placeholder="senha"]').value;
     const confirmasenha = document.querySelector('input[placeholder="confirme sua senha "]').value;
     const turma = document.querySelector('select[name="turma"]').value;

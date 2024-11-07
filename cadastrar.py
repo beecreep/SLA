@@ -21,7 +21,7 @@ def cadastrar_usuario():
     db.session.add(novo_usuario)
     db.session.commit()
     
-    return jsonify({'status': 'Usuário cadastrado com sucesso!'})
+    return jsonify({'status': 'Usuário cadastrado com sucesso!', })
 
 # Rota para fazer login
 @cadastro_bp.route('/login', methods=['POST'])
@@ -35,7 +35,9 @@ def login_usuario():
     if user and check_password_hash(user.senha, senha):
         login_user(user)
         redirect_url = '/aluno/aluno' if user.role == 'Aluno' else '/professor/professor'
-        return jsonify({'status': 'success', 'redirect_url': redirect_url})
+        return jsonify({'status': 'success', 'redirect_url': redirect_url, 'nome': user.nome,
+            'email': user.email,
+            'turma': user.turma})
     else:
         return jsonify({'status': 'Falha no login. Verifique suas credenciais.'}), 401
     
