@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bem-vindo aluno</title>
+    <title>bem-vindo {{ nome }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -205,7 +205,7 @@
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
         <img src="static/img/user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
         <input type="file" name="foto" id="foto">
-        <form action="/logout" method="get">
+        <form action="{{ url_for('cadastrar.logout') }}" method="get">
             <button type="submit" class="logout-button">Logout</button>
         </form>
         
@@ -407,7 +407,7 @@
     </section>
     <script src="{{ url_for('static', filename='js/materias.js') }}"></script>
   
-    <script src="{{ url_for('static', filename='js/nav-aluno.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/nav-bar.js') }}"></script>
     <script src="{{ url_for('static', filename='js/cronogramas.js') }}"></script>
 
     <script>

@@ -1,3 +1,11 @@
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --background-color-clarinho: #efefefdc ;
+
+}
+
+
 section {
     margin-left: 0;
     /* Remove a margem para a navbar */

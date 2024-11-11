@@ -176,7 +176,7 @@
             <li><a href="#funcionalidades">Funcionalidades</a></li>
             <li><a href="#explicacao">Explicaçao</a></li>
         </ul>
-        <a href="cadastro..html"><button id="entrar"> entrar</button></a>
+        <!--<a href="{{ url_for('cadastrar.cadastro') }}"><button id="entrar"> entrar</button></a> -->
     </nav>
     <main>
         <div id="left">
@@ -191,10 +191,10 @@
                     educacionais em instituições de ensino.
                 </p>
             </div>
-           <a href="aluno.html"> <button id="começar"> começar a testar</button></a>
+           <a href="{{ url_for('cadastrar.cadastro') }}"> <button id="começar"> começar a testar</button></a>
         </div>
         <div id="right">
-            <img src="img\undraw\undraw_Educator_re_ju47.png" alt="">
+            <img src="{{ url_for('static', filename='img/undraw/undraw_Educator_re_ju47.png') }}" alt="">
         </div>
 
     </main>
@@ -206,17 +206,17 @@
         <p>Exemplo de algumas linguagens usadas no projeto :</p>
         <div id="blocos">
             <div class="bloco-sobre">
-                <img src="img\js.png" alt="">
+                <img src="{{ url_for('static', filename='img/js.png') }}" alt="">
                 <h2>javascript</h2>
                 <p>interaçao do usuario</p>
             </div>
             <div class="bloco-sobre">
-                <img src="img\python.png" alt="">
+                <img src="{{ url_for('static', filename='img/python.png') }}" alt="">
                 <h2>python</h2>
                 <p>integraçao ao banco de dados</p>
             </div>
             <div class="bloco-sobre">
-                <img src="img\sql-server.png" alt="">
+                <img src="{{ url_for('static', filename='img/sql-server.png') }}" alt="">
                 <h2>sql</h2>
                 <p>banco de dados do site</p>
             </div>
@@ -291,7 +291,7 @@
             <div class="funcionalidade-bloco">
         
             <div class="funcionalidade-item">
-                <img src="img\bookshelf.png" alt="">
+                <img src="{{ url_for('static', filename='img/bookshelf.png') }}" alt="">
                 
 
             </div>
@@ -300,7 +300,7 @@
         </div>
         <div class="funcionalidade-bloco">
             <div class="funcionalidade-item">
-                <img src="img\graduated.png" alt="">
+                <img src="{{ url_for('static', filename='img/graduated.png') }}" alt="">
                 
 
             </div>
@@ -309,7 +309,7 @@
         </div>
         <div class="funcionalidade-bloco">
             <div class="funcionalidade-item">
-                <img src="img\chat.png" alt="">
+                <img src="{{ url_for('static', filename='img/chat.png') }}" alt="">
                
             </div>
             <h3>Fórum de Discussões</h3>
@@ -317,7 +317,7 @@
         </div>
         <div class="funcionalidade-bloco">
             <div class="funcionalidade-item">
-                <img src="img\dean.png" alt="">
+                <img src="{{ url_for('static', filename='img/dean.png') }}" alt="">
               
             </div>
             <h3>Área do Professor</h3>

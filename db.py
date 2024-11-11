@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 db = SQLAlchemy()
 
@@ -16,5 +17,6 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base.metadata.create_all(bind=engine)
 
 def connect_db():
-    conn = sqlite3.connect('usuarios.db')
+    db_path = os.path.join(os.path.dirname(__file__), 'instance', 'usuarios.db')
+    conn = sqlite3.connect(db_path)
     return conn

@@ -22,6 +22,7 @@ class User(UserMixin, db.Model):
     role = db.Column(db.String(50))
 
     mensagens = db.relationship('Mensagem', back_populates='user')
+    respostas = db.relationship('Resposta', back_populates='user')
     
     def __repr__(self):
         return f'<User {self.nome}>'
@@ -36,6 +37,8 @@ class Atividade(db.Model):
     extensao = db.Column(db.String(10)) 
     data_envio = db.Column(db.DateTime, default=db.func.current_timestamp())
 
+    respostas = db.relationship('Resposta', back_populates='atividade')
+
 class Resposta(db.Model):
     __tablename__ = 'respostas'
 
@@ -44,7 +47,11 @@ class Resposta(db.Model):
     atividade_id = db.Column(db.Integer, db.ForeignKey('atividades.id'), nullable=False)
     resposta = db.Column(db.Text, nullable=False)
     arquivo_resposta = db.Column(db.LargeBinary)
+    extensao = db.Column(db.String(10))
     data_resposta = db.Column(db.DateTime, default=db.func.current_timestamp())
+
+    user = db.relationship('User', back_populates='respostas')
+    atividade = db.relationship('Atividade', back_populates='respostas')
 
 class Mensagem(db.Model):
     __tablename__ = 'mensagens'

@@ -5,19 +5,16 @@ let conversasbtn = document.getElementById('conversas-btn');
 let materiasbtn = document.getElementById('materias-btn')
 let materias1 = document.getElementById('materias1');
 let atividades = document.getElementById('Atividades');
-let perfilbtn = document.getElementById('perfil-btn');
-let perfil = document.getElementById('perfil');
-let cronogramasbtn = document.getElementById('Cronogramas-btn');
-let cronogramas = document.getElementById('CRONOGRAMAS');
+const perfilbtn = document.getElementById('perfil-btn');
+const perfil = document.getElementById('perfil');
+const cronogramasbtn = document.getElementById('Cronogramas-btn');
+const cronogramas = document.getElementById('CRONOGRAMAS');
 const image = document.querySelectorAll('.imagem');
 const foto = document.getElementById('foto');
 
 
 atividadesbtn.addEventListener("click", () => {
     // Obter todos os elementos com a classe 'main-content'
-    for (let element of mainContentElements) {
-        element.style.display = 'none';
-    }
 
     materias1.style.display = 'none';
     atividades.style.display = 'grid';
@@ -25,12 +22,10 @@ atividadesbtn.addEventListener("click", () => {
     cronogramas.style.display = 'none'
 
 });
+
 cronogramasbtn.addEventListener("click", () => {
     // Obter todos os elementos com a classe 'main-content'
-    for (let element of mainContentElements) {
-        element.style.display = 'none';
-    }
-
+    
     materias1.style.display = 'none';
     atividades.style.display = 'none';
     perfil.style.display = 'none';
@@ -38,10 +33,6 @@ cronogramasbtn.addEventListener("click", () => {
 
 });
 perfilbtn.addEventListener("click", () => {
-
-    for (let element of mainContentElements) {
-        element.style.display = 'none';
-    }
 
     materias1.style.display = 'none';
     atividades.style.display = 'none';
@@ -51,9 +42,6 @@ perfilbtn.addEventListener("click", () => {
 });
 conversasbtn.addEventListener("click", () => {
     // Iterar sobre todos os elementos e definir display para 'none'
-    for (let element of mainContentElements) {
-        element.style.display = 'flex';
-    }
     materias1.style.display = 'none';
     atividades.style.display = 'none';
     perfil.style.display = 'none';
@@ -61,10 +49,9 @@ conversasbtn.addEventListener("click", () => {
     // Definir display para 'grid' no elemento com id 'materias1'
 
 });
- materiasbtn.addEventListener("click", () => {
-    for (let element of mainContentElements) {
-        element.style.display = 'none';
-    }
+
+materiasbtn.addEventListener("click", () => {
+   
     materias1.style.display = 'grid';
     atividades.style.display = 'none';
     perfil.style.display = 'none';
@@ -77,7 +64,7 @@ function toggleNavbar() {
     const mainContent = document.querySelector('section');
     navbar.classList.toggle('show');
     mainContent.classList.toggle('shifted');
-}  
+}
 
 foto.addEventListener("change", () => {
     if (foto.files.length > 0) {
@@ -88,8 +75,8 @@ foto.addEventListener("change", () => {
     }
 })
 document.getElementById('image2').addEventListener("click", () => {
-        foto.click();
-    });
+    foto.click();
+});
 
 function toggleTheme() {
     const body = document.body;

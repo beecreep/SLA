@@ -78,27 +78,21 @@ function enviarArquivo(username, timestamp, fileName, fileData) {
   .then(response => response.json())
   .then(data => {
       // Atualizar a text-area com as mensagens recebidas
-      textArea.innerHTML = '';  // Limpar a área de texto
-      data.forEach(item => {
-          textArea.innerHTML += `<p><strong>${item[0]}:</strong> ${item[1]}</p>`;
+      addMessageToChat(data);
       });
-  });
+  
 }
 
 // Função para carregar mensagens do servidor
 function carregarMensagens() {
   fetch('/chat/carregar_mensagens')
       .then(response => response.json())
-      .then(data => {
+      .then(mensagens => {
           const chatContainer = document.getElementById('text-area');
           chatContainer.innerHTML = '';  // Limpa o conteúdo
 
           // Exibe cada mensagem com o timestamp
-          data.forEach(item => {
-              const messageElement = document.createElement('p');
-              messageElement.innerHTML = `<strong>${item.nome}:</strong> ${item.texto} <span>(${item.timestamp})</span>`;
-              chatContainer.appendChild(messageElement);
-          });
+          mensagens.forEach(addMessageToChat);
       })
       .catch(error => console.error('Erro ao carregar as mensagens:', error));
 }
@@ -108,13 +102,20 @@ document.addEventListener('DOMContentLoaded', carregarMensagens);
 // Função para adicionar uma mensagem ao chat
 function addMessageToChat(message) {
   const p = document.createElement('p');
+
+  // Elemento para exibir o texto da mensagem com o nome do usuário
+  p.textContent = `${message.username}: ${message.text}`;
+
+  // Cria um span para exibir o timestamp
   const span = document.createElement('span');
   span.textContent = ` (${message.timestamp})`;
   span.className = 'timestamp';
 
-  p.textContent = `${message.username}: ${message.text}`;
+  // Adiciona o timestamp ao parágrafo
   p.appendChild(span);
 
+  // Adiciona o parágrafo ao chat e rola a visualização para a última mensagem
+  const textArea = document.getElementById('chat-messages');
   textArea.appendChild(p);
   textArea.scrollTop = textArea.scrollHeight;
 }
@@ -135,5 +136,5 @@ textInput.addEventListener('keydown', function (event) {
 });
 
 // Carregar mensagens ao iniciar
-loadMessages();
+carregarMensagens();
 document.getElementById('enviar').onclick = enviar;

@@ -1,86 +1,63 @@
-#upload-form {
-    display: none;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px;
-
-}
-
-.titulo {
-    border: none;
-    margin-bottom: 8px;
-    border-bottom: 4px solid black;
-    padding: 4px;
-    height: 3rem;
-    font-size: 2rem;
-    outline: none;
-    width: 100%;
-
-}
-
-#enviar {
-    width: 20%;
-    height: 2rem;
-    background-color: blue;
-    color: aliceblue;
+/* Estilo do main container */
+#atividade {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fbfdff; /* Azul claro */
     border-radius: 8px;
-
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
 }
 
-#file-list {
-    margin-top: 10px;
+/* Estilos dos rótulos e inputs */
+#atividade label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #004080; /* Azul escuro */
+}
+
+#atividade input[type="text"],
+#atividade textarea,
+#atividade input[type="file"] {
+    width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    border: 1px solid #d1dfe8;
     border-radius: 5px;
-    max-height: 70px;
-    overflow-y: auto;
-    display: none;
+    font-size: 1rem;
+    color: #004080;
+    background-color: #ffffff;
 }
 
-#file-list li {
-    list-style-type: none;
-    padding: 5px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.file-description {
+/* Botão de envio */
+#atividade button#enviar {
+    background-color: #004080; /* Azul escuro */
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
     border: none;
-    outline: none;
-    resize: none;
-    font-family: poppins;
-
-}
-#descriçao-atividade{
-    min-height: 50px;
-    width: 30%;
-
-}
-
-#file-upload {
-    display: none;
-}
-
-.icon {
+    border-radius: 5px;
     cursor: pointer;
-}
-main {
-    width: 50vw;
-    min-height: 50vh;
-    box-shadow: 10px 10px 20px black;
-    display: none;
-    padding: 10px;
-    align-items: center;
-    gap: 20px;
+    transition: background-color 0.3s ease;
+    width: 100%;
 }
 
-@media (max-width: 668px){
-main{
-    width: 100%;
-    height: 80vh;
-    gap: 50px;
+#atividade button#enviar:hover {
+    background-color: #0059b3; /* Azul mais claro */
 }
-#upload-form{
-    width: 100%;
-    height: 80%;
-}
+
+/* Resolução para telas menores */
+@media (max-width: 768px) {
+    #atividade {
+        padding: 15px;
+    }
+
+    #atividade input[type="text"],
+    #atividade textarea,
+    #atividade input[type="file"],
+    #atividade button#enviar {
+        font-size: 0.9rem;
+    }
 }

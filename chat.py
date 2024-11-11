@@ -31,13 +31,13 @@ def enviar_mensagem():
 def carregar_mensagens():
     mensagens = db.session.query(User.nome, Mensagem.mensagem).join(Mensagem.user).order_by(Mensagem.timestamp.asc()).all()
 
-    mensagens_formatadas = [
+    mensagens_data = [
         {
-            'nome': mensagem[0],
-            'texto': mensagem[1],
-            'timestamp': mensagem[2].strftime("%d/%m/%Y %H:%M:%S")  # Formato de exibição do timestamp
+            'username': mensagem[0],
+            'text': mensagem[1],
+            'timestamp': mensagem[2].strftime("%d/%m/%Y %H:%M")
         }
         for mensagem in mensagens
     ]
-    return jsonify(mensagens_formatadas)
+    return jsonify(mensagens_data)
 

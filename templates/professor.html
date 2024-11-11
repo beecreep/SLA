@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Professor-css/listachamada.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/nav-bar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/materias.css') }}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -37,10 +38,7 @@
             padding: 10px;
         }
 
-        a {
-            text-decoration: none;
-            color: none;
-        }
+
 
         main {
             width: 50vw;
@@ -51,6 +49,7 @@
             align-items: center;
             gap: 20px;
         }
+        
 
         .content {
             height: 280px;
@@ -85,22 +84,13 @@
         }
 
         #home {
-            display: flex;
+            display: none;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             gap: 15px;
             width: 100vw;
             height: 100vh;
-        }
-
-        .menu-icon {
-            font-size: 30px;
-            cursor: pointer;
-            position: fixed;
-            top: 10px;
-            left: 2%;
-            z-index: 1000;
         }
 
         h1 {
@@ -149,36 +139,33 @@
 
     <div class="navbar">
         <h2 style="text-align: center;">Menu</h2>
-        <a href="" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
-        <a href="#" id="Atividades-btn">Atividades <i
-                class="fa-solid fa-clipboard-list"></i></a>
-        <a href="#" id="chamada-btn">chamada <i class="fa-solid fa-calendar-days"></i></a>
+        <a href="#" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
+        <a href="#" id="atividade-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
+        <a href="#" id="chamada-btn">chamada</a>
         <a href="{{ url_for('chat.chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
+        <a href="{{ url_for('atividade.respostas') }}">respostas</a>
+        <a href="#" id="diario-btn">diario de bordo</a>
 
-        <form action="/logout" method="get">
+        <form action="{{ url_for('cadastrar.logout') }}" method="get">
             <button type="submit" class="logout-button">Logout</button>
         </form>
 
-
     </div>
     <section id="home">
-        
-        <div class="content" id="diario-btn">
+
+        <div class="content">
             <img src="{{ url_for('static', filename='img/diary.png') }}" alt="">
             <h1>diario de bordo</h1>
         </div>
-        <div class="content" id="atividade-btn">
+        <div class="content">
             <img src="{{ url_for('static', filename='img/score.png') }}" alt="">
             <h1>enviar atividade </h1>
 
         </div>
-        
-       
     </section>
 
     <section id="lista-caixa">
-        <span class="voltar">voltar</span>
         <h1>Lista de Chamada</h1>
         <table id="listaChamada">
             <thead>
@@ -195,8 +182,6 @@
     </section>
 
     <main id="atividade">
-        <span class="voltar">voltar</span>
-
         <form action="{{ url_for('atividade.professor_atv') }}" method="POST" enctype="multipart/form-data">
             <label for="titulo">Título:</label>
             <input type="text" class="titulo" name="titulo" required><br>
@@ -213,7 +198,7 @@
 
     <section id="perfil">
         <div class="settings-container">
-           
+
             <div class="profile-picture">
                 <img src="{{ url_for('static', filename='img/user.png') }}" alt="Profile Picture" class="imagem"
                     id="image2">
@@ -237,37 +222,14 @@
 
                 <div class="form-group">
                     <label for="password">numero</label>
-                    <input type="password" id="password" placeholder="" value="{{current_user.numero}}" readonly>
-                </div>
-
-                <div class="form-actions">
-                    <input type="submit" value="Save Changes">
-                    <input type="button" value="Cancel">
+                    <input type="text" id="password" placeholder="" value="{{current_user.numero}}" readonly>
                 </div>
             </form>
         </div>
     </section>
 
-    <section id="respostas-alunos">
-        <h2>Respostas dos Alunos</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Aluno</th>
-                    <th>ID da Atividade</th>
-                    <th>Resposta</th>
-                    <th>Data de Resposta</th>
-                </tr>
-            </thead>
-            <tbody id="respostas-tabela">
-                <!-- As respostas dos alunos serão inseridas aqui dinamicamente -->
-            </tbody>
-        </table>
-    </section>
-
 
     <section id="diario-content">
-        <span class="voltar">voltar</span>
 
         <div class="diary-header">
             <input type="text" placeholder="titulo" class="titulo" id="titulo-diario">
@@ -286,18 +248,144 @@
 
         <script src="{{ url_for('static', filename='js/diariodebordo.js') }}"></script>
     </section>
+
+    <section id="materias1">
+        <div id="banner">
+            <div class="banner-content" id="banner-content">
+                <!-- As notícias ou curiosidades vão aparecer aqui -->
+            </div>
+        </div>
+        <div id="materias">
+            <a href="{{ url_for('materias.portugues') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/literary.png') }}" alt="">
+                    <h1>Portugues</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('materias.matematica') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/calculator.png') }}" alt="">
+                    <h1>Matematica</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('materias.historia') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/parchment.png') }}" alt="">
+                    <h1>Historia</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('materias.fisica') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/atom.png') }}" alt="">
+                    <h1>Fisica</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('materias.ingles') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/english-language.png') }}" alt="">
+                    <h1>Ingles</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('materias.geografia') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/history.png') }}" alt="">
+                    <h1>Geografia</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('materias.biologia') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/biological.png') }}" alt="">
+                    <h1>Biologia</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('materias.quimica') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/laboratory.png') }}" alt="">
+                    <h1>Quimica</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('materias.eletronica') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/resistor.png') }}" alt="">
+                    <h1>Eletronica</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('materias.eventos') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/red-carpet.png') }}" alt="">
+                    <h1>Eventos</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('materias.st') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/firefighter-helmet.png') }}" alt="">
+                    <h1>Segurança do trabalho</h1>
+                </div>
+            </a>
+            <a href="{{ url_for('materias.adm') }}">
+                <div class="conteudo-materia">
+                    <img src="{{ url_for('static', filename='img/icon-materias.png/salary.png') }}" alt="">
+                    <h1>Administração</h1>
+                </div>
+            </a>
+        </div>
+
+    </section>
+
     <script>
 
         let home = document.getElementById('home');
         let listacaixa = document.getElementById('lista-caixa');
         let chamadabtn = document.getElementById('chamada-btn');
         let atividadebtn = document.getElementById('atividade-btn');
-        const atividade = document.querySelector('main');
+        const atividade = document.getElementById('atividade');
         const voltar = document.querySelectorAll('.voltar');
+        let respostabtn = document.getElementById('resposta-btn');
+        let diario = document.getElementById('diario-content');
+        const perfilbtn = document.getElementById('perfil-btn');
+        const perfil = document.getElementById('perfil');
+        const materiasbtn = document.getElementById('materias-btn')
+        const materias1 = document.getElementById('materias1');
         let diariobtn = document.getElementById('diario-btn');
-        let diariodebordo = document.getElementById('diario-content');
-        let perfilbtn = document.getElementById('perfil-btn');
-        let perfil = document.querySelector('#perfil');
+        const diariodebordo = document.getElementById('diario-content');
+
+        chamadabtn.addEventListener('click', () => {
+            home.style.display = 'none';
+            listacaixa.style.display = 'grid';
+            perfil.style.display = 'none';
+            materias1.style.display = 'none';
+            diariodebordo.style.display = ' none'
+            atividade.style.display = 'none';
+
+        });
+        diariobtn.addEventListener('click', () => {
+            diariodebordo.style.display = ' grid'
+            home.style.display = 'none';
+            materias1.style.display = 'none';
+            perfil.style.display = 'none';
+            atividade.style.display = 'none';
+            listacaixa.style.display = 'none';
+        });
+
+        materiasbtn.addEventListener("click", () => {
+            
+            materias1.style.display = 'grid';
+            atividade.style.display = 'none';
+            perfil.style.display = 'none';
+            diariodebordo.style.display = 'none'
+            listacaixa.style.display = 'none';
+
+        });
+
+        perfilbtn.addEventListener("click", () => {
+
+            materias1.style.display = 'none';
+            atividade.style.display = 'none';
+            perfil.style.display = 'grid';
+            diariodebordo.style.display = ' none'
+            listacaixa.style.display = 'none';
+
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -311,21 +399,7 @@
                 });
             });
         });
-        diariobtn.addEventListener('click', () => {
-            diariodebordo.style.display = ' grid'
-            home.style.display = 'none';
-        })
 
-        chamadabtn.addEventListener('click', () => {
-            home.style.display = 'none';
-            listacaixa.style.display = 'grid';
-
-        });
-
-        perfilbtn.addEventListener('click', () => {
-            home.style.display = 'none';
-            perfil.style.display = 'flex';
-        });
 
         document.addEventListener('DOMContentLoaded', () => {
             const tabela = document.querySelector('#listaChamada tbody');
@@ -359,19 +433,14 @@
                 .catch(error => console.error('Erro ao buscar dados:', error));
         })
 
-        document.addEventListener('DOMContentLoaded', () => {
-
-            lixeira.addEventListener('click', () => {
-                atividade.style.display = 'none'
-                alert('atividade apagado');
-                document.querySelector('section').style.display = 'flex'
-            });
-        });
 
         atividadebtn.addEventListener('click', () => {
             atividade.style.display = 'grid';
             home.style.display = 'none';
             listacaixa.style.display = 'none'
+            perfil.style.display = 'none'
+            materias1.style.display = 'none';
+             diariodebordo.style.display = 'none'
         })
 
         function triggerFileInput() {
@@ -390,50 +459,15 @@
             textArea.appendChild(fileList);
         });
 
-        async function carregarRespostas() {
-            try {
-                const response = await fetch('/atividade/respostas');
-                const data = await response.json();
-
-                const tabela = document.getElementById('respostas-tabela');
-                tabela.innerHTML = ''; // Limpa a tabela antes de preencher
-
-                data.forEach(resposta => {
-                    const row = document.createElement('tr');
-
-                    const alunoCell = document.createElement('td');
-                    alunoCell.textContent = resposta.aluno;
-                    row.appendChild(alunoCell);
-
-                    const atividadeCell = document.createElement('td');
-                    atividadeCell.textContent = resposta.atividade_id;
-                    row.appendChild(atividadeCell);
-
-                    const respostaCell = document.createElement('td');
-                    respostaCell.textContent = resposta.resposta;
-                    row.appendChild(respostaCell);
-
-                    const dataCell = document.createElement('td');
-                    dataCell.textContent = resposta.data_resposta;
-                    row.appendChild(dataCell);
-
-                    tabela.appendChild(row);
-                });
-            } catch (error) {
-                console.error("Erro ao carregar as respostas dos alunos:", error);
-            }
-        }
-
-        // Carrega as respostas dos alunos ao carregar a página
-        document.addEventListener('DOMContentLoaded', carregarRespostas);
 
         function toggleNavbar() {
             const navbar = document.querySelector('.navbar');
             const mainContent = document.querySelectorAll('section');
             navbar.classList.toggle('show');
-            mainContent.classList.toggle('shifted');
+            mainContent.forEach(section => {
+                section.classList.toggle('shifted');
+            });
         }
-
 
 
     </script>

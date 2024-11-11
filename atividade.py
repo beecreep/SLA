@@ -1,6 +1,6 @@
 from flask import  request, redirect, url_for, render_template, Blueprint,  send_file, session, jsonify
 from flask_login import current_user, login_required
-from db import db
+from db import db,connect_db
 from models import Atividade, Resposta, User
 import mimetypes
 import io
@@ -31,12 +31,41 @@ def enviar_resposta():
     atividade_id = request.form.get('atividade_id')
     resposta = request.form.get('resposta')
     arquivo_resposta = request.files['arquivo_resposta'].read() if 'arquivo_resposta' in request.files else None
+    extensao = request.files['arquivo_resposta'].filename.split('.')[-1] if 'arquivo_resposta' in request.files else None
 
-    nova_resposta = Resposta(aluno_id=aluno_id, atividade_id=atividade_id, resposta=resposta, arquivo_resposta=arquivo_resposta)
+    nova_resposta = Resposta(aluno_id=aluno_id, atividade_id=atividade_id, resposta=resposta, arquivo_resposta=arquivo_resposta, extensao=extensao)
     db.session.add(nova_resposta)
     db.session.commit()
 
     return redirect(f'/atividade/{aluno_id}')
+
+def obter_respostas():
+    respostas = db.session.query(
+        User.nome.label("aluno"), 
+        Atividade.titulo.label("titulo_atividade"), 
+        Resposta.resposta, 
+        Resposta.data_resposta, 
+        Resposta.id, 
+        Resposta.arquivo_resposta
+    ).join(Resposta.user).join(Resposta.atividade).all()
+
+    lista_respostas = [
+        {
+            "aluno": resposta.aluno,
+            "titulo_atividade": resposta.titulo_atividade,
+            "resposta": resposta.resposta,
+            "data_resposta": resposta.data_resposta.strftime("%d/%m/%Y") if resposta.data_resposta else "",
+            "arquivo_resposta_id": resposta.id if resposta.arquivo_resposta else None
+        }
+        for resposta in respostas
+    ]
+    return lista_respostas
+
+@atividade_bp.route('/respostas')
+def respostas():
+    lista_respostas = obter_respostas()  # Obtém as respostas formatadas
+    return render_template('respostas.html', respostas=lista_respostas)
+
 
 # Função para buscar as atividades do banco de dados
 def obter_atividades():
@@ -49,29 +78,6 @@ def obter_atividades():
         'extensao': atividade.extensao
     } for atividade in atividades]
     return lista_atividades
-
-@atividade_bp.route('/respostas', methods=['GET'])
-@login_required
-def obter_respostas():
-    # Consulta para obter respostas com detalhes do aluno e da atividade
-    respostas = db.session.query(
-        User.nome.label("aluno"),
-        Resposta.atividade_id,
-        Resposta.resposta,
-        Resposta.data_resposta
-    ).join(User, User.id == Resposta.aluno_id).all()
-
-    # Converte as respostas para um formato JSON
-    respostas_data = [
-        {
-            "aluno": resposta.aluno,
-            "atividade_id": resposta.atividade_id,
-            "resposta": resposta.resposta,
-            "data_resposta": resposta.data_resposta.strftime("%d/%m/%Y") if resposta.data_resposta else "N/A"
-        }
-        for resposta in respostas
-    ]
-    return jsonify(respostas_data)
 
 
 # Rota para exibir as atividades
@@ -90,3 +96,19 @@ def download(atividade_id):
                          download_name=f"arquivo_{atividade_id}.{atividade.extensao}", mimetype=mime_type)
     else:
         return "Arquivo não encontrado.", 404
+
+@atividade_bp.route('/download_resposta/<int:resposta_id>')
+def download_resposta(resposta_id):
+   # Obtenha a resposta pelo ID
+    resposta = Resposta.query.get(resposta_id)
+    
+    # Verifique se a resposta existe e possui um arquivo
+    if resposta and resposta.arquivo_resposta:
+        # Defina o tipo MIME com base na extensão do arquivo
+        mime_type, _ = mimetypes.guess_type(f"arquivo_resposta.{resposta.extensao}")
+        
+        # Envie o arquivo como um download
+        return send_file(io.BytesIO(resposta.arquivo_resposta), as_attachment=True,
+                         download_name=f"resposta_{resposta_id}.{resposta.extensao}", mimetype=mime_type)
+    else:
+        return "Arquivo de resposta não encontrado.", 404

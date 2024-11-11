@@ -47,9 +47,11 @@
             justify-content: space-between;
         }
 
-        i {
+        img {
             cursor: pointer;
             text-decoration: none;
+            width: 85%;
+            
         }
 
         .icones {
@@ -97,8 +99,7 @@
         <div class="divisoria">
             <div class="conteudo"><span>Bhaskara</span>
                 <div class="icones">
-                    <a href="/pdf/view/pdf-matematica/bhaskara.pdf"> <i
-                            class="fa-solid fa-eye"></i> </a> <a
+                    <a href="/pdf/view/pdf-matematica/bhaskara.pdf"> <img src="{{ url_for('static', filename='img/eye-solid.png') }}"> </a> <a
                         href="/pdf/download/pdf-matematica/bhaskara.pdf" download="bhaskara.pdf">
                         <i class="fa-solid fa-download"></i> </a>
                 </div>

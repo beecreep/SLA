@@ -6,6 +6,10 @@ from models import User
 
 cadastro_bp = Blueprint ('cadastrar', __name__)
 
+@cadastro_bp.route('/cadastro')
+def cadastro():
+  return render_template('cadastro.html')
+
 # Rota para ca dastrar um novo usuário
 @cadastro_bp.route('/cadastrar', methods=['POST'])
 def cadastrar_usuario():
@@ -46,5 +50,5 @@ def login_usuario():
 @login_required
 def logout():
     logout_user()
-    return redirect('/')  # Redireciona para a página inicial
+    return redirect(url_for('index'))  # Redireciona para a página inicial
 
