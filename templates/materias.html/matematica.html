@@ -6,90 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>matematica</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            width: 100vw;
-            height: 100vh;
-            font-family: poppins;
-            padding: 10px;
-
-        }
-
-        #conteudo-materia {
-            display: flex;
-            height: 90vh;
-            width: 100vw;
-            padding: 10px;
-            margin: 10px;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .conteudo {
-            box-shadow: 4px 4px 10px black;
-            border: 2px solid black;
-            border-radius: 8px;
-            border-bottom: solid 2px gray;
-            min-height: 10%;
-            width: 80%;
-            display: flex;
-            padding: 10px;
-            justify-content: space-between;
-        }
-
-        img {
-            cursor: pointer;
-            text-decoration: none;
-            width: 85%;
-            
-        }
-
-        .icones {
-            display: flex;
-            width: 10%;
-            justify-content: space-between;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .divisoria {
-            display: flex;
-            flex-direction: column;
-            padding: 10px;
-            height: 100%;
-            width: 50%;
-            gap: 50px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                min-height: 20%;
-                gap: 10px;
-            }
-
-            #conteudo-materia {
-                display: flex;
-                flex-direction: column;
-                position: relative;
-            }
-
-            .conteudo {
-                width: 80%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="static\css\materias123.css">
 </head>
 
 <body>
@@ -99,7 +16,7 @@
         <div class="divisoria">
             <div class="conteudo"><span>Bhaskara</span>
                 <div class="icones">
-                    <a href="/pdf/view/pdf-matematica/bhaskara.pdf"> <img src="{{ url_for('static', filename='img/eye-solid.png') }}"> </a> <a
+                    <a href="/pdf/view/pdf-matematica/bhaskara.pdf"> <i class="fa-solid fa-eye"></i>  </a> <a
                         href="/pdf/download/pdf-matematica/bhaskara.pdf" download="bhaskara.pdf">
                         <i class="fa-solid fa-download"></i> </a>
                 </div>
@@ -160,11 +77,6 @@
         </div>
     </div>
 
-    <h1>Atividades</h1>
-    <span></span>
-    <script>
-
-    </script>
 </body>
 
 </html>
