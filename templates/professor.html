@@ -140,12 +140,12 @@
     <div class="navbar">
         <h2 style="text-align: center;">Menu</h2>
         <a href="#" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
-        <a href="#" id="atividade-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
-        <a href="#" id="chamada-btn">chamada</a>
+        <a href="#" id="atividade-btn">Enviar atividade <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#" id="chamada-btn">chamada <i class="fa-solid fa-clipboard-list"></i></a>
         <a href="{{ url_for('chat.chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
-        <a href="{{ url_for('atividade.respostas') }}">respostas</a>
-        <a href="#" id="diario-btn">diario de bordo</a>
+        <a href="{{ url_for('atividade.respostas') }}">respostas <i class="fa-solid fa-envelope"></i></a>
+        <a href="#" id="diario-btn">diario de bordo <i class="fa-solid fa-pencil"></i></a>
 
         <form action="{{ url_for('cadastrar.logout') }}" method="get">
             <button type="submit" class="logout-button">Logout</button>

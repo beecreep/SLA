@@ -203,8 +203,6 @@
         <a href="#" id="Cronogramas-btn">Cronogramas <i class="fa-solid fa-calendar-days"></i></a>
         <a href="{{ url_for('chat.chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
-        <img src="static/img/user.png" alt="clique aqui para mudar de foto" class="imagem" id="image1">
-        <input type="file" name="foto" id="foto">
         <form action="{{ url_for('cadastrar.logout') }}" method="get">
             <button type="submit" class="logout-button">Logout</button>
         </form>
@@ -310,7 +308,7 @@
             <h2>seu perfil</h2>
 
             <div class="profile-picture">
-                <img src="static/img/user.png" alt="Profile Picture" class="imagem" id="image2">
+                <img src="{{ url_for('static', filename='img/user.png') }}" alt="Profile Picture" class="imagem" id="image2">
             </div>
 
             <form id="usernameForm">
