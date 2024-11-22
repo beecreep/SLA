@@ -120,6 +120,8 @@ function addMessageToChat(message) {
   textArea.scrollTop = textArea.scrollHeight;
 }
 
+setInterval(carregarMensagens, 3000);
+
 // Função para redefinir o chat
 function redefinir() {
   textArea.innerHTML = '';

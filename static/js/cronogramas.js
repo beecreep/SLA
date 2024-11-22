@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
         '09-07': 'Independência do Brasil',
         '05-01': 'Dia do Trabalhador',
         '11-02': 'dia de finados',
-        '11-15' : 'Proclamação da republica '
+        '11-15' : 'Proclamação da republica ',
+        '20-11' : 'Consciencia negra'
     };
 
     // Função para calcular feriados móveis (Páscoa, Carnaval, etc.)

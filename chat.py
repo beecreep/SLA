@@ -25,6 +25,15 @@ def enviar_mensagem():
     db.session.add(nova_mensagem)
     db.session.commit()
 
+     # Verificar se o número de mensagens excede 80
+    total_mensagens = db.session.query(Mensagem).count()
+    if total_mensagens > 80:
+        # Apagar as 20 mensagens mais antigas
+        mensagens_mais_antigas = db.session.query(Mensagem).order_by(Mensagem.timestamp.asc()).limit(20).all()
+        for mensagem in mensagens_mais_antigas:
+            db.session.delete(mensagem)
+        db.session.commit()
+
     return jsonify({'status': 'Mensagem enviada com sucesso!'})
 
 @chat_bp.route('/carregar_mensagens', methods=['GET'])
