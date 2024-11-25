@@ -9,7 +9,7 @@ chat_bp = Blueprint('chat', __name__)
 
 @chat_bp.route('/chat')
 def chat():
-    mensagens = db.session.query(User.nome, Mensagem.mensagem).join(Mensagem.user).order_by(Mensagem.timestamp.asc()).all()
+    mensagens = db.session.query(User.nome, Mensagem.mensagem, ).join(Mensagem.user).order_by(Mensagem.timestamp.asc()).all()
     return render_template('chat.html', mensagens=mensagens)
 
 @chat_bp.route('/enviar_mensagem', methods=['POST'])
@@ -38,7 +38,7 @@ def enviar_mensagem():
 
 @chat_bp.route('/carregar_mensagens', methods=['GET'])
 def carregar_mensagens():
-    mensagens = db.session.query(User.nome, Mensagem.mensagem).join(Mensagem.user).order_by(Mensagem.timestamp.asc()).all()
+    mensagens = db.session.query(User.nome, Mensagem.mensagem,Mensagem.timestamp).join(Mensagem.user).order_by(Mensagem.timestamp.asc()).all()
 
     mensagens_data = [
         {

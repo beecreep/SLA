@@ -13,8 +13,8 @@ main {
     color: var(--text-color);
     background-color: var(--background-color);
     transition: background-color 0.3s, color 0.3s;
-
 }
+
 #chat-form {
     display: flex;
     flex-direction: column;
@@ -28,6 +28,7 @@ main {
     border-radius: 8px;
     padding: 10px;
     overflow-y: auto;
+    word-break: break-all;
     font-family: poppins;
     margin-bottom: 10px;
     background-color: transparent;

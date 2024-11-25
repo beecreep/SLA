@@ -13,15 +13,7 @@ const image = document.querySelectorAll('.imagem');
 const foto = document.getElementById('foto');
 
 
-atividadesbtn.addEventListener("click", () => {
-    // Obter todos os elementos com a classe 'main-content'
 
-    materias1.style.display = 'none';
-    atividades.style.display = 'grid';
-    perfil.style.display = 'none';
-    cronogramas.style.display = 'none'
-
-});
 
 cronogramasbtn.addEventListener("click", () => {
     // Obter todos os elementos com a classe 'main-content'
@@ -40,15 +32,7 @@ perfilbtn.addEventListener("click", () => {
     cronogramas.style.display = 'none';
 
 });
-conversasbtn.addEventListener("click", () => {
-    // Iterar sobre todos os elementos e definir display para 'none'
-    materias1.style.display = 'none';
-    atividades.style.display = 'none';
-    perfil.style.display = 'none';
-    cronogramas.style.display = 'none'
-    // Definir display para 'grid' no elemento com id 'materias1'
 
-});
 
 materiasbtn.addEventListener("click", () => {
    

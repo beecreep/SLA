@@ -208,16 +208,16 @@
             <div class="bloco-sobre">
                 <img src="{{ url_for('static', filename='img/js.png') }}" alt="">
                 <h2>javascript</h2>
-                <p>interaçao do usuario</p>
+                <p>Interação do usuario</p>
             </div>
             <div class="bloco-sobre">
                 <img src="{{ url_for('static', filename='img/python.png') }}" alt="">
                 <h2>python</h2>
-                <p>integraçao ao banco de dados</p>
+                <p>Integração ao banco de dados</p>
             </div>
             <div class="bloco-sobre">
                 <img src="{{ url_for('static', filename='img/sql-server.png') }}" alt="">
-                <h2>sql</h2>
+                <h2>Sqlite</h2>
                 <p>banco de dados do site</p>
             </div>
         </div>
@@ -262,25 +262,41 @@
         </div>
     </section>
     <section id="raspberry-pi">
-        <h2>O Coração do Projeto: Raspberry Pi</h2>
-        <p>Para este projeto, estamos utilizando o Raspberry Pi 4, a versão mais poderosa e versátil da família Raspberry Pi. Com um processador ARM Cortex-A72 quad-core, até 8GB de RAM, e conectividade avançada, ele é o microcomputador ideal para criar uma rede local robusta e eficiente para o compartilhamento de atividades e arquivos entre alunos e professores.</p>
-        
-        <h3>Por que Escolhemos o Raspberry Pi 4?</h3>
+        <h2>O Coração do Projeto: Raspberry Pi 3</h2>
+        <p>O Raspberry Pi 3 é um microcomputador compacto e eficiente, amplamente utilizado em projetos educacionais, IoT e de automação. Ele combina poder de processamento, conectividade integrada e baixo custo, tornando-se a escolha ideal para criar a infraestrutura necessária ao nosso projeto.</p>
+    
+        <h3>Principais Características do Raspberry Pi 3</h3>
         <ul>
-            <li><strong>Desempenho Superior:</strong> O Pi 4 oferece um desempenho até três vezes superior ao seu antecessor, o Raspberry Pi 3, permitindo o processamento rápido de dados e uma experiência de usuário suave.</li>
-            <li><strong>Memória Ampliada:</strong> Com opções de até 8GB de RAM, o Pi 4 pode lidar com múltiplas tarefas simultâneas, desde o gerenciamento de arquivos até a execução de aplicações mais complexas.</li>
-            <li><strong>Conectividade Moderna:</strong> Possui portas USB 3.0 para transferência rápida de dados, além de conectividade Wi-Fi e Bluetooth integradas para uma configuração sem complicações.</li>
-            <li><strong>Suporte a 4K:</strong> Se for necessário, o Pi 4 pode ser conectado a monitores 4K, tornando-o perfeito para apresentações e visualização de conteúdos de alta definição.</li>
+            <li><strong>Processador Quad-Core:</strong> Equipado com um processador ARM Cortex-A53 de 1.2GHz, o Raspberry Pi 3 é capaz de realizar múltiplas tarefas simultaneamente, como gerenciar conexões de usuários e processar solicitações de dados.</li>
+            <li><strong>Memória RAM:</strong> Possui 1GB de memória RAM, suficiente para suportar aplicações de médio porte, como servidores locais e interfaces web interativas.</li>
+            <li><strong>Conectividade Integrada:</strong> Inclui Wi-Fi 802.11n e Bluetooth 4.1, eliminando a necessidade de adaptadores externos para redes sem fio ou dispositivos periféricos.</li>
+            <li><strong>Portas USB e GPIO:</strong> Conta com 4 portas USB e 40 pinos GPIO (General Purpose Input/Output), permitindo a conexão de diversos dispositivos e sensores, caso o projeto seja expandido no futuro.</li>
+            <li><strong>Armazenamento com microSD:</strong> Utiliza cartões microSD para armazenamento do sistema operacional e dados, oferecendo flexibilidade e fácil substituição em caso de necessidade.</li>
+            <li><strong>Eficiência Energética:</strong> Consome pouca energia (5V via micro-USB), tornando-o ideal para uso contínuo em ambientes educacionais ou de trabalho colaborativo.</li>
         </ul>
+    
+        <h3>Por que Escolhemos o Raspberry Pi 3?</h3>
+        <p>O Raspberry Pi 3 oferece o equilíbrio perfeito entre custo, desempenho e simplicidade. Embora existam versões mais avançadas, como o Raspberry Pi 4, as necessidades do nosso projeto são atendidas com folga pelo modelo 3. Além disso, sua compatibilidade com uma vasta gama de softwares e sistemas operacionais facilita o desenvolvimento e a manutenção.</p>
         
-        <h3>Comparando com o Raspberry Pi 3</h3>
-        <p>Embora o Raspberry Pi 3 ainda seja uma escolha sólida, o Pi 4 traz melhorias significativas em termos de desempenho e funcionalidades. Para um projeto que exige confiabilidade e capacidade de expansão, o Pi 4 é a escolha ideal, oferecendo mais poder de processamento e melhores opções de conectividade.</p>
-        
-        <h3>Aplicações no Projeto</h3>
-        <p>No contexto deste TCC, o Raspberry Pi 4 será utilizado como o servidor principal da rede local, gerenciando o armazenamento e o compartilhamento de arquivos entre alunos e professores. Sua potência garante que o sistema seja rápido, seguro, e capaz de lidar com múltiplos usuários simultaneamente, sem comprometer o desempenho.</p>
-        
-        <p>Estamos confiantes de que o Raspberry Pi 4 não só atende, mas excede as necessidades do nosso projeto, garantindo uma experiência de uso eficiente e moderna para todos os envolvidos.</p>
+        <h3>Como o Raspberry Pi 3 Contribui para o Projeto?</h3>
+        <ul>
+            <li><strong>Servidor Local:</strong> O Raspberry Pi 3 é o núcleo do sistema, atuando como servidor para armazenar e gerenciar as atividades e respostas compartilhadas entre alunos e professores.</li>
+            <li><strong>Acessibilidade:</strong> Graças ao Wi-Fi integrado, ele permite que dispositivos na mesma rede local acessem o sistema sem a necessidade de conexões físicas.</li>
+            <li><strong>Confiabilidade:</strong> O Raspberry Pi 3 é conhecido por sua estabilidade, garantindo que o sistema funcione de maneira ininterrupta mesmo com múltiplos usuários simultâneos.</li>
+        </ul>
+    
+        <h3>Mais Aplicações do Raspberry Pi 3</h3>
+        <p>Além do uso como servidor, o Raspberry Pi 3 pode ser expandido para diversas outras aplicações, como:</p>
+        <ul>
+            <li><strong>Streaming de Conteúdo:</strong> Pode ser usado para compartilhar vídeos ou apresentações durante aulas.</li>
+            <li><strong>Automação:</strong> Com sensores e atuadores conectados aos pinos GPIO, é possível integrar funcionalidades como monitoramento de ambiente.</li>
+            <li><strong>Aprendizado de Programação:</strong> Ideal para ensinar lógica de programação, desenvolvimento web e automação em ambientes educacionais.</li>
+        </ul>
+    
+        <h3>Conclusão</h3>
+        <p>O Raspberry Pi 3 não é apenas uma escolha prática, mas estratégica para o nosso projeto. Ele oferece a base sólida necessária para criar um sistema eficiente, econômico e adaptável às necessidades de professores e alunos. Sua popularidade na comunidade de tecnologia garante suporte abundante, tornando-o a ferramenta ideal para transformar ideias em realidade.</p>
     </section>
+    
     
     </section>
     <section class="funcionalidades-section" id="funcionalidades">

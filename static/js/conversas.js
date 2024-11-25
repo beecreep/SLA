@@ -88,8 +88,7 @@ function carregarMensagens() {
   fetch('/chat/carregar_mensagens')
       .then(response => response.json())
       .then(mensagens => {
-          const chatContainer = document.getElementById('text-area');
-          chatContainer.innerHTML = '';  // Limpa o conteúdo
+          textArea.innerHTML = '';  // Limpa o conteúdo
 
           // Exibe cada mensagem com o timestamp
           mensagens.forEach(addMessageToChat);
@@ -115,7 +114,6 @@ function addMessageToChat(message) {
   p.appendChild(span);
 
   // Adiciona o parágrafo ao chat e rola a visualização para a última mensagem
-  const textArea = document.getElementById('chat-messages');
   textArea.appendChild(p);
   textArea.scrollTop = textArea.scrollHeight;
 }

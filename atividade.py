@@ -37,7 +37,7 @@ def enviar_resposta():
     db.session.add(nova_resposta)
     db.session.commit()
 
-    return redirect(f'/atividade/{aluno_id}')
+    return redirect(f'/atividade')
 
 def obter_respostas():
     respostas = db.session.query(

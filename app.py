@@ -50,6 +50,7 @@ def cadastro():
 def index():
     return render_template('home_page.html')
 
+
 # Registra os blueprints
 app.register_blueprint(cadastro_bp,  url_prefix='/cadastrar')
 app.register_blueprint(professor_bp,  url_prefix='/professor')
@@ -61,5 +62,5 @@ app.register_blueprint(atividade_bp,  url_prefix='/atividade')
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Cria todas as tabelas definidas
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
     
