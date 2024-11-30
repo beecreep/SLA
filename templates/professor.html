@@ -142,9 +142,10 @@
         <a href="#" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
         <a href="#" id="atividade-btn">Enviar atividade <i class="fa-solid fa-arrow-right"></i></a>
         <a href="#" id="chamada-btn">chamada <i class="fa-solid fa-clipboard-list"></i></a>
+        <a href="{{ url_for('cronogramas.cronogramas_prof')}}">Cronogramas</a>
         <a href="{{ url_for('chat.chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
-        <a href="{{ url_for('atividade.respostas') }}">respostas <i class="fa-solid fa-envelope"></i></a>
+        <a href="{{ url_for('atividade.respostas') }}">Atividades recebidas <i class="fa-solid fa-envelope"></i></a>
         <a href="#" id="diario-btn">diario de bordo <i class="fa-solid fa-pencil"></i></a>
 
         <form action="{{ url_for('cadastrar.logout') }}" method="get">
@@ -468,6 +469,33 @@
                 section.classList.toggle('shifted');
             });
         }
+
+        document.getElementById('cronograma-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const dados = {};
+    const cells = document.querySelectorAll('[contenteditable]');
+
+    cells.forEach(cell => {
+        const dia = cell.getAttribute('data-dia');
+        const horario = cell.getAttribute('data-horario');
+        const materia = cell.textContent.trim();
+
+        if (!dados[dia]) {
+            dados[dia] = {};
+        }
+        dados[dia][horario] = materia;
+    });
+
+    fetch('/professor/cronogramas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+    })
+    .then(response => response.json())
+    .then(data => alert(data.status))
+    .catch(error => console.error('Erro ao salvar o cronograma:', error));
+});
 
 
     </script>

@@ -1,7 +1,7 @@
 from flask import  request, redirect, url_for, render_template, Blueprint,  send_file, session, jsonify
 from flask_login import current_user, login_required
 from db import db,connect_db
-from models import Atividade, Resposta, User
+from models import Atividade, Resposta, User, Cronograma
 import mimetypes
 import io
 
@@ -37,7 +37,7 @@ def enviar_resposta():
     db.session.add(nova_resposta)
     db.session.commit()
 
-    return redirect(f'/atividade')
+    return render_template('atividade.html')
 
 def obter_respostas():
     respostas = db.session.query(

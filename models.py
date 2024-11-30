@@ -23,6 +23,7 @@ class User(UserMixin, db.Model):
 
     mensagens = db.relationship('Mensagem', back_populates='user')
     respostas = db.relationship('Resposta', back_populates='user')
+    cronogramas = db.relationship('Cronograma', back_populates='user', cascade='all, delete-orphan')
     
     def __repr__(self):
         return f'<User {self.nome}>'
@@ -58,12 +59,29 @@ class Mensagem(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
-    mensagem = db.Column(db.Text, nullable=False)
+    mensagem = db.Column(db.Text, nullable=True)  # Pode ser nula, pois pode conter apenas arquivo
+    arquivo = db.Column(db.LargeBinary, nullable=True)  # Para armazenar o arquivo
+    extensao = db.Column(db.String(10), nullable=True)  # Para armazenar a extensão do arquivo
     timestamp = db.Column(db.DateTime, default=db.func.current_timestamp())
 
     user = db.relationship('User', back_populates='mensagens')
 
     def __repr__(self):
         return f'<Mensagem {self.id}: {self.mensagem}>'
+    
+class Cronograma(db.Model):
+    __tablename__ = 'cronogramas'
+
+    id = db.Column(db.Integer, primary_key=True)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
+    turma = db.Column(db.String(50), nullable=False)  # Nome ou ID da turma
+    dia_semana = db.Column(db.String(50), nullable=False)  # Segunda, Terça, etc.
+    horario = db.Column(db.String(10), nullable=False)  # Ex.: "08:00"
+    aula = db.Column(db.String(150), nullable=True)  # Nome da matéria ou atividade
+    professor = db.Column(db.String, nullable=False)
+
+    user = db.relationship('User', back_populates='cronogramas')
+
+
 
 

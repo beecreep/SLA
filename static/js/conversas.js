@@ -8,80 +8,51 @@ function triggerFileInput() {
   fileInput.click();
 }
 
-// Função para lidar com o upload de arquivos
-function handleFileUpload() {
-  const now = new Date();
-  const timestamp = now.toLocaleString();
-
-  if (fileInput.files.length > 0) {
-    Array.from(fileInput.files).forEach(file => {
-      const fileReader = new FileReader();
-      fileReader.onload = function (e) {
-        const link = document.createElement('a');
-        link.href = e.target.result;
-        link.download = file.name;
-        link.textContent = `${username} (${timestamp}): ${file.name}`;
-        link.style.display = 'block';
-        textArea.appendChild(link);
-
-        // Enviar a mensagem de arquivo para o backend
-        enviarArquivo(username, timestamp, file.name, e.target.result);
-      }
-      fileReader.readAsDataURL(file);
-    });
-    fileInput.value = '';
-  }
-}
-
 // Função para enviar uma mensagem
-function enviar() {
-  const mensagem = document.getElementById('text').value;
+async  function enviar() {
+  const form = document.querySelector('form');
+  const formData = new FormData(form); // Captura todos os campos do formulário automaticamente.
+ 
+  if (mensagem) {
+    formData.append('mensagem', mensagem);
+  }
 
-  if (mensagem === "") {
-    alert("Por favor, preencha o campo.");
-    return; // Interrompe a execução da função se o campo estiver vazio
-}
-  // Enviar a mensagem para o servidor via POST
-  fetch('/chat/enviar_mensagem', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ mensagem: mensagem })
-})
-.then(response => response.json())
-.then(data => {
-    if (data.status === 'Mensagem enviada com sucesso!') {
-        carregarMensagens();  // Atualiza as mensagens no chat
-    } else {
-        alert(data.message || 'Erro ao enviar a mensagem.');
+  if (arquivo) {
+    formData.append('arquivo', arquivo);
+  }
+
+      // Verifica se ao menos mensagem ou arquivo foi fornecido
+      if (!formData.get('mensagem') && !formData.get('arquivo')) {
+        alert('Por favor, insira uma mensagem ou selecione um arquivo.');
+        return;
     }
-    })
-    .catch(error => {
-      console.error("Erro ao enviar mensagem:", error);
-      alert("Ocorreu um erro ao enviar a mensagem. Tente novamente.");
-  });
 
+  // Enviar a mensagem para o servidor via POST
+  try {
+    // Envia os dados para o backend
+    const response = await fetch('/chat/enviar_mensagem', {
+        method: 'POST',
+        body: formData,
+    });
+    
+    const result = await response.json();
+
+    if (result.status === 'Mensagem enviada com sucesso!') {
+        carregarMensagens();  // Atualiza o chat
+    } 
+    else {
+        alert(result.message || 'Erro ao enviar a mensagem.');
+    }
+} 
+catch (error) {
+  console.error('Erro ao enviar a mensagem:', error);
+  alert('Ocorreu um erro ao enviar a mensagem. Tente novamente.');
+  return; // Interrompe a execução
+}
   // Limpar o campo de texto
-  textInput.value = '';
-}
+  form.reset();
 
-// Função para enviar arquivo para o backend
-function enviarArquivo(username, timestamp, fileName, fileData) {
-  fetch('/enviar_arquivo', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ username, timestamp, fileName, fileData })
-  })
-  .then(response => response.json())
-  .then(data => {
-      // Atualizar a text-area com as mensagens recebidas
-      addMessageToChat(data);
-      });
-  
-}
+};
 
 // Função para carregar mensagens do servidor
 function carregarMensagens() {
@@ -102,30 +73,42 @@ document.addEventListener('DOMContentLoaded', carregarMensagens);
 function addMessageToChat(message) {
   const p = document.createElement('p');
 
-  // Elemento para exibir o texto da mensagem com o nome do usuário
-  p.textContent = `${message.username}: ${message.text}`;
+      // Adiciona o nome do usuário
+      const spanUsername = document.createElement('span');
+      spanUsername.textContent = `${message.nome}: `;
+      spanUsername.style.fontWeight = 'bold';
+      p.appendChild(spanUsername);
+  
 
-  // Cria um span para exibir o timestamp
-  const span = document.createElement('span');
-  span.textContent = ` (${message.timestamp})`;
-  span.className = 'timestamp';
+  if (message.mensagem) {
+    const spanMensagem = document.createElement('span');
+    spanMensagem.textContent = `${message.mensagem} `;
+    p.appendChild(spanMensagem);
+}
 
-  // Adiciona o timestamp ao parágrafo
-  p.appendChild(span);
+if (message.arquivo_url) {
+  // Exibe o arquivo como link para download
+  const link = document.createElement('a');
+  link.href = message.arquivo_url;
+  link.textContent = `${message.nome} enviou um arquivo (${message.extensao.toUpperCase()})`;
+  link.target = '_blank'; // Abre o arquivo em uma nova aba
+  link.style.marginLeft = '5px';
+  p.appendChild(link);
+} 
 
+   // Adiciona o timestamp
+   const spanTimestamp = document.createElement('span');
+   spanTimestamp.textContent = ` (${message.timestamp})`;
+   spanTimestamp.className = 'timestamp';
+   p.appendChild(spanTimestamp);
+
+  
   // Adiciona o parágrafo ao chat e rola a visualização para a última mensagem
   textArea.appendChild(p);
   textArea.scrollTop = textArea.scrollHeight;
 }
 
 setInterval(carregarMensagens, 3000);
-
-// Função para redefinir o chat
-function redefinir() {
-  textArea.innerHTML = '';
-  textInput.value = '';
-  fileInput.value = '';
-}
 
 // Evento para enviar mensagem ao pressionar Enter
 textInput.addEventListener('keydown', function (event) {
@@ -137,4 +120,5 @@ textInput.addEventListener('keydown', function (event) {
 
 // Carregar mensagens ao iniciar
 carregarMensagens();
+
 document.getElementById('enviar').onclick = enviar;

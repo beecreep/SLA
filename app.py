@@ -2,6 +2,7 @@
 from db import db  # Importa a instância de db do db.py
 from cadastrar import cadastro_bp, cadastrar_usuario
 from professor import professor_bp
+from cronogramas import cronogramas_bp
 from aluno import aluno_bp
 from models import Mensagem, User, Atividade, Resposta 
 from materias import materias_bp
@@ -16,6 +17,8 @@ app = Flask(__name__)
 app.secret_key = '12345678910'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuarios.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -48,7 +51,7 @@ def cadastro():
 
 @app.route('/')
 def index():
-    return render_template('home_page.html')
+    return render_template('cadastro.html')
 
 
 # Registra os blueprints
@@ -58,6 +61,7 @@ app.register_blueprint(aluno_bp,  url_prefix='/aluno')
 app.register_blueprint(chat_bp,  url_prefix='/chat')
 app.register_blueprint(materias_bp)
 app.register_blueprint(atividade_bp,  url_prefix='/atividade')
+app.register_blueprint(cronogramas_bp,  url_prefix='/cronogramas')
 
 if __name__ == '__main__':
     with app.app_context():

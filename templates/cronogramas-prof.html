@@ -1,0 +1,126 @@
+2<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/cronograma.css') }}">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: white;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Cronograma - Turma {{ turma }}</h1>
+
+    <form id="cronograma-form" action="{{ url_for('cronogramas.gerenciar_cronograma')}}" method="POST">
+        <label for="turma">Turma:</label>
+        <select name="turma" id="turma" required>
+            {% for turma in turmas %}
+                <option value="{{ turma }}">{{ turma }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="dia_semana">Dia da Semana:</label>
+        <select name="dia_semana" id="dia_semana" required>
+            <option value="Segunda">Segunda</option>
+            <option value="Terça">Terça</option>
+            <option value="Quarta">Quarta</option>
+            <option value="Quinta">Quinta</option>
+            <option value="Sexta">Sexta</option>
+        </select>
+
+        <label for="horario">Horário:</label>
+        <select name="horario" id="horario" required>
+            {% for horario in horarios %}
+                <option value="{{ horario }}">{{ horario }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="aula">Aula:</label>
+        <input type="text" name="aula" id="aula" placeholder="Nome da Matéria" required>
+
+        <label for="professor">Professor:</label>
+        <input type="text" name="professor" id="professor" placeholder="Nome do Professor" value="{{ current_user.nome}}" readonly>
+
+        <button type="submit">Atualizar Cronograma</button>
+    </form>
+
+    <h2>Cronogramas Existentes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Turma</th>
+                <th>Dia da Semana</th>
+                <th>Horário</th>
+                <th>Aula</th>
+                <th>Professor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cronograma in cronogramas %}
+            <tr>
+                <td>{{ cronograma.turma }}</td>
+                <td>{{ cronograma.dia_semana }}</td>
+                <td>{{ cronograma.horario }}</td>
+                <td>{{ cronograma.aula }}</td>
+                <td>{{ cronograma.professor }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

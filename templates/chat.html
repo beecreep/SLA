@@ -76,21 +76,26 @@
                 <div class="text-area" id="text-area">
                     <ul>
                         {% for mensagem in mensagens %}
-                            <li><strong>{{ mensagem[0] }}</strong> : {{ mensagem[1] }}</li> <span> {{ mensagem[2] }}</span>
+                            <li>
+                                <strong>{{ mensagem[0] }}</strong> : {{ mensagem[1] }}
+                                <span>{{ mensagem[2] }}</span>
+                                {% if mensagem[3] %}
+                                    <a href="{{ url_for('chat.download', mensagem_id=mensagem[4]) }}">Baixar Arquivo</a>
+                                {% endif %}
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>
-                <div class="input-wrapper">
-                    <input type="text" id="text" name="mensagem" placeholder="Digite sua mensagem aqui">
-                    <span class="icon" onclick="triggerFileInput()">&#128206;</span>
-
-                    <input type="file" id="file" onchange="handleFileUpload()">
-                </div>
-                <div>
-                    <input type="submit" value="Enviar" name="enviar" onclick="enviar()" id="enviar">
-                    <input type="reset" value="Redefinir" name="redefinir" onclick="redefinir()">
-                </div>
-            </div>
+                <form action="{{ url_for('chat.enviar_mensagem') }}" method="POST" enctype="multipart/form-data">
+                    <div class="input-wrapper">
+                        <input type="text" id="text" name="mensagem" placeholder="Digite sua mensagem aqui" maxlength="240">
+                        <span class="icon" onclick="triggerFileInput()">&#128206;</span>
+                        <input type="file" id="file" name="arquivo">
+                    </div>
+                    <div>
+                        <button type="submit" id="enviar" name="enviar">Enviar</button>
+                    </div>
+                </form>
         </main>
     </section>
     <script src="{{ url_for('static', filename='js/conversas.js') }}"></script>

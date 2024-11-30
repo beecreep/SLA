@@ -53,17 +53,13 @@ main {
     margin: 5px 0;
 }
 
-input[type="submit"],
-input[type="reset"] {
+#enviar {
+    background-color: blue;
+    color: #ffffff;
     padding: 10px 20px;
     margin-right: 10px;
     cursor: pointer;
     border-radius: 20px;
-}
-
-#enviar {
-    background-color: blue;
-    color: #ffffff;
 }
 main input[type="file"] {
     display: none;
