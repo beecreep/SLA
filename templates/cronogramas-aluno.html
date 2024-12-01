@@ -236,6 +236,9 @@
 <body>
     <section id="cronogramas">
         <h2>Cronogramas Semanais</h2>
+        {% if mensagem %}
+        <p>{{ mensagem }}</p>
+    {% else %}
         
         <!-- Exibindo a tabela de cronograma -->
         <div class="calendario">
@@ -288,6 +291,7 @@
                     {% endfor %}
                 </ul>
             </div>
+            {% endif %}
         </div>
     </section>
     <section id="calendario-mensal">
@@ -308,7 +312,8 @@
             <!-- Dias do mês serão gerados dinamicamente aqui -->
         </div>
     </section>
-</section>
     
+
+<script src="{{ url_for('static', filename='js/cronogramas.js') }}"></script>
 </body>
 </html>

@@ -51,7 +51,7 @@ def cadastro():
 
 @app.route('/')
 def index():
-    return render_template('cadastro.html')
+    return render_template('home_page.html')
 
 
 # Registra os blueprints

@@ -19,13 +19,60 @@ def cronogramas_prof():
     "10:50 - 11:30",
     "11:30 - 12:20"
 ]
-    return render_template('cronogramas-prof.html', horarios=horarios, turmas=turmas) 
+    
+    cronogramas = Cronograma.query.order_by(Cronograma.turma, Cronograma.dia_semana, Cronograma.horario).all()
+    turmas = {cronograma.turma for cronograma in cronogramas}
+
+    return render_template('cronogramas-prof.html', horarios=horarios,
+        cronogramas=cronogramas,
+        turmas=sorted(turmas)) 
 
 @cronogramas_bp.route('/cronogramas_aluno')
+@login_required
 def cronogramas_aluno():
-    return render_template('cronogramas-aluno.html')
- 
 
+    turma_aluno = current_user.turma
+
+    if not turma_aluno:
+        return render_template(
+            'cronogramas-aluno.html',
+            cronogramas={},
+            mensagem="Nenhuma turma associada ao usuário."
+        )
+
+    # Busca os cronogramas correspondentes à turma do aluno
+    cronogramas_db = Cronograma.query.filter_by(turma=turma_aluno).order_by(
+        Cronograma.dia_semana, Cronograma.horario
+    ).all()
+
+    cronogramas_organizados = {
+        'segunda': [],
+        'terca': [],
+        'quarta': [],
+        'quinta': [],
+        'sexta': []
+    }
+
+    # Mapeamento entre dias do banco de dados e chaves do dicionário
+    dias_map = {
+        'Segunda': 'segunda',
+        'Terça': 'terca',
+        'Quarta': 'quarta',
+        'Quinta': 'quinta',
+        'Sexta': 'sexta'
+    }
+
+    for cronograma in cronogramas_db:
+        dia_key = dias_map.get(cronograma.dia_semana)
+        if dia_key:
+            cronogramas_organizados[dia_key].append({
+                'horario': cronograma.horario,
+                'aula': cronograma.aula,
+                'intervalo': cronograma.horario == "09:30 - 09:50"  # Verifica se é horário de intervalo
+            })
+
+    return render_template('cronogramas-aluno.html',  cronogramas=cronogramas_organizados,  mensagem=None)
+ 
 @cronogramas_bp.route('/cronogramas', methods=['GET', 'POST'])
 @login_required
 def gerenciar_cronograma():

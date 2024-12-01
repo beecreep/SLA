@@ -1,18 +1,7 @@
-const prevWeekButton = document.getElementById('prev-week');
-const nextWeekButton = document.getElementById('next-week');
+
 const currentWeekSpan = document.getElementById('current-week');
 
 let currentWeek = 1; // Exemplo de controle simples de semanas
-
-prevWeekButton.addEventListener('click', () => {
-    currentWeek--;
-    updateWeekDisplay();
-});
-
-nextWeekButton.addEventListener('click', () => {
-    currentWeek++;
-    updateWeekDisplay();
-});
 
 function updateWeekDisplay() {
     currentWeekSpan.textContent = `Semana ${currentWeek}`;

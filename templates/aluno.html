@@ -200,14 +200,12 @@
         <h2 style="text-align: center;">Menu</h2>
         <a href="" id="materias-btn">Materias <i class="fa-solid fa-book"></i></a>
         <a href="{{ url_for('atividade.atividade', nome=nome) }}" id="Atividades-btn">Atividades <i class="fa-solid fa-clipboard-list"></i></a>
-        <a href="#" id="Cronogramas-btn">Cronogramas <i class="fa-solid fa-calendar-days"></i></a>
+        <a href="{{ url_for('cronogramas.cronogramas_aluno') }}" id="Cronogramas-btn">Cronogramas <i class="fa-solid fa-calendar-days"></i></a>
         <a href="{{ url_for('chat.chat') }}" id="conversas-btn">Conversas <i class="fa-solid fa-comment"></i></a>
         <a href="#" id="perfil-btn">Perfil <i class="fa-solid fa-user"></i></a>
         <form action="{{ url_for('cadastrar.logout') }}" method="get">
             <button type="submit" class="logout-button">Logout</button>
         </form>
-        
-
     </div>
     
     <section id="materias1">
@@ -290,18 +288,8 @@
                 </div>
             </a>
         </div>
-
     </section>
 
-    <section id="Atividades">
-        <img src="static/img/undraw/undraw_Exams_re_4ios.png" alt="" id="atividades-img">
-        <span id="sem-atividades">Sem Atividades no momento</span>
-        <ul id="lista-atividades">
-                {% for atividade in atividades %}
-                    <li>{{ atividades.titulo }} - {{ atividades.descricao }}</li>
-                {% endfor %}
-            
-        </ul> <!-- Lista que será preenchida -->
     </section>
     <section id="perfil">
         <div class="settings-container">
@@ -331,83 +319,13 @@
                     <label for="numero">numero</label>
                     <input type="text" id="password" name="numero" placeholder="" value=" {{current_user.numero}} " readonly>
                 </div>
-
             </form>
         </div>
     </section>
-    <section id="CRONOGRAMAS">
-        <section id="cronogramas">
-            <h2>Cronograma Semanal</h2>
 
-            <div class="calendario-controle">
-                <button id="prev-week">Semana Anterior</button>
-                <span id="current-week">Semana de 04 a 10 de Setembro</span>
-                <button id="next-week">Próxima Semana</button>
-            </div>
-
-            <div class="calendario">
-                <div class="dia">
-                    <h3>Segunda-feira</h3>
-                    <ul>
-                        <li>Matemática - 08:00 às 10:00</li>
-                        <li>História - 10:30 às 12:00</li>
-                    </ul>
-                </div>
-                <div class="dia">
-                    <h3>Terça-feira</h3>
-                    <ul>
-                        <li>Geografia - 09:00 às 11:00</li>
-                        <li>Química - 11:30 às 13:00</li>
-                    </ul>
-                </div>
-                <div class="dia">
-                    <h3>Quarta-feira</h3>
-                    <ul>
-                        <li>Física - 08:00 às 10:00</li>
-                        <li>Biologia - 10:30 às 12:00</li>
-                    </ul>
-                </div>
-                <div class="dia">
-                    <h3>Quinta-feira</h3>
-                    <ul>
-                        <li>Português - 09:00 às 11:00</li>
-                        <li>Educação Física - 11:30 às 13:00</li>
-                    </ul>
-                </div>
-                <div class="dia">
-                    <h3>Sexta-feira</h3>
-                    <ul>
-                        <li>Artes - 08:00 às 09:30</li>
-                        <li>Inglês - 10:00 às 11:30</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="calendario-mensal">
-            <h2>Calendário Mensal</h2>
-            <div class="calendar-header">
-                <button id="prev-month">&laquo; Anterior</button>
-                <span id="month-year"></span>
-                <button id="next-month">Próximo &raquo;</button>
-            </div>
-            <div id="calendar">
-                <div class="day-name">Dom</div>
-                <div class="day-name">Seg</div>
-                <div class="day-name">Ter</div>
-                <div class="day-name">Qua</div>
-                <div class="day-name">Qui</div>
-                <div class="day-name">Sex</div>
-                <div class="day-name">Sáb</div>
-                <!-- Dias do mês serão gerados dinamicamente aqui -->
-            </div>
-        </section>
     </section>
     <script src="{{ url_for('static', filename='js/materias.js') }}"></script>
-  
     <script src="{{ url_for('static', filename='js/nav-bar.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/cronogramas.js') }}"></script>
-
     <script>
         // Função para alterar a imagem quando o input de arquivo muda
         let username = '';

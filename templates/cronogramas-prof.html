@@ -69,9 +69,10 @@ tr:nth-child(even) {
     <form id="cronograma-form" action="{{ url_for('cronogramas.gerenciar_cronograma')}}" method="POST">
         <label for="turma">Turma:</label>
         <select name="turma" id="turma" required>
-            {% for turma in turmas %}
-                <option value="{{ turma }}">{{ turma }}</option>
-            {% endfor %}
+            <option value="eletro">Eletronica</option>
+            <option value="segurança do trabalho">segurança do trabalho</option>
+            <option value="eventos">Eventos</option>
+            <option value="administração">Administração</option>
         </select>
 
         <label for="dia_semana">Dia da Semana:</label>

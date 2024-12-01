@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="static\css\home_page-css\materiais.css">
     <link rel="stylesheet" href="static\css\home_page-css\bloco-sobre.css">
     <link rel="stylesheet" href="static\css\home_page-css\raspibarry-pi.css">
+    <link rel="stylesheet" href="static\css\home_page-css\grupo-tcc.css">
+    <link rel="stylesheet" href="static\css\home_page-css\referencias.css">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -172,9 +175,11 @@
     <nav>
         <ul>
             <li><a href="#sobre">Sobre o Projeto</a></li>
-            <li><a href="#12">materiais</a></li>
+            <li><a href="#12">Materiais</a></li>
             <li><a href="#funcionalidades">Funcionalidades</a></li>
-            <li><a href="#raspberry-pi">raspberry-pi</a></li>
+            <li><a href="#raspberry-pi">Raspberry-pi</a></li>
+            <li><a href="#explicacao">Fluxograma</a></li>
+            <li><a href="#time">Integrantes e referencias</a></li>
         </ul>
         <!--<a href="{{ url_for('cadastrar.cadastro') }}"><button id="entrar"> entrar</button></a> -->
     </nav>
@@ -309,7 +314,6 @@
             <div class="funcionalidade-item">
                 <img src="{{ url_for('static', filename='img/bookshelf.png') }}" alt="">
                 
-
             </div>
             <h3>Biblioteca Virtual</h3>
             <p>Acesse uma vasta coleção de livros e materiais didáticos a qualquer momento.</p>
@@ -341,6 +345,66 @@
         </div>
         </div>
     </section>
+    <section id="explicacao" style="padding: 10px; text-align: center;">
+        <h2>Como Funciona o Projeto</h2>
+        <p>Este site foi desenvolvido como parte de um Trabalho de Conclusão de Curso (TCC), focado na criação de uma
+            rede local utilizando o Raspberry Pi. A proposta central é facilitar o compartilhamento de atividades e
+            arquivos entre alunos e professores de forma simples e eficiente.</p>
+        <p>Abaixo, apresentamos um fluxograma que ilustra o trajeto para o desenvolvimento do sistema:</p>
+
+        <div class="fluxograma">
+            <img src="{{ url_for('static', filename='img/fluxograma.jpeg') }}" alt="">
+        </div>
+    </section>
+    <section class="team-section" id="time">
+        <h2>Conheça o Time</h2>
+        <div class="team-container">
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='img/david_muniz.png') }}" alt="Foto de Integrante 1">
+                <h3>David Muniz</h3>
+                <p class="role">Função: Escrevente</p>
+                <p class="bio">Responsável pela coordenação geral da monografia.</p>
+            </div>
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='img/erick_henrique.jpeg') }}" alt="Foto de Integrante 2">
+                <h3>Erick Henrique</h3>
+                <p class="role">Função: Desenvolvedor</p>
+                <p class="bio">Focado no desenvolvimento do sistema e integração técnica.</p>
+            </div>
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='img/nicolas_azevedo.jpeg') }}" alt="Foto de Integrante 3">
+                <h3>Nicolas Azevedo</h3>
+                <p class="role">Função: Suporte</p>
+                <p class="bio">Responsável por auxiliar e dar suporte a equipe.</p>
+            </div>
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='img/joao_pedro.jpeg') }}" alt="Foto de Integrante 4">
+                <h3>João Pedro</h3>
+                <p class="role">Função: Pesquisador</p>
+                <p class="bio">Conduz pesquisas e análise de dados para embasamento teórico.</p>
+            </div>
+        </div>
+    </section>
+    <section class="references-section">
+        <h2>Referências do Projeto</h2>
+        <div class="references-container">
+            <ul class="references-list">
+                <li>Canal Hashtag Programação.  Disponível em: <a href="https://www.youtube.com/@HashtagProgramacao" target="_blank">www.youtube.com/@HashtagProgramacao</a></li>
+                <li>Canal Larissa Kich.  Disponível em: <a href="https://www.youtube.com/@larissakich" target="_blank">www.youtube.com/@larissakich</a></li>
+                <li>Site SQLite. Disponível em: <a href="https://www.sqlite.org/" target="_blank">www.sqlite.org</a></li>
+                <li>Site CloudConvert. Disponível em: <a href="https://cloudconvert.com/" target="_blank">cloudconvert.com</a></li>
+                <li>Documentação do Python: <a href="https://docs.python.org/" target="_blank">docs.python.org</a></li>
+                <li>Documentação do Flask: <a href="https://flask.palletsprojects.com/" target="_blank">flask.palletsprojects.com</a></li>
+                <li>Documentação do SQLALchemy: <a href="https://docs.sqlalchemy.org/" target="_blank">docs.sqlalchemy.org</a></li>
+                
+            </ul>
+        </div>
+        <div class="github-link">
+            <h3>Repositório do Projeto</h3>
+            <h4>https://github.com/juregkkk/tcc-2024</h4>
+        </div>
+    </section>
+    
     <footer id="rodape">
         <p>&copy; 2024 SLA. Todos os direitos reservados.</p>
     </footer>

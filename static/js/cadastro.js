@@ -82,18 +82,18 @@ document.getElementById('entrar').addEventListener('click', function () {
     login.style.display = 'flex';
 });
 
-function validateForm() {
-    const email = document.getElementById('email').value;
+document.getElementById('continuar').addEventListener('click', function (event) {
+    const emailInput = document.getElementById('email').value;
 
-    // Verifica se o email contém pelo menos uma parte antes e depois do '@'
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex para validação de email
+    // Regex para validar emails com domínios conhecidos (gmail, yahoo, etec, etc.)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.(gmail|yahoo|etec|com|org|net)$/i;
 
-    if (!emailPattern.test(email)) {
-        alert("Por favor, insira um email válido.");
-        return false; // Impede o envio do formulário
+    if (!emailRegex.test(emailInput)) {
+        alert('Por favor, insira um email válido (ex: @gmail, @yahoo, @etec).');
+        event.preventDefault(); // Impede qualquer ação subsequente ao clique
+        return;
     }
-    return true; // Permite o envio do formulário
-}
+});
 // Supondo que você já tenha a função de login configurada com fetch
 
 document.getElementById('numero').addEventListener('input', function (e) {
