@@ -193,7 +193,6 @@
 </head>
 
 <body>
-    <button class="button-theme-toggle" onclick="toggleTheme()">&#9788;</button> <!-- Sol -->
 
     <div class="menu-icon" onclick="toggleNavbar()">&#9776;</div> <!-- Ícone de menu -->
     <div class="navbar">
@@ -328,35 +327,12 @@
     <script src="{{ url_for('static', filename='js/nav-bar.js') }}"></script>
     <script>
         // Função para alterar a imagem quando o input de arquivo muda
-        let username = '';
-
-        // Função para atualizar a cada segundo
-        setInterval(mostrarHorario, 1000);
-
-        // Chamar a função imediatamente quando a página for carregada
-        window.onload = mostrarHorario;
+        
         // Função que carrega a atividade estilizada no aluno.html
      // Função para carregar as atividades
-function carregarAtividades() {
+
+      
     // Faz uma requisição para a rota Flask que retorna as atividades
-    fetch(`/atividades/{{ nome }}`)
-        .then(response => response.json())  // Converte a resposta em JSON
-        .then(data => {
-            const listaAtividades = document.getElementById('lista-atividades');
-            
-            // Limpa qualquer atividade já listada
-            listaAtividades.innerHTML = '';
-
-            // Adiciona cada atividade ao HTML
-            data.forEach(atividade => {
-                const li = document.createElement('li');
-                li.textContent = `${atividade.titulo}: ${atividade.descricao}`;
-                listaAtividades.appendChild(li);
-            });
-        })
-        .catch(error => console.error('Erro ao carregar as atividades:', error));
-}
-
 // Chama a função quando a página é carregada
 window.onload = carregarAtividades;
 

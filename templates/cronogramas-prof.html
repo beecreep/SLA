@@ -6,6 +6,7 @@
     <title>Cronograma</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/cronograma.css') }}">
     <style>
+        
         body {
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -69,10 +70,18 @@ tr:nth-child(even) {
     <form id="cronograma-form" action="{{ url_for('cronogramas.gerenciar_cronograma')}}" method="POST">
         <label for="turma">Turma:</label>
         <select name="turma" id="turma" required>
-            <option value="eletro">Eletronica</option>
-            <option value="segurança do trabalho">segurança do trabalho</option>
-            <option value="eventos">Eventos</option>
-            <option value="administração">Administração</option>
+            <option value="1˚ eletro">1˚ Eletro</option>
+                        <option value="2˚ eletro">2˚ Eletro</option>
+                        <option value="3˚ eletro">3˚ Eletro</option>
+                        <option value="1˚ Segurança do Trabalho">1˚ Segurança do Trabalho</option>
+                        <option value="2˚ Segurança do Trabalho">2˚ Segurança do Trabalho</option>
+                        <option value="3˚ Segurança do Trabalho">3˚ Segurança do Trabalho</option>
+                        <option value="1˚ Eventos">1˚ Eventos</option>
+                        <option value="2˚ Eventos">2˚ Eventos</option>
+                        <option value="3˚ Eventos">3˚ Eventos</option>
+                        <option value="1˚ Administração">1˚ Administração</option>
+                        <option value="2˚ Administração">2˚ Administração</option>
+                        <option value="3˚ Administração">3˚ Administração</option>
         </select>
 
         <label for="dia_semana">Dia da Semana:</label>
