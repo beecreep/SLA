@@ -14,7 +14,7 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 
 app = Flask(__name__)
-app.secret_key = '12345678910'
+app.secret_key = '12345678910' 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuarios.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
