@@ -1,6 +1,6 @@
 from flask import  request, redirect, url_for, render_template, Blueprint,  send_file, session, jsonify
 from flask_login import current_user, login_required
-from db import db,connect_db
+from db import db
 from models import Atividade, Resposta, User, Cronograma
 import mimetypes
 import io

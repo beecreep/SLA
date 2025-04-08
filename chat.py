@@ -1,8 +1,7 @@
 
-from db import connect_db
+from db import db
 from flask import Blueprint, request, jsonify, session, render_template, send_file
 from models import User, Mensagem
-from db import db
 from flask_login import current_user
 import mimetypes
 import io

@@ -1,5 +1,4 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
-from db import connect_db
 from flask_login import current_user, login_required
 from db import db
 from models import Atividade, Resposta, Cronograma
@@ -7,23 +6,19 @@ from models import Atividade, Resposta, Cronograma
 aluno_bp = Blueprint('aluno', __name__)
 
 @aluno_bp.route('/aluno', methods=['GET', 'POST'])
+@login_required
 def aluno():
-    
     if current_user.role != 'Aluno':
         return redirect(url_for('index'))
 
-    try:
-        atividades = Atividade.query.all()
-    except Exception as e:
-        flash(f"Erro ao conectar ao banco de dados: {str(e)}")
-        return render_template('aluno.html', atividades=[])
+    atividades = Atividade.query.all()
 
     if request.method == 'POST':
         atividade_id = request.form.get('atividade_id')
         resposta_texto = request.form.get('resposta')
-        arquivo_resposta = request.files['arquivo_resposta'].read() if 'arquivo_resposta' in request.files else None
+        arquivo = request.files.get('arquivo_resposta')
+        arquivo_resposta = arquivo.read() if arquivo else None
 
-        # Verifica se todos os campos obrigatórios estão preenchidos
         if not atividade_id or not resposta_texto:
             flash("Por favor, preencha todos os campos obrigatórios.")
             return redirect(url_for('aluno.aluno'))
@@ -36,22 +31,19 @@ def aluno():
         )
 
         try:
-            db.session.add(nova_resposta)  # Adiciona a resposta ao banco de dados
+            db.session.add(nova_resposta)
             db.session.commit()
             flash("Resposta enviada com sucesso!")
         except Exception as e:
-            db.session.rollback()  # Reverte a transação em caso de erro
+            db.session.rollback()
             flash(f"Erro ao enviar resposta: {str(e)}")
         finally:
             return redirect(url_for('aluno.aluno'))
 
-    return render_template('aluno.html', atividades=atividades, nome=current_user.nome)
+    cronogramas = Cronograma.query.all()
+    return render_template('aluno.html', atividades=atividades, nome=current_user.nome, cronogramas=cronogramas)
 
 @aluno_bp.route('/cronogramas', methods=['GET'])
 @login_required
 def obter_cronogramas():
-    if current_user.role != 'Aluno':
-        return redirect(url_for('index'))
-
-    cronogramas = Cronograma.query.all()
-    return render_template('aluno.html', cronogramas=cronogramas)
+    return redirect(url_for('aluno.aluno'))  # Redireciona para rota principal que já mostra cronogramas

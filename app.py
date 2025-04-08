@@ -1,32 +1,41 @@
 from flask import Flask, redirect, render_template, request, jsonify, url_for
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+load_dotenv()
 import os
 
 # Blueprints e módulos internos
-from db import db
-from models import User
+from db import db, init_db  # <-- db vem do seu SQLAlchemy(), init_db vem da função que inicializa o banco de dados
 from cadastrar import cadastro_bp, cadastrar_usuario
 from professor import professor_bp
+from cronogramas import cronogramas_bp
 from aluno import aluno_bp
+from models import Mensagem, User, Atividade, Resposta 
 from materias import materias_bp
 from chat import chat_bp
 from atividade import atividade_bp
-from cronogramas import cronogramas_bp
+
 
 # Inicialização da aplicação Flask
 app = Flask(__name__)
 
 # Configurações principais
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', '12345678910')  # Idealmente, use variável de ambiente
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')  # Chave secreta para sessões
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuarios.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limite de 16MB para uploads
 
 # Inicializa extensões
-db.init_app(app)
+from db import init_db
+
+init_db(app)
 migrate = Migrate(app, db)
+
+with app.app_context():
+    db.create_all()
+
 
 # Gerenciador de Login
 login_manager = LoginManager()

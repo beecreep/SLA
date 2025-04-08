@@ -1,0 +1,3 @@
+# Arquivos de configuração local e segredos
+#Mantem no repositorio local
+.env
