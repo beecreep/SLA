@@ -1,0 +1,11 @@
+
+#se não tiver um .venv
+python -m venv .venv
+
+#se tiver o .venv
+source .venv/Scripts/activate  # ou bin/activate se for Linux
+
+#se não rodar a aplicação
+pip install -r requirements.txt
+
+python app.py

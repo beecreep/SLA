@@ -6,7 +6,10 @@ from models import User, Cronograma
 professor_bp = Blueprint('professor', __name__)
 
 @professor_bp.route('/professor')
-@login_required
+
+
+#rota para o nome do professor
+@login_required 
 def professor(): 
     if current_user.role != 'Professor':
         return redirect(url_for('index'))

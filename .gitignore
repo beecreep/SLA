@@ -1,3 +1,8 @@
 # Arquivos de configuração local e segredos
 #Mantem no repositorio local
+#não envia coisas desnecessárias pro repo remoto
 .env
+#o .venv é diferente para cada SO então vai ser inutil no MAC ou Linux do coleguinha
+.venv/
+__pycache__/
+*.pyc                                          

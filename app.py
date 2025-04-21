@@ -51,6 +51,10 @@ with app.app_context():
     if not os.path.exists('usuarios.db'):
         db.create_all()
 
+#@app.route("/")
+#def habo():
+# return render_template("aluno.html", doido="Ericko")
+
 # Rota principal
 @app.route('/')
 def index():
