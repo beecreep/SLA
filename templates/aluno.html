@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cronogramas.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/nav-bar.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='icons/flavicon.ico') }}" type="image/png">
+    <link rel="icon" href="{{ url_for('static', filename='icons/flavicon.png') }}" sizes="96x96">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -217,7 +219,7 @@
             <a href="{{ url_for('materias.portugues') }}">
                 <div class="conteudo-materia">
                     <img src="{{ url_for('static', filename='img/icon-materias.png/literary.png') }}" alt="">
-                    <h1>Portugues, que o {{doido}} odeia!</h1>
+                    <h1>Portugues, que o {{current_user.nome}} odeia!</h1>
                 </div>
             </a>
             <a href="{{ url_for('materias.matematica') }}">

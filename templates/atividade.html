@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atividades</title>
     <link rel="stylesheet" href="style.css"> <!-- Link para o CSS -->
+    <link rel="icon" href="{{ url_for('static', filename='icons/flavicon.ico') }}" type="image/png">
+    <link rel="icon" href="{{ url_for('static', filename='icons/flavicon.png') }}" sizes="96x96">
+    
     <style>
         /* Reset básico */
         * {
@@ -91,6 +94,10 @@
             td {
                 font-size: 0.9em;
             }
+
+            form button {
+                padding: 12px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -151,24 +158,6 @@
         form button:hover {
             background-color: #0a1368;
         }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
-            }
-
-            table,
-            th,
-            td,
-            .resposta h2 {
-                font-size: 0.9em;
-            }
-
-            form button {
-                padding: 12px;
-            }
-        }
     </style>
 </head>
 
@@ -220,7 +209,6 @@
                     {% endfor %}
                 </select>
                 <input type="hidden" name="aluno_id" value="{{ aluno_id }}">
-                <input type="hidden" name="atividade_id" value="{{ atividade_id }}">
 
                 <label for="resposta">Sua Resposta:</label>
                 <textarea id="resposta" name="resposta" required></textarea>
