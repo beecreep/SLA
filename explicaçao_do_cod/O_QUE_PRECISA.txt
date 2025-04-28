@@ -1,3 +1,5 @@
+#pra remover o venv atual
+rm -rf .venv #(recursive force)
 
 #se não tiver um .venv
 python -m venv .venv
@@ -5,7 +7,23 @@ python -m venv .venv
 #se tiver o .venv
 source .venv/Scripts/activate  # ou bin/activate se for Linux
 
+#Força instalação do pip no venv
+python -m ensurepip --upgrade 
+
 #se não rodar a aplicação
 pip install -r requirements.txt
 
 python app.py
+
+Projeto Flask:
+
+Roda do servidor,
+
+Interface no navegador,
+
+Integração com banco,
+
+Ou quer deixar o front mais bonitinho,
+
+
+
