@@ -1,58 +1,56 @@
-##ANTES DE TUDO FAÇA O .VENV FUNCIONAR E INSTALE AS DEPENDENCIAS
+##FAÇA O .VENV FUNCIONAR ATIVE-O E DPS INSTALE AS DEPENDENCIAS
 
-#pra remover o venv atual
-rm -rf .venv #(recursive force)
+#pra remover o .venv atual, se tiver
+rm -rf .venv 
+#isso da um remove recursive-force 
 
-#para criar um .venv de acordo com o seu SO
-python -m venv .venv
-python3 -m venv .venv
-source .venv/bin/activate
+#criar um .venv de acordo com o seu OS
+python3 -m venv .venv 
+
+
+
+#ATIVAR O AMBIENTE VIRTUAL
+source .venv/Scripts/activate
+ #se for Linux
+ source .venv/bin/activate
+
+#INSTALAR DEPENDENCIAS 
+#Ja instala as dependencias de uma vez 
 pip install -r requirements.txt
 
-
-pip install flask-migrate
-
-
-#se tiver o .venv
-source .venv/Scripts/activate  # ou bin/activate se for Linux
-
-#Força instalação do pip no venv
-python -m ensurepip --upgrade 
-
+#Ou individualmente
 sudo apt update && sudo apt upgrade -y
 sudo apt install python3 python3-pip python3-venv
-
-#arquivo com uma lista de (dependências) pacotes necessários e a versão pra rodar o projeto
-#são impoirtantes pra não aparecer modulenotfounderror no terminal, toda vez que tentar o python app.py
-pip freeze > requirements.txt
-
-
-#instala o que está em requirements.txt
-pip install -r requirements.txt
-
-#faz o oposto do que está acima
-pip uninstall -r requirements.txt -y 
-#r diz para read o arquivo, y de yes
-
-#mas você pode fazer tudo iss apenas desinstalando o venv
-
-
+python -m ensurepip --upgrade 
+pip install flask-migrate
 pip install flask-login
 pip install python-dotenv
 
+#requirements.txt possui uma lista de  pacotes necessários pra rodar o projeto (dependências)
+#sem elas vai aparecer modulenotfounderror no terminal, toda vez que tentar o python app.py
+
+#Se tiver atualizado com novos modulos recrie o requirements.txt
+pip freeze > requirements.txt
+
+#em caso de erro ou tiver instalado sem o .venv ativado reverta com
+pip uninstall -r requirements.txt -y 
+#r diz para read o arquivo, y de yes
+
+#caso o .venv tiver algum problema desinstale e faça tudo novamente
+rm -rf .venv 
+
+#se estiver tudo certo da um play no app.py 
+python app.py
+
+#copie o ip que aparecer e cola no navegador
 
 #RESUMO DO PROJETO 
 python app.py
-
 Projeto Flask:
-
 Roda do servidor,
-
 Interface no navegador,
-
 Integração com banco,
-
-Ou quer deixar o front mais bonitinho,
+Front interativo
 
 
 
