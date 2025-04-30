@@ -1,4 +1,4 @@
-Para encaminhar o conteúdo da tag `<main>` de "professor.html" para a seção de atividades em "aluno.html" usando `localStorage`, podemos armazenar as informações da atividade quando o professor submete o formulário, e depois recuperá-las na página do aluno. Aqui está um exemplo de como implementar essa lógica:
+Para encaminhar o conteúdo da tag `<main>` de "professor.html" para a seção de atividades em "aluno.html" usando `localStorage`, podemos armazenar as informações da atividade quando o professor submete o formulário, e depois recuperá-las na página do aluno. Implementando essa lógica:
 
 1. **No arquivo "professor.html"**, você precisa salvar o conteúdo ao enviar a atividade:
 

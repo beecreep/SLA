@@ -1,4 +1,4 @@
-Se você tiver duas imagens e deseja que ambas possam ser trocadas pela mesma foto, você pode ajustar o código para que o input de arquivo altere ambas as imagens ao mesmo tempo. Aqui está como você pode fazer isso:
+Se você tiver duas imagens e deseja que ambas possam ser trocadas pela mesma foto, você pode ajustar o código para que o input de arquivo altere ambas as imagens ao mesmo tempo. Exemplo:
 
 ```html
 <!DOCTYPE html>

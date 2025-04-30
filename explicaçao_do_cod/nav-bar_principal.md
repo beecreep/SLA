@@ -1,4 +1,4 @@
-Para criar uma navbar que só aparece depois que o usuário clica em um ícone de menu, podemos usar JavaScript para alternar a visibilidade da navbar. Vou te mostrar como adicionar isso ao seu código.
+Para criar uma navbar que só aparece depois que o usuário clica em um ícone de menu, podemos usar JavaScript para alternar a visibilidade da navbar.
 
 Primeiro, adicione o CSS para ocultar a navbar por padrão e estilizar o ícone de menu:
 

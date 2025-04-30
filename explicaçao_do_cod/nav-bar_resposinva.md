@@ -1,4 +1,4 @@
-Criar uma nav-bar responsiva envolve o uso de flexbox para organizar os itens e de media queries para ajustar o layout conforme a largura da tela muda. Aqui está um exemplo simples de como você pode criar uma nav-bar responsiva:
+Criar uma nav-bar responsiva envolve o uso de flexbox para organizar os itens e de media queries para ajustar o layout conforme a largura da tela muda. Exemplo:
 
 ### HTML
 
