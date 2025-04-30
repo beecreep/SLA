@@ -1,4 +1,4 @@
-Aqui está um exemplo de como você pode criar uma seção em HTML e CSS para destacar as funcionalidades do site do TCC, incluindo a biblioteca virtual para os alunos. 
+Criando uma seção em HTML e CSS para destacar as funcionalidades do site do TCC, incluindo a biblioteca virtual para os alunos. 
 
 ### Exemplo de HTML e CSS
 

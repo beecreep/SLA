@@ -4,6 +4,9 @@
 ## 🚨 Pré-requisitos
 
 - Python 3.x instalado
+- VSCode instalado direto do site, não loja do windows. 
+- Disponivel no link: https://vscode.download.prss.microsoft.com/dbazure/download/stable/17baf841131aa23349f217ca7c570c76ee87b957/VSCodeSetup-x64-1.99.3.exe
+
 - Git e terminal funcional (não adianta ser o cmd do Windows pré-2000)
 - Um mínimo de bom senso pra não rodar `pip` fora do `.venv`
 
@@ -71,8 +74,7 @@ pip freeze > requirements.txt
 ```bash
 pip uninstall -r requirements.txt -y
 ```
-> `-r` lê o arquivo. `-y` confirma que sim, você fez bobagem.
-
+> `-r` lê o arquivo. `-y` confirma que sim
 ---
 
 ### 7. 🧨 Caso o `.venv` esteja amaldiçoado:
