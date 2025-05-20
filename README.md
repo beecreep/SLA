@@ -12,7 +12,7 @@
 
 ---
 
-## ⚙️ Passo a passo
+## Passo a passo
 
 ### 1. Remover o ambiente virtual antigo (se existir)
 ```bash
