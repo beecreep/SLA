@@ -1,7 +1,7 @@
 
-# 🧠 Guia definitivo do Erick para rodar o projeto Flask
+# Guia definitivo do Erick para rodar o projeto Flask
 
-## 🚨 Pré-requisitos
+## Pré-requisitos
 
 - Python 3.x instalado
 - VSCode instalado direto do site, não loja do windows. 
@@ -14,7 +14,7 @@
 
 ## ⚙️ Passo a passo
 
-### 1. 🔥 Remover o ambiente virtual antigo (se existir)
+### 1. Remover o ambiente virtual antigo (se existir)
 ```bash
 rm -rf .venv
 ```
@@ -22,7 +22,7 @@ rm -rf .venv
 
 ---
 
-### 2. 🧪 Criar novo ambiente virtual
+### 2. Criar novo ambiente virtual
 ```bash
 python3 -m venv .venv
 ```
@@ -30,7 +30,7 @@ python3 -m venv .venv
 
 ---
 
-### 3. 🚀 Ativar o `.venv`
+### 3. Ativar o `.venv`
 
 - **No Windows:**
 ```bash
@@ -44,7 +44,7 @@ source .venv/bin/activate
 
 ---
 
-### 4. 📦 Instalar as dependências do projeto
+### 4. Instalar as dependências do projeto
 
 - Se já tiver o `requirements.txt`:
 ```bash
@@ -63,21 +63,21 @@ pip install python-dotenv
 
 ---
 
-### 5. 🧾 Atualizar ou recriar o `requirements.txt` (se adicionar libs novas)
+### 5. Atualizar ou recriar o `requirements.txt` (se adicionar libs novas)
 ```bash
 pip freeze > requirements.txt
 ```
 
 ---
 
-### 6. 🧼 Desfazer besteira: desinstalar tudo (caso tenha feito cagada fora do `.venv`)
+### 6. Desfazer besteira: desinstalar tudo (caso tenha feito cagada fora do `.venv`)
 ```bash
 pip uninstall -r requirements.txt -y
 ```
 > `-r` lê o arquivo. `-y` confirma que sim
 ---
 
-### 7. 🧨 Caso o `.venv` esteja amaldiçoado:
+### 7. Caso o `.venv` esteja amaldiçoado:
 ```bash
 rm -rf .venv
 # E volta pro passo 2
@@ -85,7 +85,7 @@ rm -rf .venv
 
 ---
 
-### 8. 🏁 Rodar o projeto
+### 8. Rodar o projeto
 ```bash
 python app.py
 ```
@@ -93,7 +93,7 @@ python app.py
 
 ---
 
-## 🧠 Resumo do Projeto
+## Resumo do Projeto
 
 ```bash
 python app.py
@@ -106,4 +106,4 @@ python app.py
 
 ---
 
-> 💡 Dica de ouro: se aparecer `ModuleNotFoundError`, você **não ativou o .venv** ou **não instalou as dependências**. Pare de culpar o Python.
+> Dica de ouro: se aparecer `ModuleNotFoundError`, você **não ativou o .venv** ou **não instalou as dependências**. Pare de culpar o Python.
