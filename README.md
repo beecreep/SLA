@@ -1,5 +1,5 @@
 
-# Guia definitivo do Erick para rodar o projeto Flask
+# Guia para rodar o projeto Flask
 
 ## Pré-requisitos
 
@@ -70,14 +70,14 @@ pip freeze > requirements.txt
 
 ---
 
-### 6. Desfazer besteira: desinstalar tudo (caso tenha feito cagada fora do `.venv`)
+### 6. Desfazer besteira: desinstalar tudo (caso tenha instalado fora do `.venv`)
 ```bash
 pip uninstall -r requirements.txt -y
 ```
 > `-r` lê o arquivo. `-y` confirma que sim
 ---
 
-### 7. Caso o `.venv` esteja amaldiçoado:
+### 7. Caso o `.venv` trave:
 ```bash
 rm -rf .venv
 # E volta pro passo 2
@@ -90,7 +90,7 @@ rm -rf .venv
 python app.py
 ```
 > Copie o IP que aparecer (tipo `http://127.0.0.1:5000`) e cole no navegador.
-
+> Se quiser testar em rede sem fio offline desconecte o cabo Ethernet e use um roteador separado da rede
 ---
 
 ## Resumo do Projeto
