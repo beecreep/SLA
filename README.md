@@ -7,7 +7,7 @@
 - VSCode instalado direto do site, não loja do windows. 
 - Disponivel no link: https://vscode.download.prss.microsoft.com/dbazure/download/stable/17baf841131aa23349f217ca7c570c76ee87b957/VSCodeSetup-x64-1.99.3.exe
 
-- Git e terminal funcional (não adianta ser o cmd do Windows pré-2000)
+- Git e terminal funcional 
 - Um mínimo de bom senso pra não rodar `pip` fora do `.venv`
 
 ---
@@ -18,7 +18,7 @@
 ```bash
 rm -rf .venv
 ```
-> Remove de forma recursiva e forçada. Sem dó.
+> Remove de forma recursiva e forçada.
 
 ---
 
@@ -51,7 +51,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-- Ou manualmente (caso você goste de sofrer):
+- Ou manualmente:
 ```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install python3 python3-pip python3-venv
@@ -106,4 +106,4 @@ python app.py
 
 ---
 
-> Dica de ouro: se aparecer `ModuleNotFoundError`, você **não ativou o .venv** ou **não instalou as dependências**. Pare de culpar o Python.
+> Dica: se aparecer `ModuleNotFoundError`, você **não ativou o .venv** ou **não instalou as dependências**. Pare de culpar o Python.
