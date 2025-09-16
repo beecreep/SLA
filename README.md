@@ -1,5 +1,5 @@
 
-# Guia para rodar o projeto Flask
+# Guia para rodar o projeto
 
 ## Pré-requisitos
 
